@@ -7,24 +7,39 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, rust-overlay }:
   let
+    inherit (self) outputs;
     inherit (nix-darwin.lib) darwinSystem;
     inherit (nixpkgs.lib) attrValues makeOverridable optionalAttrs singleton;
-    # Configuration for `nixpkgs`
-    nixpkgsConfig = {
-      config = { allowUnfree = true; };
-      overlays = attrValues self.overlays ++ singleton (
-        # Sub in x86 version of packages that don't build on Apple Silicon yet
-        final: prev: (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-          inherit (final.pkgs-x86);
-        })
-      );
-    };
+    inherit (home-manager.lib) hm;
+
+    # Supported systems for your flake packages, shell, etc.
+    systems = [
+      "aarch64-linux"
+      "i686-linux"
+      "x86_64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
+    # This is a function that generates an attribute by calling a function you
+    # pass to it, with each system as an argument
+    forAllSystems = nixpkgs.lib.genAttrs systems;
   in
   {
+    nixpkgs.config.allowUnfree = true;
+    nixpkgs.config.allowUnfreePredicate = true;
+
+    # # Formatter for your nix files, available through 'nix fmt'
+    # # Other options beside 'alejandra' include 'nixpkgs-fmt'
+    # formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+
     # Overlays
     overlays = {
       # Overlays to add various packages into package set
@@ -33,7 +48,10 @@
         # Add access to x86 packages system is running Apple Silicon
         pkgs-x86 = import inputs.nixpkgs-unstable {
           system = "x86_64-darwin";
-          inherit (nixpkgsConfig) config;
+          config = { allowUnfree = true; };
+          overlays = [
+            rust-overlay.overlays.default
+          ];
         };
       };
     };
@@ -42,11 +60,18 @@
     # $ darwin-rebuild build --flake .#simple
     darwinConfigurations."Space" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
-      modules = attrValues self.darwinModules ++  [
+      modules = attrValues self.darwinModules ++ [
         ./darwin.nix
         home-manager.darwinModules.home-manager {
-          home-manager.users.gabrielle = import ./gabrielle.nix;
-          users.users.gabrielle.home = "/Users/Gabrielle";
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+
+            users.Gabrielle = {
+              imports = [./gabrielle.nix];
+            };
+          };
+          users.users.Gabrielle.home = "/Users/Gabrielle";
         }
       ];
       specialArgs = { inherit inputs; };

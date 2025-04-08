@@ -1,6 +1,28 @@
 { config, pkgs, lib, ... }:
 {
+  home.homeDirectory = "/Users/Gabrielle";
   home.stateVersion = "22.05";
+
+  programs = {
+    home-manager.enable = true;
+    command-not-found.enable = false;
+    git.enable = true;
+  };
+
+  home.packages = with pkgs; [
+    wakatime-cli
+    pinentry_mac
+    direnv
+    htop
+    ngrok
+    just
+    jq
+    fd
+    ffmpeg
+  ];
+
+  # Nicely reload system units when changing configs
+  systemd.user.startServices = "sd-switch";
 
   # https://github.com/malob/nixpkgs/blob/master/home/default.nix
 
