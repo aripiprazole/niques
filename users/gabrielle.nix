@@ -23,8 +23,6 @@
       zed-editor
       helix
       git
-      _1password-gui
-      _1password-cli
     ];
 
     # Nicely reload system units when changing configs

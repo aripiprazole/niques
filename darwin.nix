@@ -13,6 +13,9 @@
   environment.systemPackages =
     [ pkgs.vim
       pkgs.mkalias
+      pkgs.rsync
+      pkgs._1password-gui
+      pkgs._1password-cli
     ];
 
   # Necessary for using flakes on this system.
@@ -30,7 +33,6 @@
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
-  nixpkgs.config.allowUnfreePredicate = pkg: true;
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
 
