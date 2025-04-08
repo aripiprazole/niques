@@ -36,9 +36,9 @@
     nixpkgs.config.allowUnfree = true;
     nixpkgs.config.allowUnfreePredicate = true;
 
-    # # Formatter for your nix files, available through 'nix fmt'
-    # # Other options beside 'alejandra' include 'nixpkgs-fmt'
-    # formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+    # Formatter for your nix files, available through 'nix fmt'
+    # Other options beside 'alejandra' include 'nixpkgs-fmt'
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     # Overlays
     overlays = {
@@ -66,12 +66,19 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
+            sharedModules = [./pkg/default.nix];
 
-            users.Gabrielle = {
-              imports = [./gabrielle.nix];
+            users = {
+              Gabrielle = {
+                imports = [./users/gabrielle.nix];
+              };
             };
           };
-          users.users.Gabrielle.home = "/Users/Gabrielle";
+          users.users = {
+            Gabrielle = {
+              home = "/Users/Gabrielle";
+            };
+          };
         }
       ];
       specialArgs = { inherit inputs; };
@@ -83,7 +90,6 @@
       programs-nix-index =
         # Additional configuration for `nix-index` to enable `command-not-found` functionality with Fish.
         { config, lib, pkgs, ... }:
-
         {
           config = lib.mkIf config.programs.nix-index.enable {
             programs.fish.interactiveShellInit = ''

@@ -3,6 +3,8 @@
   home.homeDirectory = "/Users/Gabrielle";
   home.stateVersion = "22.05";
 
+  imports = [../pkg];
+
   programs = {
     home-manager.enable = true;
     command-not-found.enable = false;
