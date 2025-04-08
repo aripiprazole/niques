@@ -7,18 +7,24 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, rust-overlay }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, mac-app-util, rust-overlay }:
   let
     inherit (self) outputs;
     inherit (nix-darwin.lib) darwinSystem;
     inherit (nixpkgs.lib) attrValues makeOverridable optionalAttrs singleton;
     inherit (home-manager.lib) hm;
+
+    pkgs = import nixpkgs {
+      system = "aarch64-darwin";
+      config = { allowUnfree = true; allowBroken = true; };
+      overlays = [
+        rust-overlay.overlays.default
+      ];
+    };
 
     # Supported systems for your flake packages, shell, etc.
     systems = [
@@ -33,9 +39,6 @@
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in
   {
-    nixpkgs.config.allowUnfree = true;
-    nixpkgs.config.allowUnfreePredicate = true;
-
     # Formatter for your nix files, available through 'nix fmt'
     # Other options beside 'alejandra' include 'nixpkgs-fmt'
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
@@ -46,9 +49,9 @@
       # Overlay useful on Macs with Apple Silicon
       apple-silicon = final: prev: optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
         # Add access to x86 packages system is running Apple Silicon
-        pkgs-x86 = import inputs.nixpkgs-unstable {
+        pkgs-x86 = import nixpkgs {
           system = "x86_64-darwin";
-          config = { allowUnfree = true; };
+          config = { allowUnfree = true; allowBroken = true; };
           overlays = [
             rust-overlay.overlays.default
           ];
@@ -62,11 +65,13 @@
       system = "aarch64-darwin";
       modules = attrValues self.darwinModules ++ [
         ./darwin.nix
+        mac-app-util.darwinModules.default
         home-manager.darwinModules.home-manager {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
             sharedModules = [./pkg/default.nix];
+            backupFileExtension = "bkp";
 
             users = {
               Gabrielle = {

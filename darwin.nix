@@ -12,6 +12,7 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages =
     [ pkgs.vim
+      pkgs.mkalias
     ];
 
   # Necessary for using flakes on this system.
@@ -29,13 +30,14 @@
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
-  nixpkgs.config.allowUnfreePredicate = true;
+  nixpkgs.config.allowUnfreePredicate = pkg: true;
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowBroken = true;
 
   # Fonts
   fonts.packages = with pkgs; [
-      recursive
-      nerd-fonts.jetbrains-mono
+    recursive
+    nerd-fonts.jetbrains-mono
   ];
 
   # Keyboard

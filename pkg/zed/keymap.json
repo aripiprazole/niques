@@ -1,10 +1,3 @@
-// Zed keymap
-//
-// For information on binding keys, see the Zed
-// documentation: https://zed.dev/docs/key-bindings
-//
-// To see the default key bindings run `zed: open default keymap`
-// from the command palette.
 [
   {
     "use_key_equivalents": true,
@@ -74,9 +67,9 @@
   {
     "context": "Editor && !menu",
     "bindings": {
-      "ctrl-y": "editor::Undo", // vim default: line up
-      "ctrl-f": "buffer_search::Deploy", // vim default: page down
-      "ctrl-o": "workspace::Open" // vim default: go back 11
+      "ctrl-y": "editor::Undo",
+      "ctrl-f": "buffer_search::Deploy",
+      "ctrl-o": "workspace::Open"
     }
   },
   {
