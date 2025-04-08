@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ config, pkgs, lib, ... }:
 {
 
   # Enable experimental nix command and flakes
@@ -14,6 +14,7 @@
     [ pkgs.vim
       pkgs.mkalias
       pkgs.rsync
+      pkgs.ollama
       pkgs._1password-gui
       pkgs._1password-cli
     ];
@@ -22,7 +23,7 @@
   nix.settings.experimental-features = "nix-command flakes";
 
   # Enable alternative shell support in nix-darwin.
-  # programs.fish.enable = true;
+  programs.zsh.enable = true;
 
   # Set Git commit hash for darwin-version.
   system.configurationRevision = lib.rev or lib.dirtyRev or null;
@@ -42,12 +43,28 @@
     nerd-fonts.jetbrains-mono
   ];
 
+  # Add ability to used TouchID for sudo authentication
+  security.pam.services.sudo_local.touchIdAuth = true;
+
+  # Configure OLlama service
+  # services.ollama = {
+  #   enable = true;
+  #   loadModels = ["qwen-2.5-coder" "deepseek-r1:1.5b" "llama3.2"];
+  # };
+  launchd.user.agents.ollama = {
+    command = "${pkgs.ollama}/bin/ollama serve";
+    environment = {
+      OLLAMA_HOST = "127.0.0.1:11434";
+    };
+    serviceConfig = {
+      KeepAlive = true;
+      RunAtLoad = true;
+    };
+  };
+
   # Keyboard
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
-
-  # Add ability to used TouchID for sudo authentication
-  security.pam.services.sudo_local.touchIdAuth = true;
 
   # set some OSX preferences that I always end up hunting down and changing.
   system.defaults = {
