@@ -11,7 +11,7 @@
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, mac-app-util, rust-overlay }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, rust-overlay }:
   let
     inherit (self) outputs;
     inherit (nix-darwin.lib) darwinSystem;
@@ -65,7 +65,6 @@
       system = "aarch64-darwin";
       modules = attrValues self.darwinModules ++ [
         ./darwin.nix
-        mac-app-util.darwinModules.default
         home-manager.darwinModules.home-manager {
           home-manager = {
             useGlobalPkgs = true;
