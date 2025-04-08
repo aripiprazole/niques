@@ -9,22 +9,13 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    nix-homebrew.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, rust-overlay }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, home-manager, rust-overlay }:
   let
-    inherit (self) outputs;
-    inherit (nix-darwin.lib) darwinSystem;
-    inherit (nixpkgs.lib) attrValues makeOverridable optionalAttrs singleton;
-    inherit (home-manager.lib) hm;
-
-    pkgs = import nixpkgs {
-      system = "aarch64-darwin";
-      config = { allowUnfree = true; allowBroken = true; };
-      overlays = [
-        rust-overlay.overlays.default
-      ];
-    };
+    inherit (nixpkgs.lib) attrValues optionalAttrs;
 
     # Supported systems for your flake packages, shell, etc.
     systems = [
@@ -65,6 +56,14 @@
       system = "aarch64-darwin";
       modules = attrValues self.darwinModules ++ [
         ./darwin.nix
+        nix-homebrew.darwinModules.nix-homebrew {
+          nix-homebrew = {
+            enable = true;
+            enableRosetta = true;
+            user = "Gabrielle";
+            autoMigrate = true;
+          };
+        }
         home-manager.darwinModules.home-manager {
           home-manager = {
             useGlobalPkgs = true;

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 {
 
   # Enable experimental nix command and flakes
@@ -15,6 +15,8 @@
       pkgs.mkalias
       pkgs.rsync
       pkgs.ollama
+      pkgs.raycast
+      pkgs.betterdisplay
       pkgs._1password-gui
       pkgs._1password-cli
     ];
@@ -42,6 +44,20 @@
     recursive
     nerd-fonts.jetbrains-mono
   ];
+
+  # Homebrew for packages not on Nix
+  homebrew = {
+    enable = true;
+    casks = [
+      "eqmac"
+      "spotify"
+      "arc"
+    ];
+    caskArgs = {
+      appdir = "~/Applications";
+      require_sha = true;
+    };
+  };
 
   # Add ability to used TouchID for sudo authentication
   security.pam.services.sudo_local.touchIdAuth = true;

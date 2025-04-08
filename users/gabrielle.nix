@@ -23,6 +23,11 @@
       zed-editor
       helix
       git
+      neofetch
+      nodejs
+      yarn
+      opam
+      vscode
     ];
 
     # Nicely reload system units when changing configs
