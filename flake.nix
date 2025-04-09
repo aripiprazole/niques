@@ -11,9 +11,11 @@
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     nix-homebrew.inputs.nixpkgs.follows = "nixpkgs";
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, home-manager, rust-overlay }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, home-manager, rust-overlay, nix-vscode-extensions, ... }:
   let
     inherit (nixpkgs.lib) attrValues optionalAttrs;
 
@@ -45,13 +47,14 @@
           config = { allowUnfree = true; allowBroken = true; };
           overlays = [
             rust-overlay.overlays.default
+            nix-vscode-extensions.overlays.default
           ];
         };
       };
     };
 
     # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#simple
+    # $ darwin-rebuild build --flake .#Space
     darwinConfigurations."Space" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = attrValues self.darwinModules ++ [
@@ -71,16 +74,12 @@
             sharedModules = [./pkg/default.nix];
             backupFileExtension = "bkp";
 
-            users = {
-              Gabrielle = {
-                imports = [./users/gabrielle.nix];
-              };
+            users.Gabrielle = {
+              imports = [./users/gabrielle.nix];
             };
           };
-          users.users = {
-            Gabrielle = {
-              home = "/Users/Gabrielle";
-            };
+          users.users.Gabrielle = {
+            home = "/Users/Gabrielle";
           };
         }
       ];

@@ -1,6 +1,5 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 {
-
   # Enable experimental nix command and flakes
   nix.extraOptions = ''
     auto-optimise-store = true
@@ -20,7 +19,6 @@
       pkgs.podman
       pkgs.podman-desktop
       pkgs.podman-compose
-      pkgs.open-webui
       pkgs._1password-gui
       pkgs._1password-cli
     ];
@@ -56,6 +54,9 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
+  nixpkgs.overlays = [
+    inputs.nix-vscode-extensions.overlays.default
+  ];
 
   # Fonts
   fonts.packages = with pkgs; [

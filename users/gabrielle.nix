@@ -28,6 +28,8 @@
       yarn
       opam
       vscode
+      nil
+      nixfmt
     ];
 
     # Nicely reload system units when changing configs
