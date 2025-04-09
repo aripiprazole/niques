@@ -16,7 +16,12 @@
         filter.lfs.required = true;
         url."git@github.com:".insteadOf = "git://github.com";
         commit.gpgsign = true;
-        core.fsmonitor = true;
+        core = {
+          fsmonitor = true;
+          editor = "${pkgs.helix}/bin/hx";
+          autocrlf = "input";
+          whitespace = "fix,-indent-with-non-tab,trailing-space,cr-at-eol";
+        };
         init.defaultBranch = true;
         push.autoSetupRemote = true;
       };

@@ -17,9 +17,27 @@
       pkgs.ollama
       pkgs.raycast
       pkgs.betterdisplay
+      pkgs.podman
+      pkgs.podman-desktop
+      pkgs.podman-compose
+      pkgs.open-webui
       pkgs._1password-gui
       pkgs._1password-cli
     ];
+
+  # Enable common container config files in /etc/containers
+  # virtualisation.containers.enable = true;
+  # virtualisation = {
+  #   podman = {
+  #     enable = true;
+
+  #     # Create a `docker` alias for podman, to use it as a drop-in replacement
+  #     dockerCompat = true;
+
+  #     # Required for containers under podman-compose to be able to talk to each other.
+  #     defaultNetwork.settings.dns_enabled = true;
+  #   };
+  # };
 
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
