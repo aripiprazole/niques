@@ -1,126 +1,147 @@
 { pkgs, lib, inputs, ... }:
-{
-  # Enable experimental nix command and flakes
-  nix.extraOptions = ''
-    auto-optimise-store = true
-    experimental-features = nix-command flakes
-    extra-platforms = x86_64-darwin aarch64-darwin
-  '';
+let
+  # Work around https://github.com/containers/podman/issues/17026
+  # by downgrading to qemu-8.1.3.
+  inherit (import (pkgs.fetchFromGitHub {
+    owner = "NixOS";
+    repo = "nixpkgs";
+    rev = "4db6d0ab3a62ea7149386a40eb23d1bd4f508e6e";
+    sha256 = "sha256-kyw7744auSe+BdkLwFGyGbOHqxdE3p2hO6cw7KRLflw=";
+  }) { inherit (pkgs) system; }) qemu;
+in {
+    # Enable experimental nix command and flakes
+    nix.extraOptions = ''
+      auto-optimise-store = true
+      experimental-features = nix-command flakes
+      extra-platforms = x86_64-darwin aarch64-darwin
+    '';
 
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages =
-    [ pkgs.vim
-      pkgs.mkalias
-      pkgs.rsync
-      pkgs.ollama
-      pkgs.raycast
-      pkgs.betterdisplay
-      pkgs.podman
-      pkgs.podman-desktop
-      pkgs.podman-compose
-      pkgs._1password-gui
-      pkgs._1password-cli
+    # List packages installed in system profile. To search by name, run:
+    # $ nix-env -qaP | grep wget
+    environment.systemPackages =
+      [ pkgs.vim
+        pkgs.mkalias
+        pkgs.rsync
+        pkgs.ollama
+        pkgs.raycast
+        pkgs.betterdisplay
+        pkgs.podman
+        pkgs.podman-tui
+        pkgs.podman-desktop
+        pkgs.podman-compose
+        qemu
+        pkgs.xz
+        pkgs._1password-gui
+        pkgs._1password-cli
+      ];
+
+    # # https://github.com/containers/podman/issues/17026
+    # environment.pathsToLink = [ "/share/qemu" ];
+
+    # # https://github.com/LnL7/nix-darwin/issues/432#issuecomment-1024951660
+    # environment.etc."containers/containers.conf.d/99-gvproxy-path.conf".text = ''
+    #   [engine]
+    #   helper_binaries_dir = ["${pkgs.gvproxy}/bin"]
+    # '';
+
+    # # Enable common container config files in /etc/containers
+    # virtualisation.containers.enable = true;
+    # virtualisation = {
+    #   podman = {
+    #     enable = true;
+
+    #     # Create a `docker` alias for podman, to use it as a drop-in replacement
+    #     dockerCompat = true;
+
+    #     # Required for containers under podman-compose to be able to talk to each other.
+    #     defaultNetwork.settings.dns_enabled = true;
+    #   };
+    # };
+
+    # Necessary for using flakes on this system.
+    nix.settings.experimental-features = "nix-command flakes";
+
+    # Enable alternative shell support in nix-darwin.
+    programs.zsh.enable = true;
+
+    # Set Git commit hash for darwin-version.
+    system.configurationRevision = lib.rev or lib.dirtyRev or null;
+
+    # Used for backwards compatibility, please read the changelog before changing.
+    # $ darwin-rebuild changelog
+    system.stateVersion = 6;
+
+    # The platform the configuration will be used on.
+    nixpkgs.hostPlatform = "aarch64-darwin";
+    nixpkgs.config.allowUnfree = true;
+    nixpkgs.config.allowBroken = true;
+    nixpkgs.overlays = [
+      inputs.nix-vscode-extensions.overlays.default
     ];
 
-  # Enable common container config files in /etc/containers
-  # virtualisation.containers.enable = true;
-  # virtualisation = {
-  #   podman = {
-  #     enable = true;
-
-  #     # Create a `docker` alias for podman, to use it as a drop-in replacement
-  #     dockerCompat = true;
-
-  #     # Required for containers under podman-compose to be able to talk to each other.
-  #     defaultNetwork.settings.dns_enabled = true;
-  #   };
-  # };
-
-  # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
-
-  # Enable alternative shell support in nix-darwin.
-  programs.zsh.enable = true;
-
-  # Set Git commit hash for darwin-version.
-  system.configurationRevision = lib.rev or lib.dirtyRev or null;
-
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  system.stateVersion = 6;
-
-  # The platform the configuration will be used on.
-  nixpkgs.hostPlatform = "aarch64-darwin";
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowBroken = true;
-  nixpkgs.overlays = [
-    inputs.nix-vscode-extensions.overlays.default
-  ];
-
-  # Fonts
-  fonts.packages = with pkgs; [
-    recursive
-    nerd-fonts.jetbrains-mono
-  ];
-
-  # Homebrew for packages not on Nix
-  homebrew = {
-    enable = true;
-    casks = [
-      "eqmac"
-      "spotify"
-      "arc"
+    # Fonts
+    fonts.packages = with pkgs; [
+      recursive
+      nerd-fonts.jetbrains-mono
     ];
-    caskArgs = {
-      appdir = "~/Applications";
-      require_sha = true;
-    };
-  };
 
-  # Add ability to used TouchID for sudo authentication
-  security.pam.services.sudo_local.touchIdAuth = true;
+    # Homebrew for packages not on Nix
+    homebrew = {
+      enable = true;
+      casks = [
+        "eqmac"
+        "spotify"
+        "arc"
+      ];
+      caskArgs = {
+        appdir = "~/Applications";
+        require_sha = true;
+      };
+    };
 
-  # Configure OLlama service
-  # services.ollama = {
-  #   enable = true;
-  #   loadModels = ["qwen-2.5-coder" "deepseek-r1:1.5b" "llama3.2"];
-  # };
-  launchd.user.agents.ollama = {
-    command = "${pkgs.ollama}/bin/ollama serve";
-    environment = {
-      OLLAMA_HOST = "127.0.0.1:11434";
-    };
-    serviceConfig = {
-      KeepAlive = true;
-      RunAtLoad = true;
-    };
-  };
+    # Add ability to used TouchID for sudo authentication
+    security.pam.services.sudo_local.touchIdAuth = true;
 
-  # Keyboard
-  system.keyboard.enableKeyMapping = true;
-  system.keyboard.remapCapsLockToEscape = true;
+    # Configure OLlama service
+    # services.ollama = {
+    #   enable = true;
+    #   loadModels = ["qwen-2.5-coder" "deepseek-r1:1.5b" "llama3.2"];
+    # };
+    launchd.user.agents.ollama = {
+      command = "${pkgs.ollama}/bin/ollama serve";
+      environment = {
+        OLLAMA_HOST = "127.0.0.1:11434";
+      };
+      serviceConfig = {
+        KeepAlive = true;
+        RunAtLoad = true;
+      };
+    };
 
-  # set some OSX preferences that I always end up hunting down and changing.
-  system.defaults = {
-    # minimal dock
-    dock = {
-      autohide = true;
-      orientation = "bottom";
-      show-process-indicators = false;
-      show-recents = false;
-      static-only = true;
+    # Keyboard
+    system.keyboard.enableKeyMapping = true;
+    system.keyboard.remapCapsLockToEscape = true;
+
+    # set some OSX preferences that I always end up hunting down and changing.
+    system.defaults = {
+      # minimal dock
+      dock = {
+        autohide = true;
+        orientation = "bottom";
+        show-process-indicators = false;
+        show-recents = false;
+        static-only = true;
+      };
+      # a finder that tells me what I want to know and lets me work
+      finder = {
+        AppleShowAllExtensions = true;
+        ShowPathbar = true;
+        FXEnableExtensionChangeWarning = false;
+      };
+      # Tab between form controls and F-row that behaves as F1-F12
+      NSGlobalDomain = {
+        AppleKeyboardUIMode = 3;
+        "com.apple.keyboard.fnState" = true;
+      };
     };
-    # a finder that tells me what I want to know and lets me work
-    finder = {
-      AppleShowAllExtensions = true;
-      ShowPathbar = true;
-      FXEnableExtensionChangeWarning = false;
-    };
-    # Tab between form controls and F-row that behaves as F1-F12
-    NSGlobalDomain = {
-      AppleKeyboardUIMode = 3;
-      "com.apple.keyboard.fnState" = true;
-    };
-  };
-}
+  }

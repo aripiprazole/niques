@@ -10,10 +10,12 @@
         };
         gpg.format = "ssh";
         gpg.ssh.program = "${pkgs._1password-gui}/bin/op-ssh-sign";
-        filter.lfs.smudge = "git-lfs smudge --skip %f";
-        filter.lfs.process = "git-lfs filter-proccess --skip";
-        filter.lfs.clean = "git-lfs clean -- %f";
-        filter.lfs.required = true;
+        filter.lfs = {
+          smudge = "git-lfs smudge --skip %f";
+          process = "git-lfs filter-proccess --skip";
+          clean = "git-lfs clean -- %f";
+          required = true;
+        };
         url."git@github.com:".insteadOf = "git://github.com";
         commit.gpgsign = true;
         core = {
