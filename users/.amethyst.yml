@@ -1,0 +1,10 @@
+floating:
+  - com.apple.mail
+  - 1password
+  - camera
+  - finder
+  - teams
+  - modrinth
+  - curseforge
+window-margins: true
+window-margin-size: 10

@@ -19,6 +19,11 @@
       btop.settings.vim_keys = true;
     };
 
+    home.file.".amethyst.conf" = {
+      enable = true;
+      source = ./.amethyst.yml;
+    };
+
     home.packages = with pkgs; [
       # DX
       wakatime-cli

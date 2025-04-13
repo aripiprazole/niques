@@ -27,7 +27,6 @@ in {
         pkgs.neofetch
         pkgs.raycast
         pkgs.betterdisplay
-        pkgs.lmstudio
         pkgs.xz
         pkgs.starship
         pkgs.zsh-autosuggestions
@@ -81,6 +80,7 @@ in {
         # Real-world stuff
         "arc"
         "whatsapp"
+        "telegram"
         "microsoft-teams"
         "spotify"
 
@@ -88,6 +88,7 @@ in {
         "eqmac"
         "amethyst"
         "docker"
+        "lm-studio"
         "logi-options+"
 
         # Games / Entertainment
