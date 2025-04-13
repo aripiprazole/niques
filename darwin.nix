@@ -29,6 +29,9 @@ in {
         pkgs.betterdisplay
         pkgs.lmstudio
         pkgs.xz
+        pkgs.starship
+        pkgs.zsh-autosuggestions
+        pkgs.zsh-syntax-highlighting
         pkgs._1password-gui
         pkgs._1password-cli
       ];
@@ -37,7 +40,11 @@ in {
     nix.settings.experimental-features = "nix-command flakes";
 
     # Enable alternative shell support in nix-darwin.
-    programs.zsh.enable = true;
+    programs.zsh = {
+      enable = true;
+      enableCompletion = true;
+      enableBashCompletion = true;
+    };
 
     # The platform the configuration will be used on.
     nixpkgs = {
@@ -96,6 +103,8 @@ in {
 
     # Add ability to used TouchID for sudo authentication
     security.pam.services.sudo_local.touchIdAuth = true;
+
+    environment.shellAliases.zed = "zeditor";
 
     # Keyboard
     system.keyboard.enableKeyMapping = true;
