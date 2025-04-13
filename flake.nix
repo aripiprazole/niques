@@ -13,9 +13,10 @@
     nix-homebrew.inputs.nixpkgs.follows = "nixpkgs";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, home-manager, rust-overlay, nix-vscode-extensions, ... }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, home-manager, rust-overlay, nix-vscode-extensions, spicetify-nix, ... }:
   let
     inherit (nixpkgs.lib) attrValues optionalAttrs;
 
@@ -59,6 +60,7 @@
       system = "aarch64-darwin";
       modules = attrValues self.darwinModules ++ [
         ./darwin.nix
+        spicetify-nix.darwinModules.spicetify
         nix-homebrew.darwinModules.nix-homebrew {
           nix-homebrew = {
             enable = true;
