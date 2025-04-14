@@ -33,12 +33,15 @@
       fd
       ffmpeg
       direnv
+      cmake
+      git
+      tig
+      fzf
 
       # Text editors
       zed-editor
       vscode
       helix
-      git
       iterm2
       obsidian
 
@@ -49,9 +52,13 @@
       stack
       cabal-install
       elan
+      dune-release
 
       # Language Servers and formatters for DX
       nil
+      cmake-language-server
+      awk-language-server
+      cmake-lint
       nixfmt-classic
 
       # Messaging
