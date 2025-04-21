@@ -19,7 +19,7 @@
       btop.settings.vim_keys = true;
     };
 
-    home.file.".amethyst.conf" = {
+    home.file.".amethyst.yml" = {
       enable = true;
       source = ./.amethyst.yml;
     };
@@ -43,7 +43,6 @@
       vscode
       helix
       iterm2
-      obsidian
 
       # Languages and version managers
       yarn

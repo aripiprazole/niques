@@ -88,6 +88,7 @@ in {
         "eqmac"
         "amethyst"
         "docker"
+        "obsidian"
         "lm-studio"
         "logi-options+"
 
@@ -165,7 +166,7 @@ in {
         orientation = "bottom";
         show-process-indicators = true;
         show-recents = false;
-        static-only = true;
+        static-only = false;
         expose-group-apps = true;
         magnification = true;
         mineffect = "genie";
