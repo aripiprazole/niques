@@ -1,14 +1,35 @@
 { pkgs, lib, inputs, ... }:
-let
-  # Work around https://github.com/containers/podman/issues/17026
-  # by downgrading to qemu-8.1.3.
-  inherit (import (pkgs.fetchFromGitHub {
-    owner = "NixOS";
-    repo = "nixpkgs";
-    rev = "4db6d0ab3a62ea7149386a40eb23d1bd4f508e6e";
-    sha256 = "sha256-kyw7744auSe+BdkLwFGyGbOHqxdE3p2hO6cw7KRLflw=";
-  }) { inherit (pkgs) system; }) qemu;
-in {
+  let
+    entries = [
+      { path = "/Applications/Finder.app"; }
+      { path = "/Applications/Arc.app"; }
+      { path = "/Applications/Calendar.app"; }
+      { path = "/Applications/Mail.app"; }
+      { path = "/Applications/Messages.app"; }
+      { path = "/Applications/WhatsApp.app"; }
+      { path = "/Applications/Telegram.app"; }
+      { path = "/Applications/Slack.app"; }
+      { path = "/Applications/Nix Apps/Spotify.app"; }
+    ];
+    normalize = path: if lib.hasSuffix ".app" path then path + "/" else path;
+    entry_uri = path: "file://" + (builtins.replaceStrings
+      [" "   "!"   "\""  "#"   "$"   "%"   "&"   "'"   "("   ")"]
+      ["%20" "%21" "%22" "%23" "%24" "%25" "%26" "%27" "%28" "%29"]
+      (normalize path)
+    );
+    want_uris = lib.concatMapStrings (entry: "${entry_uri entry.path}\n") entries;
+    create_entries = lib.concatMapStrings
+      (entry: "${pkgs.dockutil}/bin/dockutil --no-restart --add '${entry.path}'\n")
+      entries;
+    # Work around https://github.com/containers/podman/issues/17026
+    # by downgrading to qemu-8.1.3.
+    inherit (import (pkgs.fetchFromGitHub {
+      owner = "NixOS";
+      repo = "nixpkgs";
+      rev = "4db6d0ab3a62ea7149386a40eb23d1bd4f508e6e";
+      sha256 = "sha256-kyw7744auSe+BdkLwFGyGbOHqxdE3p2hO6cw7KRLflw=";
+    }) { inherit (pkgs) system; }) qemu;
+  in {
     # Enable experimental nix command and flakes
     nix.extraOptions = ''
       auto-optimise-store = true
@@ -33,6 +54,8 @@ in {
         pkgs.zsh-syntax-highlighting
         pkgs._1password-gui
         pkgs._1password-cli
+        pkgs.dockutil
+        pkgs.coreutils
       ];
 
     # Necessary for using flakes on this system.
@@ -43,6 +66,7 @@ in {
       enable = true;
       enableCompletion = true;
       enableBashCompletion = true;
+      enableSyntaxHighlighting = true;
     };
 
     # The platform the configuration will be used on.
@@ -69,6 +93,17 @@ in {
     system.stateVersion = 6;
 
     system.activationScripts.postUserActivation.text = ''
+      echo >&2 "Setting up the Dock..."
+      have_uris="$(${pkgs.dockutil}/bin/dockutil --list | ${pkgs.coreutils}/bin/cut -f2)"
+      if ! diff -wu <(echo -n "$have_uris") <(echo -n '${want_uris}') >&2 ; then
+        echo >&2 "Resetting Dock."
+        ${pkgs.dockutil}/bin/dockutil --no-restart --remove all
+        ${create_entries}
+        killall Dock
+      else
+        echo >&2 "Dock setup complete."
+      fi
+
       # Following line should allow us to avoid a logout/login cycle
       /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
     '';
@@ -173,23 +208,7 @@ in {
         mouse-over-hilite-stack = true;
         showhidden = true;
         mru-spaces = false;
-        persistent-apps = [
-          {
-            app = "/Applications/Arc.app";
-          }
-          {
-            app = "/Applications/Mail.app";
-          }
-          {
-            app = "/Applications/Messages.app";
-          }
-          {
-            app = "/Applications/WhatsApp.app";
-          }
-          {
-            app = "/Applications/Nix Apps/Spotify.app";
-          }
-        ];
+        appswitcher-all-displays = true;
       };
       # a finder that tells me what I want to know and lets me work
       finder = {
