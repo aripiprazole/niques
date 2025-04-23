@@ -37,7 +37,8 @@
   ///     without formatting, it's boring to have to press Ctrl+Shift+S
   ///     instead of just saving it.
   "editor.formatOnSave": true,
-  "editor.rulers": [80, 100, 120, 160], // Rulers at 80, 100, 120, 160
+  // Rulers at 80, 100, 120, 160
+  "editor.rulers": [80, 100, 120, 160],
   ///   SUBSECTION: Highlight
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": true,
@@ -103,7 +104,7 @@
   "prettier.endOfLine": "lf",
   "prettier.semi": true,
   ///     SUBSECTION: Width
-  "prettier.tabWidth": 2, // Tab width of 2
+  "prettier.tabWidth": 2,
   "prettier.printWidth": 80,
   ///     SUBSECTION: Comma
   "prettier.trailingComma": "all",
@@ -143,7 +144,7 @@
   "rust-analyzer.assist.emitMustUse": true,
   "rust-analyzer.assist.expressionFillDefault": "default",
   ///   SUBSECTION: Debugger
-  "rust-analyzer.debug.engine": "vadimcn.vscode-lldb", // LLDB for debugger
+  "rust-analyzer.debug.engine": "vadimcn.vscode-lldb",
   ///   SUBSECTION: Highlight
   "rust-analyzer.semanticHighlighting.operator.specialization.enable": true,
   "rust-analyzer.highlightRelated.breakPoints.enable": true,
@@ -218,11 +219,6 @@
 
   /// SECTION: RedHat
   "redhat.telemetry.enabled": true,
-
-  /// SECTION: Yaml
-  "yaml.schemas": {
-    "file:///home/gabi/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
-  },
 
   /// SECTION: File associations, and exclude
   "files.eol": "\n",
@@ -335,7 +331,7 @@
   "vim.matchpairs": "(:),{:},[:]",
   "vim.showMarksInGutter": true,
   "vim.handleKeys": {
-    "<C-y>": false, // Disable scrolling with Ctrl-y
+    "<C-y>": false,
     "<C-f>": false,
     "<C-o>": false,
     "<C-i>": false
@@ -435,7 +431,8 @@
     ///   SUBSECTION: Find shortcuts
     ///   Use ctrl-f to find
     {
-      "before": ["<C-f>"], // Enable the default vscode find
+      // Enable the default vscode find
+      "before": ["<C-f>"],
       "commands": ["actions.find"]
     },
     {
