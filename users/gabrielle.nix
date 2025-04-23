@@ -43,8 +43,8 @@
       zsh-syntax-highlighting
       any-nix-shell
       cargo
-      rustfmt
-      clippy
+      rustPackages.rustfmt
+      rustPackages.clippy
       rustc
 
       # Text editors
