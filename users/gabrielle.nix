@@ -42,6 +42,10 @@
       zsh-autosuggestions
       zsh-syntax-highlighting
       any-nix-shell
+      cargo
+      rustfmt
+      clippy
+      rustc
 
       # Text editors
       zed-editor

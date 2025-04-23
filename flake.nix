@@ -69,7 +69,7 @@
       "Ocean" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = attrValues self.darwinModules ++ [
-          ./hosts/common.nix
+          ./hosts/darwin.nix
           ./hosts/ocean/default.nix
           spicetify-nix.darwinModules.spicetify
           nix-homebrew.darwinModules.nix-homebrew
@@ -94,7 +94,7 @@
       "Space" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = attrValues self.darwinModules ++ [
-          ./hosts/common.nix
+          ./hosts/darwin.nix
           ./hosts/space/default.nix
           spicetify-nix.darwinModules.spicetify
           nix-homebrew.darwinModules.nix-homebrew

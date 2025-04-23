@@ -107,6 +107,7 @@
     system.keyboard.enableKeyMapping = true;
     system.keyboard.remapCapsLockToEscape = true;
 
+    # Troubleshooting: the terminal should have full disk access
     system.defaults.CustomUserPreferences = {
       NSGlobalDomain = {
         WebKitDeveloperExtras = true;
