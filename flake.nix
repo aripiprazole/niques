@@ -31,8 +31,7 @@
     # This is a function that generates an attribute by calling a function you
     # pass to it, with each system as an argument
     forAllSystems = nixpkgs.lib.genAttrs systems;
-  in
-  {
+  in {
     # Formatter for your nix files, available through 'nix fmt'
     # Other options beside 'alejandra' include 'nixpkgs-fmt'
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
@@ -51,6 +50,20 @@
             nix-vscode-extensions.overlays.default
           ];
         };
+      };
+    };
+
+    flake-utils.lib.eachDefaultSystem = {
+      devShells."aarch64-darwin".default = nixpkgs.mkShell {
+        buildInputs = with nixpkgs; [
+          python3
+          python3Packages.pip
+          python3Packages.google-cloud-secret-manager
+          python3Packages.virtualenv
+        ];
+        shellHook = ''
+          python3 -m venv /Users/Gabrielle/venv/default
+        '';
       };
     };
 
