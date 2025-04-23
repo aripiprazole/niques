@@ -2,6 +2,17 @@
   {
     programs.git = {
       enable = true;
+      includes = [
+        {
+          condition = "gitdir:~/Developer/Cloudwalk";
+          contents = {
+            user = {
+              name = "Gabrielle Oliveira";
+              email = "gabrielle.oliveira@cloudwalk.io";
+            };
+          };
+        }
+      ];
       extraConfig = {
         user = {
           name = "Gabrielle Oliveira";
@@ -26,9 +37,6 @@
         };
         init.defaultBranch = true;
         push.autoSetupRemote = true;
-        includeIf."gitdir:~/Developer/Cloudwalk" = {
-          path = "~/Developer/Cloudwalk/.gitconfig";
-        };
       };
     };
   }
