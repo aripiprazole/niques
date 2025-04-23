@@ -16,6 +16,10 @@
       extra-platforms = x86_64-darwin aarch64-darwin
     '';
 
+    # Necessary for using flakes on this system.
+    nix.settings.experimental-features = "nix-command flakes";
+    nix.optimise.automatic = true;
+
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
     environment.systemPackages =
@@ -37,8 +41,7 @@
         pkgs.coreutils
       ];
 
-    # Necessary for using flakes on this system.
-    nix.settings.experimental-features = "nix-command flakes";
+    environment.shellAliases.zed = "zeditor";
 
     # Enable alternative shell support in nix-darwin.
     programs.zsh = {
@@ -64,17 +67,15 @@
       nerd-fonts.jetbrains-mono
     ];
 
+    # Add ability to used TouchID for sudo authentication
+    security.pam.services.sudo_local.touchIdAuth = true;
+
     # Set Git commit hash for darwin-version.
     system.configurationRevision = lib.rev or lib.dirtyRev or null;
 
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog
     system.stateVersion = 6;
-
-    # Add ability to used TouchID for sudo authentication
-    security.pam.services.sudo_local.touchIdAuth = true;
-
-    environment.shellAliases.zed = "zeditor";
 
     # Keyboard
     system.keyboard.enableKeyMapping = true;

@@ -41,6 +41,10 @@
     # Homebrew for packages not on Nix
     homebrew = {
       enable = true;
+      onActivation = {
+        autoUpdate = true;
+        upgrade = true;
+      };
       casks = [
         # Real-world stuff
         "arc"
