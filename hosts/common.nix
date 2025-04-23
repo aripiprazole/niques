@@ -1,5 +1,9 @@
 { pkgs, lib, inputs, ... }:
   let
+    gdk = pkgs.google-cloud-sdk.withExtraComponents (with pkgs.google-cloud-sdk.components; [
+      gke-gcloud-auth-plugin
+    ]);
+
     # Work around https://github.com/containers/podman/issues/17026
     # by downgrading to qemu-8.1.3.
     inherit (import (pkgs.fetchFromGitHub {
@@ -24,6 +28,7 @@
     # $ nix-env -qaP | grep wget
     environment.systemPackages =
       [ qemu
+        gdk
         pkgs.vim
         pkgs.mkalias
         pkgs.rsync
