@@ -3,16 +3,26 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    rust-overlay.url = "github:oxalica/rust-overlay";
-    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-    nix-homebrew.inputs.nixpkgs.follows = "nixpkgs";
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-    nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
@@ -53,20 +63,6 @@
       };
     };
 
-    flake-utils.lib.eachDefaultSystem = {
-      devShells."aarch64-darwin".default = nixpkgs.mkShell {
-        buildInputs = with nixpkgs; [
-          python3
-          python3Packages.pip
-          python3Packages.google-cloud-secret-manager
-          python3Packages.virtualenv
-        ];
-        shellHook = ''
-          python3 -m venv /Users/Gabrielle/venv/default
-        '';
-      };
-    };
-
     darwinConfigurations = {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#Ocean
@@ -76,27 +72,17 @@
           ./hosts/common.nix
           ./hosts/ocean/default.nix
           spicetify-nix.darwinModules.spicetify
-          nix-homebrew.darwinModules.nix-homebrew {
-            nix-homebrew = {
-              enable = true;
-              enableRosetta = true;
-              user = "Gabrielle";
-              autoMigrate = true;
-            };
-          }
+          nix-homebrew.darwinModules.nix-homebrew
           home-manager.darwinModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              sharedModules = [./pkg/default.nix];
+              sharedModules = [./modules/default.nix];
               backupFileExtension = "bkp";
 
               users.Gabrielle = {
                 imports = [./users/gabrielle.nix];
               };
-            };
-            users.users.Gabrielle = {
-              home = "/Users/Gabrielle";
             };
           }
         ];
@@ -111,27 +97,17 @@
           ./hosts/common.nix
           ./hosts/space/default.nix
           spicetify-nix.darwinModules.spicetify
-          nix-homebrew.darwinModules.nix-homebrew {
-            nix-homebrew = {
-              enable = true;
-              enableRosetta = true;
-              user = "Gabrielle";
-              autoMigrate = true;
-            };
-          }
+          nix-homebrew.darwinModules.nix-homebrew
           home-manager.darwinModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              sharedModules = [./pkg/default.nix];
+              sharedModules = [./modules/default.nix];
               backupFileExtension = "bkp";
 
               users.Gabrielle = {
                 imports = [./users/gabrielle.nix];
               };
-            };
-            users.users.Gabrielle = {
-              home = "/Users/Gabrielle";
             };
           }
         ];
@@ -144,21 +120,20 @@
     darwinModules = {
       programs-nix-index =
         # Additional configuration for `nix-index` to enable `command-not-found` functionality with Fish.
-        { config, lib, pkgs, ... }:
-          {
-            config = lib.mkIf config.programs.nix-index.enable {
-              programs.fish.interactiveShellInit = ''
-                function __fish_command_not_found_handler --on-event="fish_command_not_found"
-                  ${if config.programs.fish.useBabelfish then ''
-                  command_not_found_handle $argv
-                  '' else ''
-                  ${pkgs.bashInteractive}/bin/bash -c \
-                    "source ${config.programs.nix-index.package}/etc/profile.d/command-not-found.sh; command_not_found_handle $argv"
-                  ''}
-                end
-              '';
-              };
+        { config, lib, pkgs, ... }: {
+          config = lib.mkIf config.programs.nix-index.enable {
+            programs.fish.interactiveShellInit = ''
+              function __fish_command_not_found_handler --on-event="fish_command_not_found"
+                ${if config.programs.fish.useBabelfish then ''
+                command_not_found_handle $argv
+                '' else ''
+                ${pkgs.bashInteractive}/bin/bash -c \
+                  "source ${config.programs.nix-index.package}/etc/profile.d/command-not-found.sh; command_not_found_handle $argv"
+                ''}
+              end
+            '';
           };
+        };
     };
   };
 }

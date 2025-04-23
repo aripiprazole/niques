@@ -4,6 +4,10 @@
       gke-gcloud-auth-plugin
     ]);
 
+    python3 = pkgs.python3.withPackages (pkgs: with pkgs; [
+      google-cloud-secret-manager
+    ]);
+
     # Work around https://github.com/containers/podman/issues/17026
     # by downgrading to qemu-8.1.3.
     inherit (import (pkgs.fetchFromGitHub {
@@ -14,24 +18,33 @@
     }) { inherit (pkgs) system; }) qemu;
   in {
     # Enable experimental nix command and flakes
-    nix.extraOptions = ''
-      auto-optimise-store = true
-      experimental-features = nix-command flakes
-      extra-platforms = x86_64-darwin aarch64-darwin
-    '';
+    nix = {
+      extraOptions = ''
+        auto-optimise-store = true
+        experimental-features = nix-command flakes
+        extra-platforms = x86_64-darwin aarch64-darwin
+      '';
 
-    # Necessary for using flakes on this system.
-    nix.settings.experimental-features = "nix-command flakes";
-    nix.optimise.automatic = true;
+      settings = {
+        # Necessary for using flakes on this system.
+        experimental-features = "nix-command flakes";
+        substituters = [
+          "https://nix-community.cachix.org"
+          "https://cache.nixos.org/"
+        ];
+        trusted-public-keys = [
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        ];
+      };
+      optimise.automatic = true;
+    };
 
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
     environment.systemPackages =
       [ qemu
         gdk
-        pkgs.python3
-        pkgs.python3Packages.pip
-        pkgs.python3Packages.google-cloud-secret-manager
+        python3
         pkgs.vim
         pkgs.mkalias
         pkgs.rsync
@@ -40,9 +53,6 @@
         pkgs.raycast
         pkgs.betterdisplay
         pkgs.xz
-        pkgs.starship
-        pkgs.zsh-autosuggestions
-        pkgs.zsh-syntax-highlighting
         pkgs._1password-gui
         pkgs._1password-cli
         pkgs.dockutil
@@ -50,14 +60,6 @@
       ];
 
     environment.shellAliases.zed = "zeditor";
-
-    # Enable alternative shell support in nix-darwin.
-    programs.zsh = {
-      enable = true;
-      enableCompletion = true;
-      enableBashCompletion = true;
-      enableSyntaxHighlighting = true;
-    };
 
     # The platform the configuration will be used on.
     nixpkgs = {
@@ -67,6 +69,18 @@
       overlays = [
         inputs.nix-vscode-extensions.overlays.default
       ];
+    };
+
+    nix-homebrew = {
+      enable = true;
+      enableRosetta = true;
+      user = "Gabrielle";
+      autoMigrate = true;
+    };
+
+    homebrew.onActivation = {
+      autoUpdate = true;
+      upgrade = true;
     };
 
     # Fonts
@@ -151,6 +165,7 @@
         showhidden = true;
         mru-spaces = false;
         appswitcher-all-displays = true;
+        wvous-tl-corner = 2;  # top-left - Mission Control
       };
       # a finder that tells me what I want to know and lets me work
       finder = {

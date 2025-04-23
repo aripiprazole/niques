@@ -3,7 +3,7 @@
     home.homeDirectory = "/Users/Gabrielle";
     home.stateVersion = "22.05";
 
-    imports = [../pkg];
+    imports = [../modules];
 
     programs = {
       home-manager.enable = true;
@@ -37,6 +37,11 @@
       git
       tig
       fzf
+      starship
+      zsh
+      zsh-autosuggestions
+      zsh-syntax-highlighting
+      any-nix-shell
 
       # Text editors
       zed-editor
