@@ -1,26 +1,5 @@
 { pkgs, lib, inputs, ... }:
   let
-    entries = [
-      { path = "/Applications/Finder.app"; }
-      { path = "/Applications/Arc.app"; }
-      { path = "/Applications/Calendar.app"; }
-      { path = "/Applications/Mail.app"; }
-      { path = "/Applications/Messages.app"; }
-      { path = "/Applications/WhatsApp.app"; }
-      { path = "/Applications/Telegram.app"; }
-      { path = "/Applications/Slack.app"; }
-      { path = "/Applications/Nix Apps/Spotify.app"; }
-    ];
-    normalize = path: if lib.hasSuffix ".app" path then path + "/" else path;
-    entry_uri = path: "file://" + (builtins.replaceStrings
-      [" "   "!"   "\""  "#"   "$"   "%"   "&"   "'"   "("   ")"]
-      ["%20" "%21" "%22" "%23" "%24" "%25" "%26" "%27" "%28" "%29"]
-      (normalize path)
-    );
-    want_uris = lib.concatMapStrings (entry: "${entry_uri entry.path}\n") entries;
-    create_entries = lib.concatMapStrings
-      (entry: "${pkgs.dockutil}/bin/dockutil --no-restart --add '${entry.path}'\n")
-      entries;
     # Work around https://github.com/containers/podman/issues/17026
     # by downgrading to qemu-8.1.3.
     inherit (import (pkgs.fetchFromGitHub {
@@ -91,52 +70,6 @@
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog
     system.stateVersion = 6;
-
-    system.activationScripts.postUserActivation.text = ''
-      echo >&2 "Setting up the Dock..."
-      have_uris="$(${pkgs.dockutil}/bin/dockutil --list | ${pkgs.coreutils}/bin/cut -f2)"
-      if ! diff -wu <(echo -n "$have_uris") <(echo -n '${want_uris}') >&2 ; then
-        echo >&2 "Resetting Dock."
-        ${pkgs.dockutil}/bin/dockutil --no-restart --remove all
-        ${create_entries}
-        killall Dock
-      else
-        echo >&2 "Dock setup complete."
-      fi
-
-      # Following line should allow us to avoid a logout/login cycle
-      /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-    '';
-
-    # Homebrew for packages not on Nix
-    homebrew = {
-      enable = true;
-      casks = [
-        # Real-world stuff
-        "arc"
-        "whatsapp"
-        "telegram"
-        "microsoft-teams"
-        "spotify"
-
-        # System applications
-        "eqmac"
-        "amethyst"
-        "docker"
-        "obsidian"
-        "lm-studio"
-        "logi-options+"
-
-        # Games / Entertainment
-        "stremio"
-        "whisky"
-        "curseforge"
-        "modrinth"
-      ];
-      caskArgs = {
-        appdir = "/Applications";
-      };
-    };
 
     # Add ability to used TouchID for sudo authentication
     security.pam.services.sudo_local.touchIdAuth = true;

@@ -26,6 +26,9 @@
         };
         init.defaultBranch = true;
         push.autoSetupRemote = true;
+        includeIf."gitdir:~/Developer/Cloudwalk" = {
+          path = "~/Developer/Cloudwalk/.gitconfig";
+        };
       };
     };
   }

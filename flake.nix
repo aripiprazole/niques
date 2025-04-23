@@ -54,38 +54,76 @@
       };
     };
 
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#Space
-    darwinConfigurations."Space" = nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = attrValues self.darwinModules ++ [
-        ./darwin.nix
-        spicetify-nix.darwinModules.spicetify
-        nix-homebrew.darwinModules.nix-homebrew {
-          nix-homebrew = {
-            enable = true;
-            enableRosetta = true;
-            user = "Gabrielle";
-            autoMigrate = true;
-          };
-        }
-        home-manager.darwinModules.home-manager {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            sharedModules = [./pkg/default.nix];
-            backupFileExtension = "bkp";
-
-            users.Gabrielle = {
-              imports = [./users/gabrielle.nix];
+    darwinConfigurations = {
+      # Build darwin flake using:
+      # $ darwin-rebuild build --flake .#Ocean
+      "Ocean" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = attrValues self.darwinModules ++ [
+          ./hosts/common.nix
+          ./hosts/ocean/default.nix
+          spicetify-nix.darwinModules.spicetify
+          nix-homebrew.darwinModules.nix-homebrew {
+            nix-homebrew = {
+              enable = true;
+              enableRosetta = true;
+              user = "Gabrielle";
+              autoMigrate = true;
             };
-          };
-          users.users.Gabrielle = {
-            home = "/Users/Gabrielle";
-          };
-        }
-      ];
-      specialArgs = { inherit inputs; };
+          }
+          home-manager.darwinModules.home-manager {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              sharedModules = [./pkg/default.nix];
+              backupFileExtension = "bkp";
+
+              users.Gabrielle = {
+                imports = [./users/gabrielle.nix];
+              };
+            };
+            users.users.Gabrielle = {
+              home = "/Users/Gabrielle";
+            };
+          }
+        ];
+        specialArgs = { inherit inputs; };
+      };
+
+      # Build darwin flake using:
+      # $ darwin-rebuild build --flake .#Space
+      "Space" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = attrValues self.darwinModules ++ [
+          ./hosts/common.nix
+          ./hosts/space/default.nix
+          spicetify-nix.darwinModules.spicetify
+          nix-homebrew.darwinModules.nix-homebrew {
+            nix-homebrew = {
+              enable = true;
+              enableRosetta = true;
+              user = "Gabrielle";
+              autoMigrate = true;
+            };
+          }
+          home-manager.darwinModules.home-manager {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              sharedModules = [./pkg/default.nix];
+              backupFileExtension = "bkp";
+
+              users.Gabrielle = {
+                imports = [./users/gabrielle.nix];
+              };
+            };
+            users.users.Gabrielle = {
+              home = "/Users/Gabrielle";
+            };
+          }
+        ];
+        specialArgs = { inherit inputs; };
+      };
     };
 
     # My `nix-darwin` modules that are pending upstream, or patched versions waiting on upstream
@@ -94,20 +132,20 @@
       programs-nix-index =
         # Additional configuration for `nix-index` to enable `command-not-found` functionality with Fish.
         { config, lib, pkgs, ... }:
-        {
-          config = lib.mkIf config.programs.nix-index.enable {
-            programs.fish.interactiveShellInit = ''
-              function __fish_command_not_found_handler --on-event="fish_command_not_found"
-                ${if config.programs.fish.useBabelfish then ''
-                command_not_found_handle $argv
-                '' else ''
-                ${pkgs.bashInteractive}/bin/bash -c \
-                  "source ${config.programs.nix-index.package}/etc/profile.d/command-not-found.sh; command_not_found_handle $argv"
-                ''}
-              end
-            '';
-            };
-        };
+          {
+            config = lib.mkIf config.programs.nix-index.enable {
+              programs.fish.interactiveShellInit = ''
+                function __fish_command_not_found_handler --on-event="fish_command_not_found"
+                  ${if config.programs.fish.useBabelfish then ''
+                  command_not_found_handle $argv
+                  '' else ''
+                  ${pkgs.bashInteractive}/bin/bash -c \
+                    "source ${config.programs.nix-index.package}/etc/profile.d/command-not-found.sh; command_not_found_handle $argv"
+                  ''}
+                end
+              '';
+              };
+          };
     };
   };
 }
