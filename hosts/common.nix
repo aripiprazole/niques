@@ -29,6 +29,9 @@
     environment.systemPackages =
       [ qemu
         gdk
+        pkgs.python3
+        pkgs.python3Packages.pip
+        pkgs.python3Packages.google-cloud-secret-manager
         pkgs.vim
         pkgs.mkalias
         pkgs.rsync
