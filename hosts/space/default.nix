@@ -1,15 +1,12 @@
 { pkgs, lib, ... }:
   let
     entries = [
-      { path = "/Applications/Finder.app"; }
       { path = "/Applications/Arc.app"; }
       { path = "/Applications/Calendar.app"; }
       { path = "/Applications/Mail.app"; }
       { path = "/Applications/Messages.app"; }
       { path = "/Applications/WhatsApp.app"; }
       { path = "/Applications/Telegram.app"; }
-      { path = "/Applications/Slack.app"; }
-      { path = "/Applications/Nix Apps/Spotify.app"; }
     ];
     normalize = path: if lib.hasSuffix ".app" path then path + "/" else path;
     entry_uri = path: "file://" + (builtins.replaceStrings
