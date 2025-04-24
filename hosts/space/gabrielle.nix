@@ -5,6 +5,10 @@
   imports = [../../modules];
 
   home.packages = with pkgs; [
+    # Dev tools
+    livekit
+    foreman
+
     # Programming Languages
     stack
     cabal-install
