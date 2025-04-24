@@ -5,7 +5,7 @@
   '';
 
   users.users.Gabrielle = {
-    home = "/Users/Gabrielle";
+    home = "/Users/gabrielleoliveira";
     name = "Gabrielle";
     shell = pkgs.zsh;
   };
