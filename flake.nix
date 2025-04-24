@@ -73,18 +73,7 @@
           ./hosts/ocean/default.nix
           spicetify-nix.darwinModules.spicetify
           nix-homebrew.darwinModules.nix-homebrew
-          home-manager.darwinModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              sharedModules = [./modules/default.nix];
-              backupFileExtension = "bkp";
-
-              users.Gabrielle = {
-                imports = [./users/gabrielle.nix];
-              };
-            };
-          }
+          home-manager.darwinModules.home-manager
         ];
         specialArgs = { inherit inputs; };
       };
@@ -98,18 +87,7 @@
           ./hosts/space/default.nix
           spicetify-nix.darwinModules.spicetify
           nix-homebrew.darwinModules.nix-homebrew
-          home-manager.darwinModules.home-manager {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              sharedModules = [./modules/default.nix];
-              backupFileExtension = "bkp";
-
-              users.Gabrielle = {
-                imports = [./users/gabrielle.nix];
-              };
-            };
-          }
+          home-manager.darwinModules.home-manager
         ];
         specialArgs = { inherit inputs; };
       };

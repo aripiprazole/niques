@@ -41,6 +41,17 @@
     shell = pkgs.zsh;
   };
 
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    sharedModules = [../../modules];
+    backupFileExtension = "bkp";
+
+    users.Gabrielle = {
+      imports = [./gabrielle.nix];
+    };
+  };
+
   # Homebrew for packages not on Nix
   homebrew = {
     enable = true;
