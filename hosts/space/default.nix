@@ -35,6 +35,8 @@
     /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
   '';
 
+  nix-homebrew.user = "Gabrielle";
+
   users.users.Gabrielle = {
     home = "/Users/Gabrielle";
     name = "Gabrielle";
