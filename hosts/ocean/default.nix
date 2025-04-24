@@ -4,7 +4,7 @@
     /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
   '';
 
-  users.users.Gabrielle = {
+  users.users.gabrielleoliveira = {
     home = "/Users/gabrielleoliveira";
     name = "Gabrielle";
     shell = pkgs.zsh;
