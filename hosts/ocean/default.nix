@@ -6,7 +6,7 @@
 
   users.users.gabrielleoliveira = {
     home = "/Users/gabrielleoliveira";
-    name = "Gabrielle";
+    name = "gabrielleoliveira";
     shell = pkgs.zsh;
   };
 
@@ -16,8 +16,8 @@
     sharedModules = [../../modules];
     backupFileExtension = "bkp";
 
-    users.Gabrielle = {
-      imports = [./gabrielle.nix];
+    users.gabrielleoliveira = {
+      imports = [./gabrielleoliveira.nix];
     };
   };
 
