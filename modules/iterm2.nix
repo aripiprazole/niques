@@ -1,7 +1,7 @@
 { ... }: {
   programs.iterm2 = {
     enable = true;
-    settings.appearance.theme = "minimal";
+    settings.appearance.theme = "regular";
 
     profiles = [{
       name = "nix managed";
