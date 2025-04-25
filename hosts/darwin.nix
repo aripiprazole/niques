@@ -48,7 +48,7 @@
         gdk
         python3
         pkgs.openssl.dev
-        pkgs.pkgconf
+        pkgs.pkg-config
         pkgs.vim
         pkgs.mkalias
         pkgs.rsync
