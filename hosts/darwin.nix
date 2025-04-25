@@ -47,6 +47,7 @@
       [ qemu
         gdk
         python3
+        pkgs.openssl.dev
         pkgs.vim
         pkgs.mkalias
         pkgs.rsync

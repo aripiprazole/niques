@@ -5,6 +5,7 @@
     ./git.nix
     ./vscode.nix
     ./zsh.nix
+    ./iterm2.nix
   ];
 
   programs = {
