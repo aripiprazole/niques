@@ -1,7 +1,7 @@
 { ... }: {
   programs.iterm2 = {
     enable = true;
-    settings.appearance.theme = "regular";
+    settings.appearance.theme = "minimal";
 
     profiles = [{
       name = "nix managed";
@@ -13,8 +13,8 @@
       };
 
       font = {
-        normal = "JetBrainsMonoNF-Regular 17";
-        nonAscii = "JetBrainsMonoNF-Regular 11";
+        normal = "JetBrainsMono-Nerd-Font-Regular 17";
+        nonAscii = "JetBrainsMono-Nerd-Font-Regular 17";
         useNonAsciiFont = false;
         antiAlias = true;
         brightenBold = true;

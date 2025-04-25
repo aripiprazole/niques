@@ -48,6 +48,7 @@
         gdk
         python3
         pkgs.openssl.dev
+        pkgs.pkgconf
         pkgs.vim
         pkgs.mkalias
         pkgs.rsync
@@ -65,6 +66,14 @@
     environment.shells = [ pkgs.bashInteractive pkgs.zsh ];
 
     environment.shellAliases.zed = "zeditor";
+
+    environment.variables = {
+      PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+      OPENSSL_NO_VENDOR = "1";
+      OPENSSL_DIR = "${pkgs.openssl.dev}";
+      OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
+      OPENSSL_INCLUDE_DIR = "${pkgs.openssl.dev}/include";
+    };
 
     # The platform the configuration will be used on.
     nixpkgs = {
