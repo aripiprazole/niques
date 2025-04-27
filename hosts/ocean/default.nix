@@ -45,7 +45,6 @@
       "lm-studio"
       "logi-options+"
       "tailscale"
-      "tabby"
     ];
     caskArgs = {
       appdir = "/Applications";

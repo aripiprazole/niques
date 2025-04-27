@@ -61,6 +61,7 @@
         pkgs._1password-cli
         pkgs.dockutil
         pkgs.coreutils
+        pkgs.warp-terminal
       ];
 
     environment.shells = [ pkgs.bashInteractive pkgs.zsh ];
@@ -89,6 +90,7 @@
       enable = true;
       enableRosetta = true;
       autoMigrate = true;
+      mutableTaps = false;
     };
 
     homebrew.onActivation = {

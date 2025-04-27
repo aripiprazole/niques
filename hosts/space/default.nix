@@ -76,7 +76,6 @@
       "lm-studio"
       "logi-options+"
       "tailscale"
-      "tabby"
 
       # Games / Entertainment
       "stremio"
