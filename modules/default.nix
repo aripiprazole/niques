@@ -1,12 +1,10 @@
 { pkgs, ... }: {
   imports = [
-    ../lib/iterm2.nix
     ./zed.nix
     ./helix.nix
     ./git.nix
     ./vscode.nix
     ./zsh.nix
-    ./iterm2.nix
   ];
 
   programs = {
