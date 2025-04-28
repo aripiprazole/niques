@@ -91,6 +91,11 @@
       enable = true;
       enableRosetta = true;
       autoMigrate = true;
+      # Optional: Declarative tap management
+      taps = {
+        "homebrew/homebrew-core" = inputs.homebrew-core;
+        "homebrew/homebrew-cask" = inputs.homebrew-cask;
+      };
       mutableTaps = false;
     };
 

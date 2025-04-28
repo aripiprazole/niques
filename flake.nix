@@ -3,6 +3,15 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # Optional: Declarative tap management
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,7 +35,7 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, home-manager, rust-overlay, nix-vscode-extensions, spicetify-nix, ... }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, home-manager, rust-overlay, nix-vscode-extensions, spicetify-nix, homebrew-core, homebrew-cask, ... }:
   let
     inherit (nixpkgs.lib) attrValues optionalAttrs;
 
