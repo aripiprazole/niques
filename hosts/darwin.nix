@@ -62,6 +62,7 @@
         pkgs.dockutil
         pkgs.coreutils
         pkgs.warp-terminal
+        pkgs.postman
       ];
 
     environment.shells = [ pkgs.bashInteractive pkgs.zsh ];

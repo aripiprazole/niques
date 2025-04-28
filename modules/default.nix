@@ -67,6 +67,11 @@
     source = ./amethyst/.amethyst.yml;
   };
 
+  home.file.".config/1Password/ssh/agent.toml" = {
+    enable = true;
+    source = ./1password/ssh/agent.toml;
+  };
+
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 }
