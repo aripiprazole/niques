@@ -37,7 +37,7 @@
       { path = "${pkgs.zed-editor}/Applications/Zed.app"; }
       { path = "/Applications/Spotify.app"; }
       { path = "/Applications/LM Studio.app"; }
-      { path = "${pkgs.warp}/Applications/Warp.app"; }
+      { path = "${pkgs.warp-terminal}/Applications/Warp.app"; }
     ];
 
   # Homebrew for packages not on Nix
