@@ -1,10 +1,10 @@
 floating:
   - com.apple.mail
-  - 1password
-  - camera
-  - finder
-  - teams
-  - modrinth
-  - curseforge
+  - com.1password.1password
+  - com.apple.facetime.FaceTime
+  - com.apple.finder
+  - ModrinthApp
+  - com.overwolf.curseforge
 window-margins: true
 window-margin-size: 10
+smart-window-margins: true
