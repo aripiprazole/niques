@@ -90,29 +90,29 @@
     use_multiline_find = true;
     use_smartcase_find = true;
   };
-  language_models = {
-    ollama = {
-      api_url = "http://localhost:11434";
-      available_models = [
-        {
-          name = "qwen2.5-coder";
-          display_name = "qwen 2.5 coder 32K";
-          max_tokens = 32768;
-        }
-      ];
-    };
-  };
+  # language_models = {
+  #   ollama = {
+  #     api_url = "http://localhost:11434";
+  #     available_models = [
+  #       {
+  #         name = "qwen2.5-coder";
+  #         display_name = "qwen 2.5 coder 32K";
+  #         max_tokens = 32768;
+  #       }
+  #     ];
+  #   };
+  # };
   assistant = {
     enable_experimental_live_diffs = true;
     version = "2";
-    editor_model = {
-      provider = "ollama";
-      model = "qwen2.5-coder";
-    };
-    default_model = {
-      provider = "ollama";
-      model = "qwen2.5-coder";
-    };
+    # editor_model = {
+    #   provider = "ollama";
+    #   model = "qwen2.5-coder";
+    # };
+    # default_model = {
+    #   provider = "ollama";
+    #   model = "qwen2.5-coder";
+    # };
   };
   diagnostics = {
     use_rendered = true;
