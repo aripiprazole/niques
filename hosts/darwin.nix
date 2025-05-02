@@ -65,6 +65,7 @@
         pkgs.coreutils
         pkgs.warp-terminal
         pkgs.postman
+        pkgs.postgresql
       ];
 
     environment.shells = [ pkgs.bashInteractive pkgs.zsh ];

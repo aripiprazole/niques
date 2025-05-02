@@ -102,9 +102,9 @@
   #     ];
   #   };
   # };
-  assistant = {
-    enable_experimental_live_diffs = true;
-    version = "2";
+  # assistant = {
+  #   enable_experimental_live_diffs = true;
+  #   version = "2";
     # editor_model = {
     #   provider = "ollama";
     #   model = "qwen2.5-coder";
@@ -113,7 +113,7 @@
     #   provider = "ollama";
     #   model = "qwen2.5-coder";
     # };
-  };
+  # };
   diagnostics = {
     use_rendered = true;
     update_with_cursor = true;
