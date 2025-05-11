@@ -63,7 +63,6 @@
         pkgs._1password-cli
         pkgs.dockutil
         pkgs.coreutils
-        pkgs.warp-terminal
         pkgs.postman
         pkgs.postgresql
       ];

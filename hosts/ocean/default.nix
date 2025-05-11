@@ -39,6 +39,7 @@
 
       # System applications
       "eqmac"
+      "ghostty"
       "amethyst"
       "docker"
       "obsidian"

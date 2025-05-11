@@ -37,7 +37,7 @@
       { path = "${pkgs.zed-editor}/Applications/Zed.app"; }
       { path = "/Applications/Spotify.app"; }
       { path = "/Applications/LM Studio.app"; }
-      { path = "${pkgs.warp-terminal}/Applications/Warp.app"; }
+      { path = "/Applications/Ghostty.app"; }
     ];
 
   # Homebrew for packages not on Nix
@@ -59,6 +59,7 @@
       "amethyst"
       "docker"
       "obsidian"
+      "ghostty"
       "lm-studio"
       "logi-options+"
       "tailscale"
