@@ -23,6 +23,31 @@
   current_line_highlight = "all";
   icon_theme = "JetBrains New UI Icons (Dark)";
   wrap_guides = [80 100 120];
+  confirm_quit = true;
+  minimap = {
+    show = "auto";
+  };
+  slash_commands = {
+    docs = {
+      enabled = true;
+    };
+    project = {
+      enabled = true;
+    };
+  };
+  agent = {
+    version = "2";
+    dock = "left";
+    enable_feedbacks = false;
+    default_model = {
+      provider = "anthropic";
+      model = "claude-3-7-sonnet-latest";
+    };
+    editor_model = {
+      provider = "openai";
+      model = "o3-mini";
+    };
+  };
   semantic_tokens = {
     enabled = true;
     fetch_debounce_ms = 500;
@@ -126,6 +151,7 @@
     };
   };
   edit_predictions = {
+    mode = "subtle";
     disabled_in = ["comment" "string"];
   };
   languages = {

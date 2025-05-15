@@ -23,6 +23,10 @@
     };
   };
 
+  environment.variables = {
+    PATH = "$PATH:/Users/Gabrielle/.cargo/bin";
+  };
+
   local.dock.enable = true;
   local.dock.entries = [
       { path = "/Applications/Arc.app"; }
@@ -47,6 +51,9 @@
       autoUpdate = true;
       upgrade = true;
     };
+    brews = [
+      "llvm"
+    ];
     casks = [
       # Real-world stuff
       "arc"

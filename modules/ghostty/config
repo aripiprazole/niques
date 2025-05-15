@@ -1,1 +1,8 @@
 font-family = JetBrains Mono NerdFont
+theme = GitHub-Dark-Colorblind
+shell-integration = zsh
+font-size = 18pt
+window-decoration = client
+toggle_quick_terminal = center
+macos-titlebar-proxy-icon = visible
+macos-icon = retro
