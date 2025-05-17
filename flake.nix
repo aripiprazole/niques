@@ -2,8 +2,8 @@
   description = "Example nix-darwin system flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    # Optional: Declarative tap management
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;
@@ -13,11 +13,11 @@
       flake = false;
     };
     nix-darwin = {
-      url = "github:nix-darwin/nix-darwin/master";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rust-overlay = {
@@ -28,14 +28,14 @@
       url = "github:zhaofengli-wip/nix-homebrew";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-vscode-extensions = {
-      url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nix-vscode-extensions = {
+    #   url = "github:nix-community/nix-vscode-extensions/00e11463876a04a77fb97ba50c015ab9e5bee90d";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, home-manager, rust-overlay, nix-vscode-extensions, spicetify-nix, homebrew-core, homebrew-cask, ... }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, home-manager, spicetify-nix, ... }:
   let
     inherit (nixpkgs.lib) attrValues optionalAttrs;
 
@@ -47,6 +47,12 @@
       "aarch64-darwin"
       "x86_64-darwin"
     ];
+
+    pkgs-unstable = import inputs.nixpkgs-unstable {
+      system = "aarch64-darwin";
+      config = { allowUnfree = true; allowBroken = true; };
+    };
+
     # This is a function that generates an attribute by calling a function you
     # pass to it, with each system as an argument
     forAllSystems = nixpkgs.lib.genAttrs systems;
@@ -64,10 +70,6 @@
         pkgs-x86 = import nixpkgs {
           system = "x86_64-darwin";
           config = { allowUnfree = true; allowBroken = true; };
-          overlays = [
-            rust-overlay.overlays.default
-            nix-vscode-extensions.overlays.default
-          ];
         };
       };
     };
@@ -84,7 +86,7 @@
           nix-homebrew.darwinModules.nix-homebrew
           home-manager.darwinModules.home-manager
         ];
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs pkgs-unstable; };
       };
 
       # Build darwin flake using:
@@ -98,7 +100,7 @@
           nix-homebrew.darwinModules.nix-homebrew
           home-manager.darwinModules.home-manager
         ];
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs pkgs-unstable; };
       };
     };
 

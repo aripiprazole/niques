@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, ... }:
+{ pkgs, pkgs-unstable, lib, inputs, ... }:
   let
     gdk = pkgs.google-cloud-sdk.withExtraComponents (with pkgs.google-cloud-sdk.components; [
       gke-gcloud-auth-plugin
@@ -7,15 +7,6 @@
     python3 = pkgs.python3.withPackages (pkgs: with pkgs; [
       google-cloud-secret-manager
     ]);
-
-    # Work around https://github.com/containers/podman/issues/17026
-    # by downgrading to qemu-8.1.3.
-    inherit (import (pkgs.fetchFromGitHub {
-      owner = "NixOS";
-      repo = "nixpkgs";
-      rev = "4db6d0ab3a62ea7149386a40eb23d1bd4f508e6e";
-      sha256 = "sha256-kyw7744auSe+BdkLwFGyGbOHqxdE3p2hO6cw7KRLflw=";
-    }) { inherit (pkgs) system; }) qemu;
   in {
     # Enable experimental nix command and flakes
     nix = {
@@ -39,8 +30,7 @@
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
     environment.systemPackages =
-      [ qemu
-        gdk
+      [ gdk
         python3
         pkgs.openssl.dev
         pkgs.pkg-config
@@ -49,17 +39,18 @@
         pkgs.rsync
         pkgs.pinentry_mac
         pkgs.neofetch
-        pkgs.raycast
-        pkgs.betterdisplay
         pkgs.xz
-        pkgs._1password-gui
-        pkgs._1password-cli
         pkgs.dockutil
         pkgs.coreutils
-        pkgs.postman
-        pkgs.postgresql
         pkgs.zstd.dev
-        pkgs.rio
+
+        # Apps
+        pkgs.postman
+        pkgs._1password-gui
+        pkgs._1password-cli
+
+        # Unstable packages
+        pkgs-unstable.betterdisplay
       ];
 
     environment.shells = [ pkgs.bashInteractive pkgs.zsh ];
@@ -80,7 +71,7 @@
       config.allowUnfree = true;
       config.allowBroken = true;
       overlays = [
-        inputs.nix-vscode-extensions.overlays.default
+        # inputs.nix-vscode-extensions.overlays.default
       ];
     };
 
@@ -103,19 +94,21 @@
 
     # Fonts
     fonts.packages = with pkgs; [
+      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "JetBrainsMono" ]; })
       recursive
-      nerd-fonts.jetbrains-mono
+      jetbrains-mono
     ];
 
     # Add ability to used TouchID for sudo authentication
-    security.pam.services.sudo_local.touchIdAuth = true;
+    # security.pam.services.sudo_local.touchIdAuth = true;
+    security.pam.enableSudoTouchIdAuth = true;
 
     # Set Git commit hash for darwin-version.
     system.configurationRevision = lib.rev or lib.dirtyRev or null;
 
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog
-    system.stateVersion = 6;
+    system.stateVersion = 5;
 
     # Keyboard
     system.keyboard.enableKeyMapping = true;

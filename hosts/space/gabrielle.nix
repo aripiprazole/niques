@@ -9,18 +9,13 @@
     livekit
     foreman
 
-    # Programming Languages
-    stack
-    cabal-install
-    elan
-    opam
-    dune-release
+    # # Programming Languages
+    # elan
 
-    # DX
-    nil
-    cmake-language-server
-    awk-language-server
-    cmake-lint
-    nixfmt-classic
+    # # DX
+    # nil
+    # cmake-language-server
+    # cmake-lint
+    # nixfmt-classic
   ];
 }

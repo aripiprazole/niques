@@ -3,6 +3,6 @@ theme = GitHub-Dark-Colorblind
 shell-integration = zsh
 font-size = 18
 window-decoration = client
-toggle_quick_terminal = center
+keybind = cmd+opt>t=toggle_quick_terminal
+quick-terminal-position = center
 macos-titlebar-proxy-icon = visible
-macos-icon = retro

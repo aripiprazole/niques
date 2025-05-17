@@ -31,7 +31,6 @@
     ffmpeg
     direnv
     cmake
-    git
     tig
     fzf
     starship
@@ -46,8 +45,6 @@
     helix
 
     # Languages and version managers
-    nodejs
-    yarn
     rustc
     cargo
 
@@ -56,7 +53,6 @@
     rustPackages.clippy
 
     # Messaging
-    telegram-desktop
     slack
     discord
   ];
