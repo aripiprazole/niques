@@ -213,6 +213,7 @@
         FXDefaultSearchScope = "SCcf";
         FXRemoveOldTrashItems = true;
         _FXSortFoldersFirst = true;
+        _FXShowPosixPathInTitle = false;
       };
       # Tab between form controls and F-row that behaves as F1-F12
       NSGlobalDomain = {
