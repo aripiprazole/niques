@@ -43,6 +43,7 @@
         pkgs.dockutil
         pkgs.coreutils
         pkgs.zstd.dev
+        pkgs.sccache
 
         # Apps
         pkgs.postman
@@ -63,6 +64,7 @@
       OPENSSL_DIR = "${pkgs.openssl.dev}";
       OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
       OPENSSL_INCLUDE_DIR = "${pkgs.openssl.dev}/include";
+      RUSTC_WRAPPER = "${pkgs.sccache}/bin/sccache";
     };
 
     # The platform the configuration will be used on.
@@ -211,7 +213,6 @@
         FXDefaultSearchScope = "SCcf";
         FXRemoveOldTrashItems = true;
         _FXSortFoldersFirst = true;
-        _FXShowPosixPathInTitle = true;
       };
       # Tab between form controls and F-row that behaves as F1-F12
       NSGlobalDomain = {
