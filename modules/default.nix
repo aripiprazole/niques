@@ -44,10 +44,6 @@
     vscode
     helix
 
-    # Languages and version managers
-    rustc
-    cargo
-
     # Language DX
     rustPackages.rustfmt
     rustPackages.clippy

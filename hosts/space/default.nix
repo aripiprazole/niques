@@ -41,7 +41,6 @@
       { path = "/Applications/Ghostty.app"; }
       { path = "${pkgs.zed-editor}/Applications/Zed.app"; }
       { path = "/Applications/Spotify.app"; }
-      { path = "/Applications/LM Studio.app"; }
     ];
 
   # Homebrew for packages not on Nix

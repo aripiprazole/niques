@@ -44,6 +44,7 @@
         pkgs.coreutils
         pkgs.zstd.dev
         pkgs.sccache
+        pkgs.rust-bin.nightly.latest.default
 
         # Apps
         pkgs.postman
@@ -74,6 +75,7 @@
       config.allowBroken = true;
       overlays = [
         inputs.nix-vscode-extensions.overlays.default
+        inputs.rust-overlay.overlays.default
       ];
     };
 
