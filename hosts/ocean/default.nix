@@ -32,7 +32,7 @@
     };
     casks = [
       # Real-world stuff
-      "arc"
+      "sigmaos"
       "whatsapp"
       "telegram"
       "spotify"

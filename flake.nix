@@ -28,10 +28,10 @@
       url = "github:zhaofengli-wip/nix-homebrew";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # nix-vscode-extensions = {
-    #   url = "github:nix-community/nix-vscode-extensions/00e11463876a04a77fb97ba50c015ab9e5bee90d";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
@@ -39,28 +39,11 @@
   let
     inherit (nixpkgs.lib) attrValues optionalAttrs;
 
-    # Supported systems for your flake packages, shell, etc.
-    systems = [
-      "aarch64-linux"
-      "i686-linux"
-      "x86_64-linux"
-      "aarch64-darwin"
-      "x86_64-darwin"
-    ];
-
     pkgs-unstable = import inputs.nixpkgs-unstable {
       system = "aarch64-darwin";
       config = { allowUnfree = true; allowBroken = true; };
     };
-
-    # This is a function that generates an attribute by calling a function you
-    # pass to it, with each system as an argument
-    forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    # Formatter for your nix files, available through 'nix fmt'
-    # Other options beside 'alejandra' include 'nixpkgs-fmt'
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-
     # Overlays
     overlays = {
       # Overlays to add various packages into package set
@@ -69,7 +52,7 @@
         # Add access to x86 packages system is running Apple Silicon
         pkgs-x86 = import nixpkgs {
           system = "x86_64-darwin";
-          config = { allowUnfree = true; allowBroken = true; };
+          config = { allowUnfree = true; };
         };
       };
     };

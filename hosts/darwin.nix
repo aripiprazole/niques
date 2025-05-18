@@ -71,7 +71,7 @@
       config.allowUnfree = true;
       config.allowBroken = true;
       overlays = [
-        # inputs.nix-vscode-extensions.overlays.default
+        inputs.nix-vscode-extensions.overlays.default
       ];
     };
 
