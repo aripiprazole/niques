@@ -44,7 +44,7 @@
         pkgs.coreutils
         pkgs.zstd.dev
         pkgs.sccache
-        pkgs.rust-bin.nightly.latest.default
+        pkgs.rust-bin.nightly."2025-04-10".default
 
         # Apps
         pkgs.postman

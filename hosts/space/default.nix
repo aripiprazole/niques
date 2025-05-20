@@ -29,7 +29,7 @@
 
   local.dock.enable = true;
   local.dock.entries = [
-      { path = "/Applications/SigmaOS.app"; }
+      { path = "/System/Applications/Safari.app"; }
       { path = "/System/Applications/Calendar.app"; }
       { path = "/System/Applications/Mail.app"; }
       { path = "/System/Applications/Messages.app"; }
@@ -37,10 +37,8 @@
       { path = "/Applications/Telegram.app"; }
       { path = "/Applications/Discord.app"; }
       { path = "${pkgs.slack}/Applications/Slack.app"; }
-      { path = "/Applications/Obsidian.app"; }
-      { path = "/Applications/Ghostty.app"; }
-      { path = "${pkgs.zed-editor}/Applications/Zed.app"; }
       { path = "/Applications/Spotify.app"; }
+      { path = "/Applications/Obsidian.app"; }
     ];
 
   # Homebrew for packages not on Nix
@@ -56,6 +54,7 @@
     casks = [
       # Real-world stuff
       "sigmaos"
+      "arc"
       "whatsapp"
       "telegram"
       "spotify"
