@@ -29,7 +29,7 @@
 
   local.dock.enable = true;
   local.dock.entries = [
-      { path = "/System/Applications/Safari.app"; }
+      { path = "/Applications/Safari.app"; }
       { path = "/System/Applications/Calendar.app"; }
       { path = "/System/Applications/Mail.app"; }
       { path = "/System/Applications/Messages.app"; }
@@ -50,10 +50,10 @@
     };
     brews = [
       "llvm"
+      "fftw"
     ];
     casks = [
       # Real-world stuff
-      "sigmaos"
       "arc"
       "whatsapp"
       "telegram"
