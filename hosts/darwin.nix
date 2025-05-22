@@ -44,6 +44,8 @@
         pkgs.coreutils
         pkgs.zstd.dev
         pkgs.sccache
+        pkgs.ruby_3_1
+        pkgs.go
         pkgs.rust-bin.nightly."2025-04-10".default
 
         # Apps
