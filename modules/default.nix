@@ -44,10 +44,6 @@
     vscode
     helix
 
-    # Language DX
-    rustPackages.rustfmt
-    rustPackages.clippy
-
     # Messaging
     slack
     discord
