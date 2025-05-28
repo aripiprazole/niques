@@ -51,6 +51,7 @@
     brews = [
       "llvm"
       "fftw"
+      "docker"
     ];
     casks = [
       # Real-world stuff
@@ -58,10 +59,10 @@
       "whatsapp"
       "telegram"
       "spotify"
+      "gather"
 
       # System applications
       "eqmac"
-      "docker"
       "obsidian"
       "ghostty"
       "lm-studio"
