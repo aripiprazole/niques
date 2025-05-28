@@ -21,11 +21,11 @@
   soft_wrap = "none";
   load_direnv = "shell_hook";
   current_line_highlight = "all";
-  icon_theme = "JetBrains New UI Icons (Dark)";
+  # icon_theme = "JetBrains New UI Icons (Dark)";
   wrap_guides = [80 100 120];
   confirm_quit = true;
-  minimap = {
-    show = "auto";
+  preview_tabs = {
+    enabled = false;
   };
   slash_commands = {
     docs = {
