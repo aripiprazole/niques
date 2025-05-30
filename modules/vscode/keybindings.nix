@@ -792,40 +792,40 @@
     "key" = "ctrl+left";
     "command" = "cursorWordLeft";
   }
-  {
-    "key" = "ctrl+right";
-    "command" = "paredit.forwardSexp";
-    "when" = "calva =keybindingsEnabled && editorTextFocus && editorLangId == 'clojure' && paredit =keyMap =~ /original|strict/";
-  }
-  {
-    "key" = "ctrl+left";
-    "command" = "paredit.backwardSexp";
-    "when" = "calva =keybindingsEnabled && editorTextFocus && editorLangId == 'clojure' && paredit =keyMap =~ /original|strict/";
-  }
-  {
-    "key" = "shift+9";
-    "command" = "paredit.wrapAroundParens";
-    "when" = "editorTextFocus && editorHasSelection && !editorReadOnly && editorLangId =~ /clojure|scheme|lisp/ && paredit =keyMap =~ /original|strict/";
-  }
-  {
-    "key" = "[";
-    "command" = "paredit.wrapAroundSquare";
-    "when" = "editorHasSelection && editorTextFocus && !editorReadOnly && editorLangId =~ /clojure|scheme|lisp/ && paredit =keyMap =~ /original|strict/";
-  }
-  {
-    "key" = "shift+[";
-    "command" = "paredit.wrapAroundCurly";
-    "when" = "editorHasSelection && editorTextFocus && !editorReadOnly && editorLangId =~ /clojure|scheme|lisp/ && paredit =keyMap =~ /original|strict/";
-  }
-  {
-    "key" = "escape";
-    "command" = "-calva.clearInlineResults";
-  }
-  {
-    "key" = "shift+escape";
-    "command" = "calva.clearInlineResults";
-    "when" = "editorTextFocus && !editorHasMultipleSelections && !editorReadOnly && !hasOtherSuggestions && !suggestWidgetVisible && editorLangId == 'clojure'";
-  }
+  # {
+  #   "key" = "ctrl+right";
+  #   "command" = "paredit.forwardSexp";
+  #   "when" = "calva =keybindingsEnabled && editorTextFocus && editorLangId == 'clojure' && paredit =keyMap =~ /original|strict/";
+  # }
+  # {
+  #   "key" = "ctrl+left";
+  #   "command" = "paredit.backwardSexp";
+  #   "when" = "calva =keybindingsEnabled && editorTextFocus && editorLangId == 'clojure' && paredit =keyMap =~ /original|strict/";
+  # }
+  # {
+  #   "key" = "shift+9";
+  #   "command" = "paredit.wrapAroundParens";
+  #   "when" = "editorTextFocus && editorHasSelection && !editorReadOnly && editorLangId =~ /clojure|scheme|lisp/ && paredit =keyMap =~ /original|strict/";
+  # }
+  # {
+  #   "key" = "[";
+  #   "command" = "paredit.wrapAroundSquare";
+  #   "when" = "editorHasSelection && editorTextFocus && !editorReadOnly && editorLangId =~ /clojure|scheme|lisp/ && paredit =keyMap =~ /original|strict/";
+  # }
+  # {
+  #   "key" = "shift+[";
+  #   "command" = "paredit.wrapAroundCurly";
+  #   "when" = "editorHasSelection && editorTextFocus && !editorReadOnly && editorLangId =~ /clojure|scheme|lisp/ && paredit =keyMap =~ /original|strict/";
+  # }
+  # {
+  #   "key" = "escape";
+  #   "command" = "-calva.clearInlineResults";
+  # }
+  # {
+  #   "key" = "shift+escape";
+  #   "command" = "calva.clearInlineResults";
+  #   "when" = "editorTextFocus && !editorHasMultipleSelections && !editorReadOnly && !hasOtherSuggestions && !suggestWidgetVisible && editorLangId == 'clojure'";
+  # }
   {
     "key" = "alt+cmd+k";
     "command" = "-git.pushTo";

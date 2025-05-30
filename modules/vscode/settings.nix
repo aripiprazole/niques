@@ -7,7 +7,7 @@
   #   SUBSECTION = Command Center
   #   Enables the top search bar, to search for files, symbols, etc.
   #   It's useful to have it enabled, but it's not necessary.
-  "window.commandCenter" = false;
+  "window.commandCenter" = true;
 
   # SECTION = Security
   "security.workspace.trust.untrustedFiles" = "open";
@@ -19,12 +19,12 @@
 
   # SECTION = Editor configuration
   #   SUBSECTION = Font
-  "editor.fontSize" = 16;
+  "editor.fontSize" = 18;
   "editor.fontLigatures" = "'ss01', 'cv03', 'zero'";
   "editor.fontFamily" = "JetBrains Mono";
   "editor.codeLensFontFamily" = "JetBrains Mono";
   "editor.wordWrap" = "off";
-  "editor.codeLensFontSize" = 16;
+  "editor.codeLensFontSize" = 18;
   #   SUBSECTION = Suggests
   #   Disable the word suggestions, because I don't like them.
   "editor.suggest.showWords" = false;
@@ -58,11 +58,13 @@
   "search.quickOpen.includeSymbols" = true;
   "search.quickOpen.includeHistory" = true;
 
+  "editor.minimap.enabled" = false;
+
   # SECTION = Terminal
   #   SUBSECTION = Font
   #   I use JetBrains Mono, but I also like to use FiraCode Nerd Font
   "terminal.integrated.fontFamily" = "JetBrains Mono";
-  "terminal.integrated.fontSize" = 15.6;
+  "terminal.integrated.fontSize" = 18;
 
   # SECTION = Haskell
   #   SUBSECTION = Go to Definition
@@ -113,11 +115,6 @@
   "prettier.singleQuote" = true;
   "prettier.jsxSingleQuote" = true;
   "prettier.quoteProps" = "consistent";
-
-  # SECTION = C++
-  "C_Cpp.default.includePath" = [
-    "/home/gabi/.elan/toolchains/leanprover--lean4---nightly-2023-08-19/include/"
-  ];
 
   # SECTION = Calva
   "calva.useTestExplorer" = true;
@@ -512,8 +509,8 @@
   "workbench.tree.expandMode" = "doubleClick";
   "workbench.sideBar.location" = "right";
   "workbench.layoutControl.type" = "both";
-  "workbench.editor.enablePreview" = true;
-  "workbench.activityBar.location" = "bottom";
+  "workbench.editor.enablePreview" = false;
+  "workbench.activityBar.location" = "hidden";
   "workbench.editor.labelFormat" = "medium";
   "workbench.editor.splitInGroupLayout" = "horizontal";
   #   SUBSECTION = Command

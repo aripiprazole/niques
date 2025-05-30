@@ -30,12 +30,13 @@
   local.dock.enable = true;
   local.dock.entries = [
       { path = "/Applications/Arc.app"; }
+      { path = "/System/Applications/Calendar.app"; }
       { path = "/System/Applications/Mail.app"; }
       { path = "/System/Applications/Messages.app"; }
-      { path = "/System/Applications/Calendar.app"; }
       { path = "/Applications/WhatsApp.app"; }
       { path = "/Applications/Telegram.app"; }
       { path = "/Applications/Discord.app"; }
+      { path = "/Applications/Gather.app"; }
       { path = "${pkgs.slack}/Applications/Slack.app"; }
       { path = "/Applications/Spotify.app"; }
       { path = "/Applications/Obsidian.app"; }
@@ -52,6 +53,7 @@
       "llvm"
       "fftw"
       "docker"
+      "docker-compose"
     ];
     casks = [
       # Real-world stuff

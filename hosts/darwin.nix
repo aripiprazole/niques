@@ -46,7 +46,6 @@
         pkgs.sccache
         pkgs.ruby_3_1
         pkgs.go
-        pkgs.rust-bin.nightly."2025-04-10".default
 
         # Apps
         pkgs.postman
@@ -69,6 +68,7 @@
       OPENSSL_DIR = "${pkgs.openssl.dev}";
       OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
       OPENSSL_INCLUDE_DIR = "${pkgs.openssl.dev}/include";
+      RUST_BACKTRACE = "1";
       RUSTC_WRAPPER = "${pkgs.sccache}/bin/sccache";
     };
 
@@ -79,7 +79,6 @@
       config.allowBroken = true;
       overlays = [
         inputs.nix-vscode-extensions.overlays.default
-        inputs.rust-overlay.overlays.default
       ];
     };
 
@@ -230,7 +229,7 @@
       WindowManager = {
         EnableTiledWindowMargins = true;
         EnableTopTilingByEdgeDrag = true;
-        GloballyEnabled = false;
+        GloballyEnabled = true;
       };
     };
   }
