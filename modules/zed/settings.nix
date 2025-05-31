@@ -174,9 +174,9 @@
         checkOnSave = true;
         check = {
           workspace = false;
-          external = {
-            command = ["cargo" "clippy" "--" "-W" "clippy::pedantic"];
-          };
+          # external = {
+          #   command = ["cargo" "clippy" "--" "-W" "clippy::pedantic"];
+          # };
         };
         hover = {
           actions = {
