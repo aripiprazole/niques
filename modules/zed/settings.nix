@@ -172,11 +172,6 @@
     rust-analyzer = {
       initialization_options = {
         checkOnSave = true;
-        diagnostics = {
-          experimental = {
-            enable = false;
-          };
-        };
         check = {
           workspace = false;
           external = {

@@ -23,6 +23,25 @@
     };
   };
 
+  environment.variables = {
+    PATH = "$PATH:/Users/Gabrielle/.cargo/bin";
+  };
+
+  local.dock.enable = true;
+  local.dock.entries = [
+    { path = "/Applications/Arc.app"; }
+    { path = "/System/Applications/Calendar.app"; }
+    { path = "/System/Applications/Mail.app"; }
+    { path = "/System/Applications/Messages.app"; }
+    { path = "/Applications/WhatsApp.app"; }
+    { path = "/Applications/Telegram.app"; }
+    { path = "/Applications/Discord.app"; }
+    { path = "/Applications/Gather.app"; }
+    { path = "/Applications/Slack.app"; }
+    { path = "/Applications/Spotify.app"; }
+    { path = "/Applications/Obsidian.app"; }
+  ];
+
   # Homebrew for packages not on Nix
   homebrew = {
     enable = true;
@@ -30,20 +49,22 @@
       autoUpdate = true;
       upgrade = true;
     };
+    brews = [
+      "docker"
+      "docker-compose"
+    ];
     casks = [
       # Real-world stuff
-      "sigmaos"
+      "arc"
       "whatsapp"
       "telegram"
       "spotify"
+      "gather"
 
       # System applications
       "eqmac"
       "ghostty"
-      "amethyst"
-      "docker"
       "obsidian"
-      "lm-studio"
       "logi-options+"
       "tailscale"
     ];
