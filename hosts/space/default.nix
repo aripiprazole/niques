@@ -37,7 +37,6 @@
     { path = "/Applications/Telegram.app"; }
     { path = "/Applications/Discord.app"; }
     { path = "/Applications/Gather.app"; }
-    { path = "/Applications/Slack.app"; }
     { path = "/Applications/Spotify.app"; }
     { path = "/Applications/Obsidian.app"; }
   ];
