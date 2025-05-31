@@ -186,6 +186,7 @@
           };
         };
         completion = {
+          termSearch.enable = true;
           fullFunctionSignatures = {
             enable = true;
           };
