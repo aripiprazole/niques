@@ -48,7 +48,6 @@
         pkgs.go
 
         # Apps
-        pkgs.postman
         pkgs._1password-gui
         pkgs._1password-cli
 
@@ -57,7 +56,6 @@
       ];
 
     environment.shells = [ pkgs.bashInteractive pkgs.zsh ];
-
     environment.shellAliases.zed = "zeditor";
 
     environment.variables = {
@@ -101,14 +99,14 @@
 
     # Fonts
     fonts.packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "JetBrainsMono" ]; })
+      nerd-fonts.jetbrains-mono
       recursive
       jetbrains-mono
     ];
 
     # Add ability to used TouchID for sudo authentication
     # security.pam.services.sudo_local.touchIdAuth = true;
-    security.pam.enableSudoTouchIdAuth = true;
+    security.pam.services.sudo_local.touchIdAuth = true;
 
     # Set Git commit hash for darwin-version.
     system.configurationRevision = lib.rev or lib.dirtyRev or null;

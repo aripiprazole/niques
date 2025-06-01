@@ -5,7 +5,7 @@
   };
   programs.zsh = {
     enable = true;
-    initExtra = ''
+    initContent = ''
       PROMPT="$\{PROMPT\}"$'\n'
       ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
     '';

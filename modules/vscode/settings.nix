@@ -5,9 +5,8 @@
 {
   # SECTION = Window
   #   SUBSECTION = Command Center
-  #   Enables the top search bar, to search for files, symbols, etc.
-  #   It's useful to have it enabled, but it's not necessary.
   "window.commandCenter" = true;
+  "window.customTitleBarVisibility" = true;
 
   # SECTION = Security
   "security.workspace.trust.untrustedFiles" = "open";
@@ -22,9 +21,7 @@
   "editor.fontSize" = 18;
   "editor.fontLigatures" = "'ss01', 'cv03', 'zero'";
   "editor.fontFamily" = "JetBrains Mono";
-  "editor.codeLensFontFamily" = "JetBrains Mono";
   "editor.wordWrap" = "off";
-  "editor.codeLensFontSize" = 18;
   #   SUBSECTION = Suggests
   #   Disable the word suggestions, because I don't like them.
   "editor.suggest.showWords" = false;
@@ -73,7 +70,6 @@
   #   SUBSECTION = Language Server
   "haskell.manageHLS" = "GHCup";
   "haskell.plugin.ghcide-type-lenses.config.mode" = "diagnostics";
-  #   SUBSECTION = Executable path
   #   SUBSECTION = HLint
   "haskell.formattingProvider" = "fourmolu";
 
@@ -123,7 +119,6 @@
   "rust-analyzer.checkOnSave" = true;
   "rust-analyzer.check.command" = "clippy";
   "rust-analyzer.check.allTargets" = true;
-  "rust-analyzer.cachePriming.numThreads" = 64;
   "rust-analyzer.cachePriming.enable" = true;
   #   SUBSECTION = Completion
   "rust-analyzer.completion.fullFunctionSignatures.enable" = true;
@@ -135,6 +130,7 @@
   "rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames" = true;
   #   SUBSECTION = Assists
   "rust-analyzer.assist.emitMustUse" = true;
+  "rust-analyzer.assist.termSearch.enable" = true;
   "rust-analyzer.assist.expressionFillDefault" = "default";
   #   SUBSECTION = Debugger
   "rust-analyzer.debug.engine" = "vadimcn.vscode-lldb";
@@ -148,15 +144,11 @@
   "rust-analyzer.hover.actions.debug.enable" = true;
   "rust-analyzer.hover.actions.gotoTypeDef.enable" = true;
   "rust-analyzer.hover.actions.implementations.enable" = true;
-  # "rust-analyzer.hover.actions.references.enable" = true;
   "rust-analyzer.hover.actions.run.enable" = true;
-  #   SUBSECTION = Lens
-  #   Enable all lens for Rust Analyzer, because I want to see all the
-  #   possible lens.
-  "rust-analyzer.lens.references.adt.enable" = true;
-  "rust-analyzer.lens.implementations.enable" = true;
-  "rust-analyzer.lens.references.trait.enable" = true;
-  "rust-analyzer.lens.references.method.enable" = true;
+  "rust-analyzer.lens.references.adt.enable" = false;
+  "rust-analyzer.lens.implementations.enable" = false;
+  "rust-analyzer.lens.references.trait.enable" = false;
+  "rust-analyzer.lens.references.method.enable" = false;
   #   SUBSECTION = Debug
   "rust-analyzer.debug.openDebugPane" = true;
   "rust-analyzer.cargo.features" = [];
@@ -199,9 +191,6 @@
   "breadcrumbs.showInterfaces" = true;
   "breadcrumbs.showMethods" = true;
 
-  # SECTION = Error Lens
-  # Highlight errors, warnings, etc. in the code, and show them in the
-  # side of the line.
   "errorLens.enabledDiagnosticLevels" = ["error" "warning" "info" "hint"];
 
   # SECTION = Explorer
@@ -210,13 +199,11 @@
   "explorer.confirmDragAndDrop" = false;
   "explorer.fileNesting.enabled" = false;
 
-  # SECTION = RedHat
-  "redhat.telemetry.enabled" = true;
+  "redhat.telemetry.enabled" = false;
 
   # SECTION = File associations, and exclude
   "files.eol" = "\n";
   "files.autoSave" = "off";
-  #   SUBSECTION = Associations
   "files.associations" = {
     ".huskyrc" = "json";
     "*.json" = "jsonc";
@@ -308,7 +295,6 @@
   # SECTION = VIM
   "vim.leader" = "<space>";
   #   SUBSECTION = General
-  "vim.easymotion" = false;
   "vim.incsearch" = true;
   "vim.hlsearch" = true;
   "vim.visualstar" = true;
@@ -328,6 +314,7 @@
   "vim.foldfix" = true;
   "vim.highlightedyank.enable" = true;
   "vim.surround" = true;
+  "vim.sneak" = true;
   #   SUBSECTION = Keybindings
   "vim.operatorPendingModeKeyBindingsNonRecursive" = [
     {
@@ -413,10 +400,6 @@
       "before" = ["<C-n>"];
       "commands" = [":nohl"];
     }
-    {
-      "before" = ["<leader>" "m"];
-      "commands" = ["bookmarks.toggle"];
-    }
     #   SUBSECTION = Find shortcuts
     #   Use ctrl-f to find
     {
@@ -428,47 +411,6 @@
       "before" = ["/"];
       "commands" = ["actions.find"];
     }
-    #   SUBSECTION = Calva
-    #   Shortcuts:
-    #     <leader> n n = evaluate current form
-    #     <leader> n f = evaluate file
-    #     <leader> n e = evaluate selection
-    #     <leader> n c = evaluate selection as comment
-    #     <leader> n l = load file
-    {
-      "before" = ["<leader>" "n" "n"];
-      "commands" = ["calva.evaluateEnclosingForm"];
-    }
-    {
-      "before" = ["<leader>" "n" "f"];
-      "commands" = ["calva.evaluateStartOfFileToCursor"];
-    }
-    {
-      "before" = ["<leader>" "n" "e"];
-      "commands" = ["calva.evaluateSelectionReplace"];
-    }
-    {
-      "before" = ["<leader>" "n" "c"];
-      "commands" = ["calva.evaluateSelectionAsComment"];
-    }
-    {
-      "before" = ["<leader>" "n" "l"];
-      "commands" = ["calva.loadFile"];
-    }
-    {
-      "before" = ["<leader>" "f" "n"];
-      "commands" = ["calva-fmt.alignCurrentForm"];
-    }
-    {
-      "before" = ["<leader>" "f" "m"];
-      "commands" = ["calva-fmt.trimCurrentFormWhiteSpace"];
-    }
-    {
-      "before" = ["<leader>" "n" "t"];
-      "commands" = ["calva.jackIn"];
-    }
-    #   SUBSECTION = Test runner
-    #   Use <leader>t to run test
     {
       "before" = ["<leader>" "b"];
       "commands" = ["editor.debug.action.toggleBreakpoint"];

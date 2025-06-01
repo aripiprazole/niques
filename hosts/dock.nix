@@ -50,7 +50,7 @@ in
             cfg.entries;
         in
         {
-          system.activationScripts.postUserActivation.text = ''
+          system.activationScripts.activateSettings.text = ''
             echo >&2 "Setting up the Dock..."
             haveURIs="$(${dockutil}/bin/dockutil --list | ${pkgs.coreutils}/bin/cut -f2)"
             if ! diff -wu <(echo -n "$haveURIs") <(echo -n '${wantURIs}') >&2 ; then
