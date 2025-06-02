@@ -354,27 +354,6 @@
       "commands" = ["editor.action.revealDefinition"];
     }
     {
-      "before" = ["h"];
-      "commands" = ["cursorLeft"];
-    }
-    {
-      "before" = ["j"];
-      "commands" = ["cursorDown"];
-    }
-    {
-      "before" = ["k"];
-      "commands" = ["cursorUp"];
-    }
-    {
-      "before" = ["l"];
-      "commands" = ["cursorRight"];
-    }
-    {
-      "before" = ["K"];
-      "commands" = ["lineBreakInsert"];
-      "silent" = true;
-    }
-    {
       "before" = [":"];
       "commands" = ["workbench.action.showCommands"];
       "silent" = true;
@@ -411,15 +390,6 @@
     {
       "before" = ["<leader>" "c" "c"];
       "commands" = ["cargo.check"];
-    }
-  ];
-  "vim.insertModeKeyBindings" = [
-    #   SUBSECTION = Calva bindings
-    #   It's useful to have these bindings, because I use Calva to
-    #   code clojure
-    {
-      "before" = ["j" "k"];
-      "after" = ["<esc>"];
     }
   ];
   "vim.autoSwitchInputMethod.enable" = true;
