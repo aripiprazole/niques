@@ -16,7 +16,7 @@
   ui_font_size = 18;
   ui_font_family = "JetBrains Mono";
   buffer_font_family = "JetBrains Mono";
-  format_on_save = "on";
+  format_on_save = "off";
   scroll_beyond_last_line = "off";
   soft_wrap = "none";
   load_direnv = "shell_hook";
@@ -174,6 +174,13 @@
       };
     };
     rust-analyzer = {
+      binary = {
+        path = "/run/current-system/sw/bin/bash";
+        arguments = [
+          "-c"
+          "if [ -e flake.nix ]; then nix develop --command rust-analyzer; else rust-analyzer; fi"
+        ];
+      };
       initialization_options = {
         checkOnSave = true;
         check = {
