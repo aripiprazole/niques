@@ -45,6 +45,7 @@
   # Homebrew for packages not on Nix
   homebrew = {
     enable = true;
+    caskArgs.appdir = "/User/Gabrielle/Applications";
     onActivation = {
       autoUpdate = true;
       upgrade = true;
@@ -77,8 +78,5 @@
       "curseforge"
       "modrinth"
     ];
-    caskArgs = {
-      appdir = "/Applications";
-    };
   };
 }

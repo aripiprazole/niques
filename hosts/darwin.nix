@@ -17,13 +17,11 @@
       '';
 
       settings = {
-        # Necessary for using flakes on this system.
         experimental-features = "nix-command flakes";
       };
+
       optimise.automatic = true;
     };
-
-    programs.zsh.enable = true;
 
     imports = [./dock.nix];
 
@@ -84,7 +82,6 @@
       enable = true;
       enableRosetta = true;
       autoMigrate = true;
-      # Optional: Declarative tap management
       taps = {
         "homebrew/homebrew-core" = inputs.homebrew-core;
         "homebrew/homebrew-cask" = inputs.homebrew-cask;
@@ -113,7 +110,7 @@
 
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog
-    system.stateVersion = 5;
+    system.stateVersion = 6;
 
     # Keyboard
     system.keyboard.enableKeyMapping = true;
@@ -190,12 +187,11 @@
 
     # set some OSX preferences that I always end up hunting down and changing.
     system.defaults = {
-      # minimal dock
       dock = {
         autohide = true;
         orientation = "bottom";
         show-process-indicators = true;
-        show-recents = false;
+        show-recents = true;
         static-only = false;
         expose-group-apps = true;
         magnification = true;
@@ -204,7 +200,6 @@
         showhidden = true;
         mru-spaces = false;
         appswitcher-all-displays = true;
-        wvous-tl-corner = 2;  # top-left - Mission Control
       };
       # a finder that tells me what I want to know and lets me work
       finder = {

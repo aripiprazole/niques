@@ -46,7 +46,7 @@ in
             (entry: "${entryURI entry.path}\n")
             cfg.entries;
           createEntries = concatMapStrings
-            (entry: "${dockutil}/bin/dockutil --no-restart --add '${entry.path}' --section ${entry.section} ${entry.options}\n")
+            (entry: "sudo -u ${config.system.primaryUser.username} ${dockutil}/bin/dockutil --no-restart --add '${entry.path}' --section ${entry.section} ${entry.options}\n")
             cfg.entries;
         in
         {
@@ -55,7 +55,7 @@ in
             haveURIs="$(${dockutil}/bin/dockutil --list | ${pkgs.coreutils}/bin/cut -f2)"
             if ! diff -wu <(echo -n "$haveURIs") <(echo -n '${wantURIs}') >&2 ; then
               echo >&2 "Resetting Dock."
-              ${dockutil}/bin/dockutil --no-restart --remove all
+              sudo -u ${config.system.primaryUser.username} ${dockutil}/bin/dockutil --no-restart --remove all
               ${createEntries}
               killall Dock
             else
