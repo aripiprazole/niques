@@ -6,7 +6,7 @@
   # SECTION = Window
   #   SUBSECTION = Command Center
   "window.commandCenter" = true;
-  "window.customTitleBarVisibility" = true;
+  "window.customTitleBarVisibility" = "windowed";
 
   # SECTION = Security
   "security.workspace.trust.untrustedFiles" = "open";
@@ -175,22 +175,7 @@
   "liveshare.publishWorkspaceInfo" = true;
 
   # SECTION = Breadcumbs
-  "breadcrumbs.enabled" = true;
-  "breadcrumbs.showArrays" = true;
-  "breadcrumbs.showVariables" = true;
-  "breadcrumbs.showBooleans" = true;
-  "breadcrumbs.showClasses" = true;
-  "breadcrumbs.showConstants" = true;
-  "breadcrumbs.showConstructors" = true;
-  "breadcrumbs.showEnumMembers" = true;
-  "breadcrumbs.showEnums" = true;
-  "breadcrumbs.showEvents" = true;
-  "breadcrumbs.showFields" = true;
-  "breadcrumbs.showFiles" = true;
-  "breadcrumbs.showFunctions" = true;
-  "breadcrumbs.showInterfaces" = true;
-  "breadcrumbs.showMethods" = true;
-
+  "breadcrumbs.enabled" = false;
   "errorLens.enabledDiagnosticLevels" = ["error" "warning" "info" "hint"];
 
   # SECTION = Explorer

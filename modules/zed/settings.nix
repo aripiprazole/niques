@@ -86,6 +86,13 @@
   tab_bar = {
     show_nav_history_buttons = true;
   };
+  toolbar = {
+    breadcrumbs = false;
+    quick_actions = false;
+    selections_menu = false;
+    agent_review = false;
+    code_actions = false;
+  };
   tabs = {
     file_icons = true;
     git_status = true;
@@ -94,9 +101,6 @@
   terminal = {
     button = true;
     font_family = "JetBrains Mono";
-    toolbar = {
-      breadcrumbs = true;
-    };
     scrollbar = {
       show = "auto";
     };
