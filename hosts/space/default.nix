@@ -9,7 +9,7 @@
 
   users.users.gabrielle = {
     home = "/Users/gabrielle";
-    name = "Gabrielle";
+    name = "gabrielle";
     shell = pkgs.zsh;
   };
 
