@@ -159,6 +159,7 @@
       };
       initialization_options = {
         checkOnSave = true;
+        check.workspace = false;
         hover = {
           actions = {
             references = {
@@ -166,7 +167,7 @@
             };
           };
         };
-        assist.termSearch.enable = true;
+        # assist.termSearch.enable = true;
         completion = {
           fullFunctionSignatures.enable = true;
         };

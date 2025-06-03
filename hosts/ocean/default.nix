@@ -45,6 +45,7 @@
   # Homebrew for packages not on Nix
   homebrew = {
     enable = true;
+    user = config.system.primaryUser;
     onActivation = {
       autoUpdate = true;
       upgrade = true;
