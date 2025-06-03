@@ -46,7 +46,6 @@
   homebrew = {
     enable = true;
     user = config.system.primaryUser;
-    caskArgs.appdir = "/User/gabrielle/Applications";
     onActivation = {
       autoUpdate = true;
       upgrade = true;
