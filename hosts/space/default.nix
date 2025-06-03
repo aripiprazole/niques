@@ -19,7 +19,7 @@
     sharedModules = [../../modules];
     backupFileExtension = "bkp";
 
-    users.Gabrielle = {
+    users.gabrielle = {
       imports = [./gabrielle.nix];
     };
   };
