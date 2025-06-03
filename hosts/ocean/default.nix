@@ -25,7 +25,7 @@
   };
 
   environment.variables = {
-    PATH = "$PATH:/Users/Gabrielle/.cargo/bin";
+    PATH = "$PATH:/Users/gabrielleoliveira/.cargo/bin";
   };
 
   local.dock.enable = true;
