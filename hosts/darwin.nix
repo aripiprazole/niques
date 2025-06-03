@@ -13,17 +13,17 @@
     # Enable experimental nix command and flakes
     nix = {
       enable = false;
-      extraOptions = ''
-        auto-optimise-store = true
-        experimental-features = nix-command flakes
-        extra-platforms = x86_64-darwin aarch64-darwin
-      '';
+      # extraOptions = ''
+      #   auto-optimise-store = true
+      #   experimental-features = nix-command flakes
+      #   extra-platforms = x86_64-darwin aarch64-darwin
+      # '';
 
-      settings = {
-        experimental-features = "nix-command flakes";
-      };
+      # settings = {
+      #   experimental-features = "nix-command flakes";
+      # };
 
-      optimise.automatic = true;
+      # optimise.automatic = true;
     };
 
     # List packages installed in system profile. To search by name, run:
