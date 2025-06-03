@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  home.homeDirectory = "/Users/Gabrielle";
+  home.homeDirectory = "/Users/gabrielle";
   home.stateVersion = "25.05";
 
   imports = [../../modules];
