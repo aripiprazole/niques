@@ -12,6 +12,7 @@
 
     # Enable experimental nix command and flakes
     nix = {
+      enable = false;
       extraOptions = ''
         auto-optimise-store = true
         experimental-features = nix-command flakes
