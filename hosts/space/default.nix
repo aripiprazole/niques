@@ -1,11 +1,11 @@
-{ config, pkgs, ... }: {
-  system.primaryUser = "gabrielle";
+{ pkgs, ... }: {
+  system.primaryUser = "Gabrielle";
   system.activationScripts.activateSettings.text = ''
     # Following line should allow us to avoid a logout/login cycle
     /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
   '';
 
-  nix-homebrew.user = "gabrielle";
+  nix-homebrew.user = "Gabrielle";
 
   users.users.Gabrielle = {
     home = "/Users/gabrielle";
@@ -45,7 +45,6 @@
   # Homebrew for packages not on Nix
   homebrew = {
     enable = true;
-    user = config.system.primaryUser;
     onActivation = {
       autoUpdate = true;
       upgrade = true;
@@ -69,7 +68,6 @@
       "eqmac"
       "obsidian"
       "ghostty"
-      "lm-studio"
       "logi-options+"
       "tailscale"
 
