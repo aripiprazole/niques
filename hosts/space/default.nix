@@ -7,7 +7,7 @@
 
   nix-homebrew.user = "Gabrielle";
 
-  users.users.Gabrielle = {
+  users.users.gabrielle = {
     home = "/Users/gabrielle";
     name = "Gabrielle";
     shell = pkgs.zsh;

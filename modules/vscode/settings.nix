@@ -80,7 +80,6 @@
   "calva.highlight.rainbowIndentGuides" = true;
   "calva.showDocstringInParameterHelp" = true;
   "calva.paredit.defaultKeyMap" = "strict";
-  "calva.fmt.configPath" = "/Users/Gabrielle/.cljfmt.edn";
   "calva.prettyPrintingOptions" = {
     "printEngine" = "pprint";
     "enabled" = true;
