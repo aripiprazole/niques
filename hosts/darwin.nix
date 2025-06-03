@@ -8,6 +8,8 @@
       google-cloud-secret-manager
     ]);
   in {
+    imports = [./dock.nix];
+
     # Enable experimental nix command and flakes
     nix = {
       extraOptions = ''
@@ -22,8 +24,6 @@
 
       optimise.automatic = true;
     };
-
-    imports = [./dock.nix];
 
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
@@ -44,6 +44,8 @@
         pkgs.sccache
         pkgs.ruby_3_1
         pkgs.go
+        pkgs.nil
+        pkgs.gh
 
         # Apps
         pkgs._1password-gui
@@ -55,7 +57,6 @@
 
     environment.shells = [ pkgs.bashInteractive pkgs.zsh ];
     environment.shellAliases.zed = "zeditor";
-
     environment.variables = {
       PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig:${pkgs.ruby_3_1}/lib/pkgconfig";
       LIBRARY_PATH = "${pkgs.ruby_3_1}/lib:$LIBRARY_PATH";

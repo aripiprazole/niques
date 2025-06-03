@@ -38,6 +38,7 @@
     zsh-autosuggestions
     zsh-syntax-highlighting
     any-nix-shell
+    gh
 
     # Text editors
     zed-editor

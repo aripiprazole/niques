@@ -53,6 +53,7 @@
     brews = [
       "llvm"
       "fftw"
+      "colima"
       "docker"
       "docker-compose"
     ];

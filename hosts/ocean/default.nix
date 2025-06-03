@@ -50,6 +50,7 @@
       upgrade = true;
     };
     brews = [
+      "colima"
       "docker"
       "docker-compose"
     ];
