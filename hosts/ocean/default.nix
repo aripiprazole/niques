@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   system.primaryUser = "gabrielleoliveira";
   system.activationScripts.activateSettings.text = ''
     # Following line should allow us to avoid a logout/login cycle

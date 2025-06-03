@@ -1,14 +1,14 @@
 { config, pkgs, ... }: {
-  system.primaryUser = "Gabrielle";
+  system.primaryUser = "gabrielle";
   system.activationScripts.activateSettings.text = ''
     # Following line should allow us to avoid a logout/login cycle
     /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
   '';
 
-  nix-homebrew.user = "Gabrielle";
+  nix-homebrew.user = "gabrielle";
 
   users.users.Gabrielle = {
-    home = "/Users/Gabrielle";
+    home = "/Users/gabrielle";
     name = "Gabrielle";
     shell = pkgs.zsh;
   };
@@ -25,7 +25,7 @@
   };
 
   environment.variables = {
-    PATH = "$PATH:/Users/Gabrielle/.cargo/bin";
+    PATH = "$PATH:/Users/gabrielle/.cargo/bin";
   };
 
   local.dock.enable = true;
@@ -46,7 +46,7 @@
   homebrew = {
     enable = true;
     user = config.system.primaryUser;
-    caskArgs.appdir = "/User/Gabrielle/Applications";
+    caskArgs.appdir = "/User/gabrielle/Applications";
     onActivation = {
       autoUpdate = true;
       upgrade = true;
