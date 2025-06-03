@@ -1,11 +1,11 @@
 { pkgs, ... }: {
-  system.primaryUser = "Gabrielle";
+  system.primaryUser = "gabrielle";
   system.activationScripts.activateSettings.text = ''
     # Following line should allow us to avoid a logout/login cycle
     /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
   '';
 
-  nix-homebrew.user = "Gabrielle";
+  nix-homebrew.user = "gabrielle";
 
   users.users.gabrielle = {
     home = "/Users/gabrielle";
