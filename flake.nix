@@ -6,6 +6,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    mac-app-util.url = "github:hraban/mac-app-util";
     nix-darwin.url = "github:nix-darwin/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
@@ -16,7 +17,7 @@
     homebrew-cask.flake = false;
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, home-manager, spicetify-nix, ... }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, home-manager, spicetify-nix, mac-app-util, ... }:
   let
     inherit (nixpkgs.lib) attrValues optionalAttrs;
 
@@ -46,6 +47,7 @@
         modules = attrValues self.darwinModules ++ [
           ./hosts/darwin.nix
           ./hosts/ocean/default.nix
+          mac-app-util.darwinModules.default
           spicetify-nix.darwinModules.spicetify
           nix-homebrew.darwinModules.nix-homebrew
           home-manager.darwinModules.home-manager
@@ -60,6 +62,7 @@
         modules = attrValues self.darwinModules ++ [
           ./hosts/darwin.nix
           ./hosts/space/default.nix
+          mac-app-util.darwinModules.default
           spicetify-nix.darwinModules.spicetify
           nix-homebrew.darwinModules.nix-homebrew
           home-manager.darwinModules.home-manager

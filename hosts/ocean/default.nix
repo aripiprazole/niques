@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, ... }: {
   system.primaryUser = "gabrielleoliveira";
   system.activationScripts.activateSettings.text = ''
     # Following line should allow us to avoid a logout/login cycle
@@ -36,7 +36,6 @@
     { path = "/System/Applications/Messages.app"; }
     { path = "/Applications/WhatsApp.app"; }
     { path = "/Applications/Telegram.app"; }
-    { path = "/Applications/Discord.app"; }
     { path = "/Applications/Gather.app"; }
     { path = "/Applications/Spotify.app"; }
     { path = "/Applications/Obsidian.app"; }
