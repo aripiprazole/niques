@@ -113,7 +113,7 @@
   };
   terminal = {
     button = true;
-    breadcrumbs = false;
+    toolbar.breadcrumbs = false;
     font_family = "JetBrains Mono";
     scrollbar = {
       show = "auto";
