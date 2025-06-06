@@ -16,7 +16,8 @@
   ui_font_size = 18;
   ui_font_family = "JetBrains Mono";
   buffer_font_family = "JetBrains Mono";
-  format_on_save = "on";
+  format_on_save = "off";
+  autosave = "on_focus_change";
   scroll_beyond_last_line = "off";
   soft_wrap = "none";
   load_direnv = "shell_hook";
@@ -29,25 +30,10 @@
   semantic_tokens.enabled = true;
   languages = {
     Rust = {
+      autosave = false;
       tab_size = 4;
       show_edit_predictions = false;
-    };
-    JSON = {
-      autosave = true;
-      format_on_save = "off";
-    };
-    JSONC = {
-      autosave = true;
-      format_on_save = "off";
-    };
-    TOML = {
-      autosave = true;
-      format_on_save = "off";
-      tab_size = 4;
-    };
-    SQL = {
-      autosave = true;
-      format_on_save = "off";
+      format_on_save = "on";
     };
   };
   slash_commands = {
