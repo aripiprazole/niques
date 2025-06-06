@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, mac-app-util, ... }: {
   system.primaryUser = "gabrielle";
   system.activationScripts.activateSettings.text = ''
     # Following line should allow us to avoid a logout/login cycle
@@ -20,7 +20,7 @@
     backupFileExtension = "bkp";
 
     users.gabrielle = {
-      imports = [./gabrielle.nix];
+      imports = [./gabrielle.nix mac-app-util.homeManagerModules.default];
     };
   };
 
