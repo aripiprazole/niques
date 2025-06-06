@@ -42,6 +42,10 @@
     nixd
     mkalias
 
+    # Language tools
+    elan
+    rustup
+
     # Text editors
     zed-editor
     vscode
