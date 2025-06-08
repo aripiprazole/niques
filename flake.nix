@@ -31,7 +31,7 @@
       ...
     }:
     let
-      inherit (nixpkgs.lib) attrValues optionalAttrs;
+      inherit (nixpkgs.lib) attrValues;
       pkgs-unstable = import inputs.nixpkgs-unstable {
         system = "aarch64-darwin";
         config.allowUnfree = true;
@@ -43,21 +43,6 @@
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
     in
     {
-      # Overlays
-      overlays = {
-        # Overlays to add various packages into package set
-        # Overlay useful on Macs with Apple Silicon
-        apple-silicon =
-          final: prev:
-          optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-            # Add access to x86 packages system is running Apple Silicon
-            pkgs-x86 = import nixpkgs {
-              system = "x86_64-darwin";
-              config.allowUnfree = true;
-            };
-          };
-      };
-
       checks = forAllSystems (system: {
         pre-commit-check = git-hooks.lib.${system}.run {
           src = ./.;
