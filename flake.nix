@@ -28,7 +28,6 @@
       spicetify-nix,
       mac-app-util,
       git-hooks,
-      flake-utils,
       ...
     }:
     let
@@ -37,6 +36,11 @@
         system = "aarch64-darwin";
         config.allowUnfree = true;
       };
+      supportedSystems = [
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
     in
     {
       # Overlays
@@ -54,17 +58,21 @@
           };
       };
 
-      pre-commit-check = git-hooks.run {
-        hooks = {
-          nixfmt-rfc-style.enable = true;
+      checks = forAllSystems (system: {
+        pre-commit-check = git-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            nixfmt-rfc-style.enable = true;
+          };
         };
-      };
+      });
 
-      devShell = nixpkgs.mkShell {
-        inherit (self.pre-commit-check) shellHook;
-        buildInputs = self.pre-commit-check.enabledPackages;
-        nativeBuildInputs = [ nixpkgs.pre-commit ];
-      };
+      devShells = forAllSystems (system: {
+        default = nixpkgs.legacyPackages.${system}.mkShell {
+          inherit (self.checks.${system}.pre-commit-check) shellHook;
+          buildInputs = self.checks.${system}.pre-commit-check.enabledPackages;
+        };
+      });
 
       darwinConfigurations = {
         # Build darwin flake using:
@@ -79,7 +87,9 @@
             nix-homebrew.darwinModules.nix-homebrew
             home-manager.darwinModules.home-manager
           ];
-          specialArgs = { inherit inputs pkgs-unstable mac-app-util; };
+          specialArgs = {
+            inherit inputs pkgs-unstable mac-app-util;
+          };
         };
 
         # Build darwin flake using:
@@ -94,7 +104,9 @@
             nix-homebrew.darwinModules.nix-homebrew
             home-manager.darwinModules.home-manager
           ];
-          specialArgs = { inherit inputs pkgs-unstable mac-app-util; };
+          specialArgs = {
+            inherit inputs pkgs-unstable mac-app-util;
+          };
         };
       };
 
