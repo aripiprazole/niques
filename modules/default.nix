@@ -11,9 +11,6 @@
     home-manager.enable = true;
     command-not-found.enable = false;
 
-    # Direnv, load and unload environment variables depending on the current directory.
-    # https://direnv.net
-    # https://rycee.gitlab.io/home-manager/options.html#opt-programs.direnv.enable
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
 
@@ -29,22 +26,25 @@
     jq
     fd
     ffmpeg
-    direnv
     cmake
     tig
     fzf
+    gh
+    mkalias
+
+    # Terminal
     starship
     zsh
     zsh-autosuggestions
     zsh-syntax-highlighting
     any-nix-shell
-    gh
-    nixd
-    mkalias
+    direnv
 
     # Language tools
     elan
     rustup
+    nixfmt-rfc-style
+    nil
 
     # Text editors
     zed-editor

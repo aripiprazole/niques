@@ -31,7 +31,12 @@
   #     without formatting, it's boring to have to press Ctrl+Shift+S
   #     instead of just saving it.
   "editor.formatOnSave" = true;
-  "editor.rulers" = [80 100 120 160]; # Rulers at 80, 100, 120, 160
+  "editor.rulers" = [
+    80
+    100
+    120
+    160
+  ]; # Rulers at 80, 100, 120, 160
   #   SUBSECTION = Highlight
   "editor.bracketPairColorization.enabled" = true;
   "editor.guides.bracketPairs" = true;
@@ -150,7 +155,7 @@
   "rust-analyzer.lens.references.method.enable" = false;
   #   SUBSECTION = Debug
   "rust-analyzer.debug.openDebugPane" = true;
-  "rust-analyzer.cargo.features" = [];
+  "rust-analyzer.cargo.features" = [ ];
 
   # SECTION = Debug
   #   SUBSECTION = UI
@@ -175,7 +180,12 @@
 
   # SECTION = Breadcumbs
   "breadcrumbs.enabled" = false;
-  "errorLens.enabledDiagnosticLevels" = ["error" "warning" "info" "hint"];
+  "errorLens.enabledDiagnosticLevels" = [
+    "error"
+    "warning"
+    "info"
+    "hint"
+  ];
 
   # SECTION = Explorer
   "explorer.compactFolders" = false;
@@ -222,7 +232,7 @@
   "[rust]" = {
     "editor.tabSize" = 4;
     "editor.useTabStops" = true;
-    "editor.rulers" = [100];
+    "editor.rulers" = [ 100 ];
   };
   "[cpp]" = {
     "editor.defaultFormatter" = "xaver.clang-format";
@@ -302,93 +312,120 @@
   #   SUBSECTION = Keybindings
   "vim.operatorPendingModeKeyBindingsNonRecursive" = [
     {
-      "before" = ["("];
-      "after" = ["i("];
+      "before" = [ "(" ];
+      "after" = [ "i(" ];
     }
     {
-      "before" = ["{"];
-      "after" = ["w"];
+      "before" = [ "{" ];
+      "after" = [ "w" ];
     }
     {
-      "before" = ["L"];
-      "after" = ["$"];
+      "before" = [ "L" ];
+      "after" = [ "$" ];
     }
     {
-      "before" = ["H"];
-      "after" = ["^"];
+      "before" = [ "H" ];
+      "after" = [ "^" ];
     }
   ];
   "vim.visualModeKeyBindings" = [
     {
-      "before" = ["g" "p"];
-      "commands" = ["editor.action.peekDefinition"];
+      "before" = [
+        "g"
+        "p"
+      ];
+      "commands" = [ "editor.action.peekDefinition" ];
     }
     {
-      "before" = ["g" "d"];
-      "commands" = ["editor.action.revealDefinition"];
+      "before" = [
+        "g"
+        "d"
+      ];
+      "commands" = [ "editor.action.revealDefinition" ];
     }
     #   SUBSECTION = Surround
     {
-      "before" = ["p"];
-      "after" = ["p" "g" "v" "y"];
+      "before" = [ "p" ];
+      "after" = [
+        "p"
+        "g"
+        "v"
+        "y"
+      ];
     }
     #   SUBSECTION = Indent
     #   Use < and > to indent/unindent
     {
-      "before" = [">"];
-      "commands" = ["editor.action.indentLines"];
+      "before" = [ ">" ];
+      "commands" = [ "editor.action.indentLines" ];
     }
     {
-      "before" = ["<"];
-      "commands" = ["editor.action.outdentLines"];
+      "before" = [ "<" ];
+      "commands" = [ "editor.action.outdentLines" ];
     }
   ];
   "vim.normalModeKeyBindingsNonRecursive" = [
     {
-      "before" = ["g" "p"];
-      "commands" = ["editor.action.peekDefinition"];
+      "before" = [
+        "g"
+        "p"
+      ];
+      "commands" = [ "editor.action.peekDefinition" ];
     }
     {
-      "before" = ["g" "d"];
-      "commands" = ["editor.action.revealDefinition"];
+      "before" = [
+        "g"
+        "d"
+      ];
+      "commands" = [ "editor.action.revealDefinition" ];
     }
     {
-      "before" = [":"];
-      "commands" = ["workbench.action.showCommands"];
+      "before" = [ ":" ];
+      "commands" = [ "workbench.action.showCommands" ];
       "silent" = true;
     }
   ];
   "vim.normalModeKeyBindings" = [
     {
-      "before" = ["<C-n>"];
-      "commands" = [":nohl"];
+      "before" = [ "<C-n>" ];
+      "commands" = [ ":nohl" ];
     }
     #   SUBSECTION = Find shortcuts
     #   Use ctrl-f to find
     {
       # Enable the default vscode find
-      "before" = ["<C-f>"];
-      "commands" = ["actions.find"];
+      "before" = [ "<C-f>" ];
+      "commands" = [ "actions.find" ];
     }
     {
-      "before" = ["/"];
-      "commands" = ["actions.find"];
+      "before" = [ "/" ];
+      "commands" = [ "actions.find" ];
     }
     {
-      "before" = ["<leader>" "b"];
-      "commands" = ["editor.debug.action.toggleBreakpoint"];
+      "before" = [
+        "<leader>"
+        "b"
+      ];
+      "commands" = [ "editor.debug.action.toggleBreakpoint" ];
     }
     #   SUBSECTION = Debug and breakpoints
     #   Use <leader>b to toggle breakpoints
     {
-      "before" = ["<leader>" "b"];
-      "commands" = ["editor.debug.action.toggleBreakpoint"];
+      "before" = [
+        "<leader>"
+        "b"
+      ];
+      "commands" = [ "editor.debug.action.toggleBreakpoint" ];
     }
     #   SUBSECTION = Cargo check
     #   Use <leader>cc to toggle breakpoints
     {
-      "before" = ["<leader>" "c" "c"];
-      "commands" = ["cargo.check"];
+      "before" = [
+        "<leader>"
+        "c"
+        "c"
+      ];
+      "commands" = [ "cargo.check" ];
     }
   ];
   "vim.autoSwitchInputMethod.enable" = true;

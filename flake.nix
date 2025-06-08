@@ -15,81 +15,119 @@
     homebrew-core.flake = false;
     homebrew-cask.url = "github:homebrew/homebrew-cask";
     homebrew-cask.flake = false;
+    git-hooks.url = "github:cachix/git-hooks.nix";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, home-manager, spicetify-nix, mac-app-util, ... }:
-  let
-    inherit (nixpkgs.lib) attrValues optionalAttrs;
-
-    pkgs-unstable = import inputs.nixpkgs-unstable {
-      system = "aarch64-darwin";
-      config.allowUnfree = true;
-    };
-  in {
-    # Overlays
-    overlays = {
-      # Overlays to add various packages into package set
-      # Overlay useful on Macs with Apple Silicon
-      apple-silicon = final: prev: optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-        # Add access to x86 packages system is running Apple Silicon
-        pkgs-x86 = import nixpkgs {
-          system = "x86_64-darwin";
-          config.allowUnfree = true;
-        };
-      };
-    };
-
-    darwinConfigurations = {
-      # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#Ocean
-      "Ocean" = nix-darwin.lib.darwinSystem {
+  outputs =
+    inputs@{
+      self,
+      nix-darwin,
+      nixpkgs,
+      nix-homebrew,
+      home-manager,
+      spicetify-nix,
+      mac-app-util,
+      git-hooks,
+      flake-utils,
+      ...
+    }:
+    let
+      inherit (nixpkgs.lib) attrValues optionalAttrs;
+      pkgs-unstable = import inputs.nixpkgs-unstable {
         system = "aarch64-darwin";
-        modules = attrValues self.darwinModules ++ [
-          ./hosts/darwin.nix
-          ./hosts/ocean/default.nix
-          mac-app-util.darwinModules.default
-          spicetify-nix.darwinModules.spicetify
-          nix-homebrew.darwinModules.nix-homebrew
-          home-manager.darwinModules.home-manager
-        ];
-        specialArgs = { inherit inputs pkgs-unstable mac-app-util; };
+        config.allowUnfree = true;
       };
-
-      # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#Space
-      "Space" = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = attrValues self.darwinModules ++ [
-          ./hosts/darwin.nix
-          ./hosts/space/default.nix
-          mac-app-util.darwinModules.default
-          spicetify-nix.darwinModules.spicetify
-          nix-homebrew.darwinModules.nix-homebrew
-          home-manager.darwinModules.home-manager
-        ];
-        specialArgs = { inherit inputs pkgs-unstable mac-app-util; };
-      };
-    };
-
-    # My `nix-darwin` modules that are pending upstream, or patched versions waiting on upstream
-    # fixes.
-    darwinModules = {
-      programs-nix-index =
-        # Additional configuration for `nix-index` to enable `command-not-found` functionality with Fish.
-        { config, lib, pkgs, ... }: {
-          config = lib.mkIf config.programs.nix-index.enable {
-            programs.fish.interactiveShellInit = ''
-              function __fish_command_not_found_handler --on-event="fish_command_not_found"
-                ${if config.programs.fish.useBabelfish then ''
-                command_not_found_handle $argv
-                '' else ''
-                ${pkgs.bashInteractive}/bin/bash -c \
-                  "source ${config.programs.nix-index.package}/etc/profile.d/command-not-found.sh; command_not_found_handle $argv"
-                ''}
-              end
-            '';
+    in
+    {
+      # Overlays
+      overlays = {
+        # Overlays to add various packages into package set
+        # Overlay useful on Macs with Apple Silicon
+        apple-silicon =
+          final: prev:
+          optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
+            # Add access to x86 packages system is running Apple Silicon
+            pkgs-x86 = import nixpkgs {
+              system = "x86_64-darwin";
+              config.allowUnfree = true;
+            };
           };
+      };
+
+      pre-commit-check = git-hooks.run {
+        hooks = {
+          nixfmt-rfc-style.enable = true;
         };
+      };
+
+      devShell = nixpkgs.mkShell {
+        inherit (self.pre-commit-check) shellHook;
+        buildInputs = self.pre-commit-check.enabledPackages;
+        nativeBuildInputs = [ nixpkgs.pre-commit ];
+      };
+
+      darwinConfigurations = {
+        # Build darwin flake using:
+        # $ darwin-rebuild build --flake .#Ocean
+        "Ocean" = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = attrValues self.darwinModules ++ [
+            ./hosts/darwin.nix
+            ./hosts/ocean/default.nix
+            mac-app-util.darwinModules.default
+            spicetify-nix.darwinModules.spicetify
+            nix-homebrew.darwinModules.nix-homebrew
+            home-manager.darwinModules.home-manager
+          ];
+          specialArgs = { inherit inputs pkgs-unstable mac-app-util; };
+        };
+
+        # Build darwin flake using:
+        # $ darwin-rebuild build --flake .#Space
+        "Space" = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = attrValues self.darwinModules ++ [
+            ./hosts/darwin.nix
+            ./hosts/space/default.nix
+            mac-app-util.darwinModules.default
+            spicetify-nix.darwinModules.spicetify
+            nix-homebrew.darwinModules.nix-homebrew
+            home-manager.darwinModules.home-manager
+          ];
+          specialArgs = { inherit inputs pkgs-unstable mac-app-util; };
+        };
+      };
+
+      # My `nix-darwin` modules that are pending upstream, or patched versions waiting on upstream
+      # fixes.
+      darwinModules = {
+        programs-nix-index =
+          # Additional configuration for `nix-index` to enable `command-not-found` functionality with Fish.
+          {
+            config,
+            lib,
+            pkgs,
+            ...
+          }:
+          {
+            config = lib.mkIf config.programs.nix-index.enable {
+              programs.fish.interactiveShellInit = ''
+                function __fish_command_not_found_handler --on-event="fish_command_not_found"
+                  ${
+                    if config.programs.fish.useBabelfish then
+                      ''
+                        command_not_found_handle $argv
+                      ''
+                    else
+                      ''
+                        ${pkgs.bashInteractive}/bin/bash -c \
+                          "source ${config.programs.nix-index.package}/etc/profile.d/command-not-found.sh; command_not_found_handle $argv"
+                      ''
+                  }
+                end
+              '';
+            };
+          };
+      };
     };
-  };
 }

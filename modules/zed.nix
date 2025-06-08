@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   programs.zed-editor = {
     enable = true;
     extensions = [
@@ -16,9 +16,9 @@
       "html"
       "dockerfile"
       "jetbrains-new-ui-icons"
-      "github-dark-default"
+      "github-theme"
     ];
     userKeymaps = builtins.fromJSON (builtins.readFile ./zed/keymap.json);
-    userSettings = import ./zed/settings.nix;
+    userSettings = import ./zed/settings.nix pkgs;
   };
 }

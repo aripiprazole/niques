@@ -1,4 +1,10 @@
-{ pkgs, mac-app-util, ... }: {
+{
+  pkgs,
+  pkgs-unstable,
+  mac-app-util,
+  ...
+}:
+{
   system.primaryUser = "gabrielle";
   system.activationScripts.activateSettings.text = ''
     # Following line should allow us to avoid a logout/login cycle
@@ -6,6 +12,8 @@
   '';
 
   nix-homebrew.user = "gabrielle";
+
+  environment.systemPackages = [ pkgs-unstable.betterdisplay ];
 
   users.users.gabrielle = {
     home = "/Users/gabrielle";
@@ -16,11 +24,14 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    sharedModules = [../../modules];
+    sharedModules = [ ../../modules ];
     backupFileExtension = "bkp";
 
     users.gabrielle = {
-      imports = [./gabrielle.nix mac-app-util.homeManagerModules.default];
+      imports = [
+        ./gabrielle.nix
+        mac-app-util.homeManagerModules.default
+      ];
     };
   };
 
@@ -43,6 +54,7 @@
     onActivation = {
       autoUpdate = true;
       upgrade = true;
+      cleanup = "uninstall";
     };
     brews = [
       "llvm"

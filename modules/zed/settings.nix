@@ -1,4 +1,4 @@
-{
+pkgs: {
   vim_mode = true;
   tab_size = 2;
   vertical_scroll_margin = 3;
@@ -22,7 +22,11 @@
   soft_wrap = "none";
   load_direnv = "shell_hook";
   current_line_highlight = "all";
-  wrap_guides = [80 100 120];
+  wrap_guides = [
+    80
+    100
+    120
+  ];
   confirm_quit = true;
   preview_tabs.enabled = false;
   bottom_dock_layout = "contained";
@@ -33,6 +37,14 @@
       autosave = false;
       tab_size = 4;
       show_edit_predictions = false;
+      format_on_save = "on";
+    };
+    Nix = {
+      autosave = false;
+      language_servers = [
+        "!nixd"
+        "nil"
+      ];
       format_on_save = "on";
     };
   };
@@ -133,10 +145,18 @@
   };
   edit_predictions = {
     mode = "subtle";
-    disabled_in = ["comment" "string"];
+    disabled_in = [
+      "comment"
+      "string"
+    ];
   };
   lsp = {
     nix.binary.path_lookup = true;
+    nil.initialization_options = {
+      formatting = {
+        command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
+      };
+    };
     rust-analyzer = {
       binary = {
         path = "/run/current-system/sw/bin/bash";

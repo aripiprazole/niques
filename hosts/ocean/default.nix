@@ -1,4 +1,5 @@
-{ pkgs, mac-app-util, ... }: {
+{ pkgs, mac-app-util, ... }:
+{
   system.primaryUser = "gabrielleoliveira";
   system.activationScripts.activateSettings.text = ''
     # Following line should allow us to avoid a logout/login cycle
@@ -16,11 +17,14 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    sharedModules = [../../modules];
+    sharedModules = [ ../../modules ];
     backupFileExtension = "bkp";
 
     users.gabrielleoliveira = {
-      imports = [./gabrielleoliveira.nix mac-app-util.homeManagerModules.default];
+      imports = [
+        ./gabrielleoliveira.nix
+        mac-app-util.homeManagerModules.default
+      ];
     };
   };
 
@@ -43,6 +47,7 @@
     onActivation = {
       autoUpdate = true;
       upgrade = true;
+      cleanup = "uninstall";
     };
     brews = [
       "colima"
