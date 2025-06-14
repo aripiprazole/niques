@@ -39,6 +39,8 @@
     { path = "/Applications/Obsidian.app"; }
   ];
 
+  system.defaults.dock.show-recents = true;
+
   # Homebrew for packages not on Nix
   homebrew = {
     enable = true;

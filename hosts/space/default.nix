@@ -81,7 +81,6 @@
       # Games / Entertainment
       "whisky"
       "curseforge"
-      "modrinth"
     ];
   };
 }
