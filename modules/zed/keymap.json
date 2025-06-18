@@ -1,5 +1,6 @@
 [
   {
+    "context": "Editor",
     "use_key_equivalents": true,
     "bindings": {
       "ctrl->": "editor::Indent",
@@ -75,7 +76,7 @@
   {
     "context": "Editor",
     "bindings": {
-      "cmd-k": "assistant::InlineAssist",
+      "cmd-m": "workspace::OpenInTerminal",
       "cmd-r": "search::ToggleReplace",
       "ctrl-r": "task::Rerun",
       "shift-f6": "editor::Rename",
@@ -86,9 +87,9 @@
     "context": "ProjectPanel",
     "bindings": {
       "enter": "project_panel::Open",
-      "cmd-backspace": ["project_panel::Trash", { "skip_prompt": false }],
-      "backspace": ["project_panel::Trash", { "skip_prompt": false }],
-      "delete": ["project_panel::Trash", { "skip_prompt": false }],
+      "cmd-backspace": ["project_panel::Trash", { "skip_prompt": true }],
+      "backspace": ["project_panel::Trash", { "skip_prompt": true }],
+      "delete": ["project_panel::Trash", { "skip_prompt": true }],
       "shift-delete": ["project_panel::Delete", { "skip_prompt": false }],
       "shift-f6": "project_panel::Rename"
     }
