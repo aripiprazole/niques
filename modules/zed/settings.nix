@@ -34,18 +34,15 @@ pkgs: {
   semantic_tokens.enabled = true;
   languages = {
     Rust = {
-      autosave = false;
       tab_size = 4;
       show_edit_predictions = false;
-      format_on_save = "on";
     };
     Nix = {
-      autosave = false;
+      autosave = "off";
       language_servers = [
         "!nixd"
         "nil"
       ];
-      format_on_save = "on";
     };
   };
   slash_commands = {
