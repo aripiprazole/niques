@@ -29,6 +29,13 @@
   {
     "context": "vim_mode == normal || vim_mode == visual",
     "bindings": {
+      "alt-k": "editor::HalfPageUp",
+      "alt-j": "editor::HalfPageDown"
+    }
+  },
+  {
+    "context": "vim_mode == normal || vim_mode == visual",
+    "bindings": {
       "space k": "editor::SelectLargerSyntaxNode",
       "space j": "editor::SelectSmallerSyntaxNode"
     }
@@ -47,15 +54,8 @@
   {
     "context": "Editor && (showing_context_menu || showing_completions)",
     "bindings": {
-      "tab": "editor::ContextMenuNext",
-      "shift-tab": "editor::ContextMenuPrevious"
-    }
-  },
-  {
-    "context": "Editor && (showing_context_menu || showing_completions)",
-    "bindings": {
-      "tab": "editor::ContextMenuNext",
-      "shift-tab": "editor::ContextMenuPrevious"
+      "ctrl-tab": "editor::ContextMenuNext",
+      "ctrl-shift-tab": "editor::ContextMenuPrevious"
     }
   },
   {
@@ -63,14 +63,6 @@
     "bindings": {
       "shift shift": "file_finder::Toggle",
       "alt-g": ["task::Spawn", { "task_name": "generate_.mli_file" }]
-    }
-  },
-  {
-    "context": "Editor && !menu",
-    "bindings": {
-      "ctrl-y": "editor::Undo",
-      "ctrl-f": "buffer_search::Deploy",
-      "ctrl-o": "workspace::Open"
     }
   },
   {
@@ -91,13 +83,9 @@
       "backspace": ["project_panel::Trash", { "skip_prompt": true }],
       "delete": ["project_panel::Trash", { "skip_prompt": true }],
       "shift-delete": ["project_panel::Delete", { "skip_prompt": false }],
-      "shift-f6": "project_panel::Rename"
-    }
-  },
-  {
-    "context": "Terminal",
-    "bindings": {
-      "ctrl-n": ["terminal::SendKeystroke", "ctrl-n"]
+      "shift-f6": "project_panel::Rename",
+      "ctrl-tab": "project_panel::SelectNextDirectory",
+      "ctrl-shift-tab": "project_panel::SelectPrevDirectory"
     }
   }
 ]
