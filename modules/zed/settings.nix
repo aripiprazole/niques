@@ -28,9 +28,9 @@ pkgs: {
     120
   ];
   confirm_quit = true;
-  preview_tabs.enabled = false;
+  preview_tabs.enabled = true;
   bottom_dock_layout = "contained";
-  inlay_hints.enabled = true;
+  inlay_hints.enabled = false;
   semantic_tokens.enabled = true;
   languages = {
     Rust = {
@@ -164,7 +164,7 @@ pkgs: {
       };
       initialization_options = {
         checkOnSave = true;
-        check.workspace = false;
+        check.workspace = true;
         hover.actions.references.enable = true;
         completion = {
           fullFunctionSignatures.enable = true;

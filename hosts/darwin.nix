@@ -36,6 +36,7 @@ in
     pkgs.xz
     pkgs.dockutil
     pkgs.coreutils
+    pkgs.zoxide
 
     # Cache
     pkgs.sccache
@@ -58,6 +59,7 @@ in
     pkgs.zsh
   ];
   environment.shellAliases.zed = "zeditor";
+  environment.shellAliases.cd = "${pkgs.zoxide}/bin/zoxide";
   environment.variables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig:${pkgs.ruby_3_1}/lib/pkgconfig";
     LIBRARY_PATH = "${pkgs.ruby_3_1}/lib:$LIBRARY_PATH";
@@ -141,7 +143,7 @@ in
       ShowFullURLInSmartSearchField = true;
       # Prevent Safari from opening ‘safe’ files automatically after downloading
       AutoOpenSafeDownloads = false;
-      ShowFavoritesBar = true;
+      ShowFavoritesBar = false;
       IncludeInternalDebugMenu = true;
       IncludeDevelopMenu = true;
       WebKitDeveloperExtrasEnabledPreferenceKey = true;
@@ -193,15 +195,15 @@ in
       autohide = true;
       orientation = "bottom";
       show-process-indicators = true;
-      show-recents = true;
-      static-only = false;
+      show-recents = false;
+      static-only = true;
       expose-group-apps = true;
-      magnification = true;
+      magnification = false;
       mineffect = "genie";
       mouse-over-hilite-stack = true;
       showhidden = true;
       mru-spaces = false;
-      appswitcher-all-displays = true;
+      appswitcher-all-displays = false;
     };
     # a finder that tells me what I want to know and lets me work
     finder = {
