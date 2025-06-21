@@ -36,7 +36,7 @@ in
     pkgs.xz
     pkgs.dockutil
     pkgs.coreutils
-    pkgs.zoxide
+    pkgs.fzf
 
     # Cache
     pkgs.sccache

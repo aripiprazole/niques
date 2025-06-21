@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
     ./zed.nix
     ./helix.nix
@@ -16,6 +17,9 @@
 
     btop.enable = true;
     btop.settings.vim_keys = true;
+    zoxide.enable = true;
+    zoxide.enableZshIntegration = true;
+    zoxide.options = [ "--cmd cd" ];
   };
 
   home.packages = with pkgs; [
