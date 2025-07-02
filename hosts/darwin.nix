@@ -59,7 +59,6 @@ in
     pkgs.zsh
   ];
   environment.shellAliases.zed = "zeditor";
-  environment.shellAliases.cd = "${pkgs.zoxide}/bin/zoxide";
   environment.variables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig:${pkgs.ruby_3_1}/lib/pkgconfig";
     LIBRARY_PATH = "${pkgs.ruby_3_1}/lib:$LIBRARY_PATH";
@@ -196,7 +195,7 @@ in
       orientation = "bottom";
       show-process-indicators = true;
       show-recents = false;
-      static-only = true;
+      static-only = false;
       expose-group-apps = true;
       magnification = false;
       mineffect = "genie";
