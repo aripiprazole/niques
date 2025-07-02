@@ -72,11 +72,12 @@
       "gather"
 
       # System applications
-      "eqmac"
+      "soundsource"
       "obsidian"
       "ghostty"
       "logi-options+"
       "tailscale"
+      "alt-tab"
 
       # Games / Entertainment
       "whisky"
