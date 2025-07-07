@@ -77,7 +77,7 @@ in
     config.allowUnfree = true;
     config.allowBroken = true;
     overlays = [
-      inputs.nix-vscode-extensions.overlays.default
+      #inputs.nix-vscode-extensions.overlays.default
     ];
   };
 
@@ -194,7 +194,7 @@ in
       autohide = true;
       orientation = "bottom";
       show-process-indicators = true;
-      show-recents = false;
+      #show-recents = false;
       static-only = false;
       expose-group-apps = true;
       magnification = false;

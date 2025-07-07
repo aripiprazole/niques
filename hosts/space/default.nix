@@ -43,7 +43,6 @@
     { path = "/System/Applications/Messages.app"; }
     { path = "/Applications/WhatsApp.app"; }
     { path = "/Applications/Telegram.app"; }
-    { path = "/Applications/Gather.app"; }
     { path = "/Applications/Spotify.app"; }
     { path = "/Applications/Obsidian.app"; }
   ];
@@ -69,7 +68,6 @@
       "whatsapp"
       "telegram"
       "spotify"
-      "gather"
 
       # System applications
       "soundsource"

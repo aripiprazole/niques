@@ -1,5 +1,20 @@
 [
   {
+    "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
+    "bindings": {
+      "q": "vim::AnyQuotes",
+      "b": "vim::AnyBrackets",
+      "Q": "vim::MiniQuotes",
+      "B": "vim::MiniBrackets"
+    }
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "shift-x": "vim::Exchange"
+    }
+  },
+  {
     "context": "Editor",
     "use_key_equivalents": true,
     "bindings": {
