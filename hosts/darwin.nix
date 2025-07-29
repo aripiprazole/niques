@@ -15,6 +15,7 @@ let
   python3 = pkgs.python3.withPackages (
     pkgs: with pkgs; [
       google-cloud-secret-manager
+      gdk
     ]
   );
 in
@@ -194,13 +195,12 @@ in
       autohide = true;
       orientation = "bottom";
       show-process-indicators = true;
-      #show-recents = false;
       static-only = false;
       expose-group-apps = true;
       magnification = false;
       mineffect = "genie";
       mouse-over-hilite-stack = true;
-      showhidden = true;
+      showhidden = false;
       mru-spaces = false;
       appswitcher-all-displays = false;
     };

@@ -75,7 +75,6 @@
       "ghostty"
       "logi-options+"
       "tailscale"
-      "alt-tab"
 
       # Games / Entertainment
       "whisky"
