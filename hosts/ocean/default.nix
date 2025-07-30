@@ -49,7 +49,6 @@
       cleanup = "uninstall";
     };
     brews = [
-      "colima"
       "docker"
       "docker-compose"
     ];
