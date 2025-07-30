@@ -58,6 +58,7 @@
       "whatsapp"
       "telegram"
       "spotify"
+      "podman-desktop"
 
       # System applications
       "eqmac"
