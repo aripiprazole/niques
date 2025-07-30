@@ -49,10 +49,6 @@ in
     pkgs.ruby_3_1
     pkgs.go
     pkgs.gh
-
-    # Apps
-    pkgs._1password-gui
-    pkgs._1password-cli
   ];
 
   environment.shells = [
