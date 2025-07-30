@@ -80,13 +80,13 @@ in
     {
       system.activationScripts.applications.text = ''
         echo >&2 "Setting up the Dock..."
-        defaults write com.apple.dock contents-immutable - bool false
+        defaults write com.apple.dock contents-immutable false
         haveURIs="$(sudo -u ${config.system.primaryUser} ${dockutil}/bin/dockutil --list | sudo -u ${config.system.primaryUser} ${pkgs.coreutils}/bin/cut -f2)"
         if ! diff -wu <(echo -n "$haveURIs") <(echo -n '${wantURIs}') >&2 ; then
           echo >&2 "Resetting Dock."
           sudo -u ${config.system.primaryUser} ${dockutil}/bin/dockutil --no-restart --remove all
           ${createEntries}
-          defaults write com.apple.dock contents-immutable - bool true
+          defaults write com.apple.dock contents-immutable true
           killall Dock
         else
           echo >&2 "Dock setup complete."
