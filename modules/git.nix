@@ -21,7 +21,7 @@
         signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHeK9z5uJU6w1bNKYyUDGlh+wqfws1jJcec83zlolGxp";
       };
       gpg.format = "ssh";
-      gpg.ssh.program = "${pkgs._1password-gui}/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+      gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
       filter.lfs = {
         smudge = "git-lfs smudge --skip %f";
         process = "git-lfs filter-proccess --skip";
