@@ -49,7 +49,6 @@
 
   # Homebrew for packages not on Nix
   homebrew = {
-    enable = true;
     brews = [
       "llvm"
       "fftw"

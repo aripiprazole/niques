@@ -96,7 +96,10 @@ in
       upgrade = true;
       cleanup = "uninstall";
     };
-    brews = [ "docker" ];
+    brews = [
+      "docker"
+      "podman"
+    ];
     casks = [
       "arc"
       "whatsapp"
