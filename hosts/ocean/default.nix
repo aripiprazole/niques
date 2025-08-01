@@ -38,31 +38,9 @@
     { path = "/Applications/Obsidian.app"; }
   ];
 
-  system.defaults.dock.show-recents = true;
-
   # Homebrew for packages not on Nix
   homebrew = {
     enable = true;
-    onActivation = {
-      autoUpdate = true;
-      upgrade = true;
-      cleanup = "uninstall";
-    };
-    casks = [
-      # Real-world stuff
-      "arc"
-      "whatsapp"
-      "telegram"
-      "spotify"
-      "podman-desktop"
-
-      # System applications
-      "soundsource"
-      "ghostty"
-      "obsidian"
-      "logi-options+"
-      "tailscale"
-    ];
     caskArgs = {
       appdir = "/Applications";
     };

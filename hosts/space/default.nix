@@ -50,32 +50,11 @@
   # Homebrew for packages not on Nix
   homebrew = {
     enable = true;
-    onActivation = {
-      autoUpdate = true;
-      upgrade = true;
-      cleanup = "uninstall";
-    };
     brews = [
       "llvm"
       "fftw"
-      "docker"
-      "docker-compose"
     ];
     casks = [
-      # Real-world stuff
-      "arc"
-      "whatsapp"
-      "telegram"
-      "spotify"
-
-      # System applications
-      "soundsource"
-      "obsidian"
-      "ghostty"
-      "logi-options+"
-      "tailscale"
-
-      # Games / Entertainment
       "whisky"
       "curseforge"
     ];

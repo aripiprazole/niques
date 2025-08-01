@@ -89,9 +89,28 @@ in
     mutableTaps = false;
   };
 
-  homebrew.onActivation = {
-    autoUpdate = true;
-    upgrade = true;
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+      cleanup = "uninstall";
+    };
+    brews = [ "docker" ];
+    casks = [
+      "arc"
+      "whatsapp"
+      "telegram"
+      "spotify"
+
+      # System applications
+      "soundsource"
+      "obsidian"
+      "ghostty"
+      "logi-options+"
+      "tailscale"
+      "podman-desktop"
+    ];
   };
 
   # Fonts
