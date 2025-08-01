@@ -145,6 +145,13 @@ pkgs: {
       min_column = 80;
       update_debounce_ms = 150;
     };
+    lsp_pull_diagnostics = {
+      enabled = true;
+      debounce_ms = 50;
+    };
+    cargo = {
+      fetch_cargo_diagnostics = true;
+    };
   };
   edit_predictions = {
     mode = "subtle";
