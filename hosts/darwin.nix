@@ -99,6 +99,7 @@ in
     brews = [
       "docker"
       "podman"
+      "docker-compose"
     ];
     casks = [
       "arc"
