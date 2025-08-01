@@ -39,10 +39,10 @@ pkgs: {
       show_edit_predictions = false;
     };
     TOML = {
-      format_on_save = false;
+      format_on_save = "off";
     };
     SQL = {
-      format_on_save = false;
+      format_on_save = "off";
     };
     Nix = {
       language_servers = [
@@ -60,8 +60,11 @@ pkgs: {
     };
   };
   agent = {
-    version = "2";
     dock = "left";
+    stream_edits = true;
+    preferred_completion_mode = "burn";
+    play_sound_when_agent_done = true;
+    notify_when_agent_waiting = "all_screens";
     enable_feedbacks = false;
     default_model = {
       provider = "anthropic";
@@ -136,8 +139,6 @@ pkgs: {
     use_smartcase_find = true;
   };
   diagnostics = {
-    use_rendered = true;
-    update_with_cursor = true;
     include_warnings = true;
     inline = {
       enabled = true;
