@@ -12,12 +12,12 @@ pkgs: {
   use_autoclose = true;
   use_auto_surround = true;
   use_smartcase_search = true;
-  buffer_font_size = 18;
-  ui_font_size = 18;
-  ui_font_family = "JetBrains Mono";
-  buffer_font_family = "JetBrains Mono";
+  buffer_font_size = 16;
+  ui_font_size = 16;
+  ui_font_family = "Zed Plex Sans";
+  buffer_font_family = "JetBrains Mono NL";
   format_on_save = "off";
-  autosave = "on_focus_change";
+  autosave = "off";
   scroll_beyond_last_line = "off";
   soft_wrap = "none";
   load_direnv = "shell_hook";
@@ -31,14 +31,20 @@ pkgs: {
   preview_tabs.enabled = true;
   bottom_dock_layout = "contained";
   inlay_hints.enabled = false;
+  inlay_hints.toggle_on_modifiers_press.function = true;
   semantic_tokens.enabled = true;
   languages = {
     Rust = {
       tab_size = 4;
       show_edit_predictions = false;
     };
+    TOML = {
+      format_on_save = false;
+    };
+    SQL = {
+      format_on_save = false;
+    };
     Nix = {
-      autosave = "off";
       language_servers = [
         "!nixd"
         "nil"
@@ -148,7 +154,6 @@ pkgs: {
     ];
   };
   lsp = {
-    nix.binary.path_lookup = true;
     nil.initialization_options = {
       formatting = {
         command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];

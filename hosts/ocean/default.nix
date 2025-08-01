@@ -48,10 +48,6 @@
       upgrade = true;
       cleanup = "uninstall";
     };
-    brews = [
-      "docker"
-      "docker-compose"
-    ];
     casks = [
       # Real-world stuff
       "arc"
@@ -61,7 +57,7 @@
       "podman-desktop"
 
       # System applications
-      "eqmac"
+      "soundsource"
       "ghostty"
       "obsidian"
       "logi-options+"
