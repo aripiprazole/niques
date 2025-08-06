@@ -61,12 +61,12 @@
 
       darwinConfigurations = {
         # Build darwin flake using:
-        # $ darwin-rebuild build --flake .#Ocean
-        "Ocean" = nix-darwin.lib.darwinSystem {
+        # $ darwin-rebuild build --flake .#Tadpole
+        "Tadpole" = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           modules = attrValues self.darwinModules ++ [
             ./hosts/darwin.nix
-            ./hosts/ocean/default.nix
+            ./hosts/Tadpole/default.nix
             mac-app-util.darwinModules.default
             spicetify-nix.darwinModules.spicetify
             nix-homebrew.darwinModules.nix-homebrew
@@ -78,12 +78,12 @@
         };
 
         # Build darwin flake using:
-        # $ darwin-rebuild build --flake .#Space
-        "Space" = nix-darwin.lib.darwinSystem {
+        # $ darwin-rebuild build --flake .#Condor
+        "Condor" = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           modules = attrValues self.darwinModules ++ [
             ./hosts/darwin.nix
-            ./hosts/space/default.nix
+            ./hosts/Condor/default.nix
             mac-app-util.darwinModules.default
             spicetify-nix.darwinModules.spicetify
             nix-homebrew.darwinModules.nix-homebrew
