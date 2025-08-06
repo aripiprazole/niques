@@ -150,9 +150,6 @@ pkgs: {
       enabled = true;
       debounce_ms = 50;
     };
-    cargo = {
-      fetch_cargo_diagnostics = true;
-    };
   };
   edit_predictions = {
     mode = "subtle";
