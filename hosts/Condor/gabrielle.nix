@@ -10,4 +10,8 @@
     livekit
     foreman
   ];
+
+  home.sessionVariables = {
+    PATH = "/Users/gabrielle/.local/bin:$PATH";
+  };
 }

@@ -2,6 +2,7 @@
   pkgs,
   lib,
   inputs,
+  aider-nix,
   ...
 }:
 let
@@ -16,6 +17,7 @@ let
     pkgs: with pkgs; [
       google-cloud-secret-manager
       gdk
+      pip
     ]
   );
 in
@@ -49,6 +51,8 @@ in
     pkgs.ruby_3_1
     pkgs.go
     pkgs.gh
+
+    aider-nix.packages.aarch64-darwin.aider-chat
   ];
 
   environment.shells = [

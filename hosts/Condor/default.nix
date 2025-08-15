@@ -35,10 +35,6 @@
     };
   };
 
-  environment.variables = {
-    PATH = "/Users/gabrielle/.local/bin:$PATH";
-  };
-
   local.dock.enable = true;
   local.dock.entries = [
     { path = "/Applications/Arc.app"; }
