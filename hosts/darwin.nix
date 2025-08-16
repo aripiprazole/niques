@@ -51,6 +51,7 @@ in
     pkgs.ruby_3_1
     pkgs.go
     pkgs.gh
+    pkgs.jujutsu
 
     aider-nix.packages.aarch64-darwin.aider-chat
   ];
