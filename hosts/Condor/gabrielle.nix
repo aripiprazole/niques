@@ -12,6 +12,6 @@
   ];
 
   home.sessionVariables = {
-    PATH = "/Users/gabrielle/.local/bin:$PATH";
+    PATH = "$PATH:/Users/gabrielle/.radicle/bin/:/Users/gabrielle/.local/bin/";
   };
 }
