@@ -6,7 +6,6 @@ pkgs: {
   auto_signature_help = true;
   auto_indent_on_paste = false;
   autoscroll_on_clicks = true;
-  show_user_picture = true;
   show_completion_documentation = true;
   show_signature_help_after_edits = true;
   use_autoclose = true;
@@ -14,9 +13,9 @@ pkgs: {
   use_smartcase_search = true;
   buffer_font_size = 16;
   ui_font_size = 16;
-  ui_font_family = "Zed Plex Sans";
+  ui_font_family = ".SystemUIFont";
   buffer_font_family = "JetBrains Mono NL";
-  format_on_save = "off";
+  format_on_save = "on";
   autosave = "off";
   scroll_beyond_last_line = "off";
   soft_wrap = "none";
@@ -33,6 +32,10 @@ pkgs: {
   inlay_hints.enabled = false;
   inlay_hints.toggle_on_modifiers_press.function = true;
   semantic_tokens.enabled = true;
+  telemetry = {
+    diagnostics = false;
+    metrics = false;
+  };
   languages = {
     Rust = {
       tab_size = 4;
@@ -52,12 +55,8 @@ pkgs: {
     };
   };
   slash_commands = {
-    docs = {
-      enabled = true;
-    };
-    project = {
-      enabled = true;
-    };
+    docs.enabled = true;
+    cargo_workspace.enabled = true;
   };
   agent = {
     dock = "left";
@@ -65,18 +64,22 @@ pkgs: {
     preferred_completion_mode = "burn";
     play_sound_when_agent_done = true;
     notify_when_agent_waiting = "all_screens";
-    enable_feedbacks = false;
+    enable_feedback = false;
     default_model = {
-      provider = "anthropic";
-      model = "claude-sonnet-4-thinking";
+      provider = "openrouter";
+      model = "GPT-5";
+    };
+    thread_summary_model = {
+      provider = "openrouter";
+      model = "GPT-5 Nano";
     };
     commit_message_model = {
-      provider = "openai";
-      model = "gpt-4o-mini";
+      provider = "openrouter";
+      model = "GPT-5 Nano";
     };
     inline_assistant_model = {
-      provider = "openai";
-      model = "o3-mini";
+      provider = "openrouter";
+      model = "GPT-5 Mini";
     };
   };
   session = {
@@ -130,12 +133,11 @@ pkgs: {
   };
   theme = {
     mode = "system";
-    dark = "Github Dark";
-    light = "Github Light Colorblind";
+    dark = "Gruvbox Dark Hard";
+    light = "Gruvbox Light Hard";
   };
   vim = {
     toggle_relative_line_numbers = true;
-    use_multiline_find = true;
     use_smartcase_find = true;
   };
   diagnostics = {
@@ -153,7 +155,7 @@ pkgs: {
   };
   edit_predictions = {
     mode = "subtle";
-    disabled_in = [
+    disabled_globs = [
       "comment"
       "string"
     ];
