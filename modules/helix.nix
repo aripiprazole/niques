@@ -3,7 +3,7 @@
   programs.helix = {
     enable = true;
     settings = {
-      theme = "gruvbox";
+      theme = "gruvbox_light_hard";
       editor = {
         line-number = "relative";
         mouse = true;
