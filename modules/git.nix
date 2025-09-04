@@ -36,7 +36,7 @@
         autocrlf = "input";
         whitespace = "fix,-indent-with-non-tab,trailing-space,cr-at-eol";
       };
-      init.defaultBranch = true;
+      init.defaultBranch = "main";
       push.autoSetupRemote = true;
     };
   };

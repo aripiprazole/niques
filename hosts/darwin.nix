@@ -40,6 +40,7 @@ in
     pkgs.dockutil
     pkgs.coreutils
     pkgs.fzf
+    pkgs.codex
 
     # Cache
     pkgs.sccache
@@ -117,7 +118,6 @@ in
       "obsidian"
       "ghostty"
       "logi-options+"
-      "tailscale"
       "podman-desktop"
     ];
   };

@@ -52,6 +52,7 @@
     brews = [
       "llvm"
       "fftw"
+      "gemini-cli"
     ];
     casks = [
       "whisky"
