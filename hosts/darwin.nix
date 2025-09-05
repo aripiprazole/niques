@@ -54,6 +54,7 @@ in
     pkgs.gh
     pkgs.jujutsu
     (pkgs.agda.withPackages (p: [ p.standard-library ]))
+    pkgs.haskellPackages.agda-language-server
 
     aider-nix.packages.aarch64-darwin.aider-chat
   ];
