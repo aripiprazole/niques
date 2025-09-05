@@ -53,6 +53,7 @@ in
     pkgs.go
     pkgs.gh
     pkgs.jujutsu
+    (pkgs.agda.withPackages (p: [ p.standard-library ]))
 
     aider-nix.packages.aarch64-darwin.aider-chat
   ];
@@ -105,6 +106,7 @@ in
     brews = [
       "docker"
       "podman"
+      "colima"
       "docker-compose"
     ];
     casks = [
@@ -117,8 +119,6 @@ in
       "soundsource"
       "obsidian"
       "ghostty"
-      "logi-options+"
-      "podman-desktop"
     ];
   };
 
