@@ -1,8 +1,28 @@
 { pkgs, ... }:
 {
+  programs.zellij = {
+    enable = true;
+    settings = {
+      simplified_ui = true;
+      theme = "gruvbox-light";
+      default_layout = "compact";
+      show_startup_tips = false;
+      pane_frames = false;
+      ui = {
+        pane_frames = {
+          rounded_corners = true;
+        };
+      };
+    };
+  };
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
+    settings = {
+      character = {
+        success_symbol = "[➜](bold green)";
+      };
+    };
   };
   programs.zsh = {
     enable = true;

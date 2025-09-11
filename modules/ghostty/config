@@ -1,5 +1,5 @@
 font-family = JetBrains Mono NerdFont
-theme = light:GitHub-Light-Colorblind,dark:GitHub-Dark-Colorblind
+theme = light:GruvboxLightHard,dark:GruvboxDarkHard
 shell-integration = zsh
 font-size = 18
 window-decoration = client
