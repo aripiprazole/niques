@@ -59,7 +59,6 @@
 
     # Messaging
     slack
-    discord
   ];
 
   home.file.".amethyst.yml" = {
