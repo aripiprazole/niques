@@ -9,8 +9,6 @@
   ];
 
   programs = {
-    zellij.enableZshIntegration = true;
-
     home-manager.enable = true;
     command-not-found.enable = false;
 

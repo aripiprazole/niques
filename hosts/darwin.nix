@@ -102,12 +102,9 @@ in
       upgrade = true;
       cleanup = "uninstall";
     };
-    brews = [
-      "docker"
-      "podman"
-      "colima"
-      "docker-compose"
-    ];
+    brews =
+      [
+      ];
     casks = [
       "arc"
       "whatsapp"
