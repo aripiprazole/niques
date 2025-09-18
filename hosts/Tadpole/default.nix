@@ -44,8 +44,5 @@
     caskArgs = {
       appdir = "/Applications";
     };
-    casks = [
-      "tailscale"
-    ];
   };
 }
