@@ -111,16 +111,8 @@ pkgs: {
     background_coloring = "indent_aware";
     active_line_width = 2;
   };
-  toolbar = {
-    breadcrumbs = false;
-    quick_actions = false;
-    selections_menu = false;
-    agent_review = false;
-    code_actions = false;
-  };
   terminal = {
     button = true;
-    toolbar.breadcrumbs = false;
     font_family = "JetBrains Mono";
     scrollbar = {
       show = "auto";

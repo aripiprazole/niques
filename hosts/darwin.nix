@@ -43,7 +43,7 @@ in
     pkgs.codex
 
     # Cache
-    pkgs.sccache
+    # pkgs.sccache
 
     # Development utils
     gdk
@@ -71,7 +71,7 @@ in
     OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
     OPENSSL_INCLUDE_DIR = "${pkgs.openssl.dev}/include";
     RUST_BACKTRACE = "1";
-    RUSTC_WRAPPER = "${pkgs.sccache}/bin/sccache";
+    # RUSTC_WRAPPER = "${pkgs.sccache}/bin/sccache";
   };
 
   # The platform the configuration will be used on.
