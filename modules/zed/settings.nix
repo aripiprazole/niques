@@ -158,6 +158,14 @@ pkgs: {
         command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
       };
     };
+    gopls = {
+      initialization_options = {
+        buildFlags = [
+          "-tags=integration"
+          "-gcflags=all=-N -l"
+        ];
+      };
+    };
     rust-analyzer = {
       binary = {
         path = "/run/current-system/sw/bin/bash";
