@@ -42,15 +42,13 @@ in
     pkgs.fzf
     pkgs.codex
 
-    # Cache
-    # pkgs.sccache
-
     # Development utils
     gdk
     python3
     pkgs.zstd.dev
     pkgs.ruby_3_1
     pkgs.go
+    pkgs.delve
     pkgs.gh
     pkgs.jujutsu
 

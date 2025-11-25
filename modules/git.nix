@@ -30,6 +30,7 @@
       };
       credential.helper = "store";
       url."git@github.com:".insteadOf = "git://github.com";
+      url."ssh://git@github.com:".insteadOf = "https://github.com";
       commit.gpgsign = true;
       core = {
         fsmonitor = true;
