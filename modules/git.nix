@@ -28,6 +28,7 @@
         clean = "git-lfs clean -- %f";
         required = true;
       };
+      credential.helper = "store";
       url."git@github.com:".insteadOf = "git://github.com";
       commit.gpgsign = true;
       core = {
