@@ -44,6 +44,9 @@ pkgs: {
     TOML = {
       format_on_save = "off";
     };
+    Yaml = {
+      format_on_save = "off";
+    };
     SQL = {
       format_on_save = "off";
     };
@@ -59,7 +62,6 @@ pkgs: {
     cargo_workspace.enabled = true;
   };
   agent = {
-    dock = "left";
     stream_edits = true;
     preferred_completion_mode = "burn";
     play_sound_when_agent_done = true;
@@ -99,12 +101,6 @@ pkgs: {
   };
   active_pane_modifiers = {
     inactive_opacity = 0.7;
-  };
-  project_panel = {
-    dock = "right";
-  };
-  outline_panel = {
-    dock = "right";
   };
   indent_guides = {
     coloring = "indent_aware";
