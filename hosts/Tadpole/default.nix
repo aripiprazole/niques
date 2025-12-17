@@ -1,4 +1,20 @@
 { pkgs, mac-app-util, ... }:
+let
+  gdk = pkgs.google-cloud-sdk.withExtraComponents (
+    with pkgs.google-cloud-sdk.components;
+    [
+      gke-gcloud-auth-plugin
+    ]
+  );
+
+  python3 = pkgs.python3.withPackages (
+    pkgs: with pkgs; [
+      google-cloud-secret-manager
+      gdk
+      pip
+    ]
+  );
+in
 {
   system.primaryUser = "gabrielleoliveira";
   system.activationScripts.activateSettings.text = ''
@@ -13,6 +29,11 @@
     name = "gabrielleoliveira";
     shell = pkgs.zsh;
   };
+
+  environment.systemPackages = [
+    gdk
+    python3
+  ];
 
   home-manager = {
     useGlobalPkgs = true;

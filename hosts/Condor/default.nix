@@ -1,9 +1,4 @@
-{
-  pkgs,
-  pkgs-unstable,
-  mac-app-util,
-  ...
-}:
+{ pkgs, mac-app-util, ... }:
 {
   system.primaryUser = "gabrielle";
   system.activationScripts.activateSettings.text = ''
@@ -12,8 +7,6 @@
   '';
 
   nix-homebrew.user = "gabrielle";
-
-  environment.systemPackages = [ pkgs-unstable.betterdisplay ];
 
   users.users.gabrielle = {
     home = "/Users/gabrielle";

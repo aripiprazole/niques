@@ -9,7 +9,7 @@
           user = {
             name = "Gabrielle Oliveira";
             email = "gabrielle.oliveira@cloudwalk.io";
-            signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKl9cgE81HeQ9AOTpaSsx7qVzD5ryCjQPpENcXEotaxW";
+            signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA1w2UXALVRmKAucVOBGMo7rXkkqqfSFqNwx9ZZ+x14g";
           };
         };
       }

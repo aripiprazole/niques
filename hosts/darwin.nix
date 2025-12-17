@@ -1,26 +1,11 @@
 {
   pkgs,
+  pkgs-unstable,
   lib,
   inputs,
   aider-nix,
   ...
 }:
-let
-  gdk = pkgs.google-cloud-sdk.withExtraComponents (
-    with pkgs.google-cloud-sdk.components;
-    [
-      gke-gcloud-auth-plugin
-    ]
-  );
-
-  python3 = pkgs.python3.withPackages (
-    pkgs: with pkgs; [
-      google-cloud-secret-manager
-      gdk
-      pip
-    ]
-  );
-in
 {
   imports = [ ./dock.nix ];
 
@@ -41,10 +26,9 @@ in
     pkgs.coreutils
     pkgs.fzf
     pkgs.codex
+    pkgs-unstable.betterdisplay
 
     # Development utils
-    gdk
-    python3
     pkgs.zstd.dev
     pkgs.ruby
     pkgs.go
@@ -69,7 +53,6 @@ in
     OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
     OPENSSL_INCLUDE_DIR = "${pkgs.openssl.dev}/include";
     RUST_BACKTRACE = "1";
-    # RUSTC_WRAPPER = "${pkgs.sccache}/bin/sccache";
   };
 
   # The platform the configuration will be used on.
