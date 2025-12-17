@@ -4,17 +4,17 @@
     enable = true;
     includes = [
       {
-        condition = "gitdir:~/Developer/Cloudwalk/**";
+        condition = "gitdir:~/Cloudwalk/**";
         contents = {
           user = {
             name = "Gabrielle Oliveira";
-            email = "gabrielle.oliveira@cloudwalk.io";
+            email = "gabrielle.oliveira+cloudwalk@cloudwalk.io";
             signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA1w2UXALVRmKAucVOBGMo7rXkkqqfSFqNwx9ZZ+x14g";
           };
         };
       }
     ];
-    extraConfig = {
+    settings = {
       user = {
         name = "Gabrielle Oliveira";
         email = "you@gabx.io";

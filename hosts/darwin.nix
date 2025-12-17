@@ -46,7 +46,7 @@ in
     gdk
     python3
     pkgs.zstd.dev
-    pkgs.ruby_3_1
+    pkgs.ruby
     pkgs.go
     pkgs.delve
     pkgs.gh
@@ -61,9 +61,9 @@ in
   ];
   environment.shellAliases.zed = "zeditor";
   environment.variables = {
-    PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig:${pkgs.ruby_3_1}/lib/pkgconfig";
-    LIBRARY_PATH = "${pkgs.ruby_3_1}/lib:$LIBRARY_PATH";
-    DYLD_FALLBACK_LIBRARY_PATH = "${pkgs.ruby_3_1}/lib:$DYLD_FALLBACK_LIBRARY_PATH";
+    PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig:${pkgs.ruby}/lib/pkgconfig";
+    LIBRARY_PATH = "${pkgs.ruby}/lib:$LIBRARY_PATH";
+    DYLD_FALLBACK_LIBRARY_PATH = "${pkgs.ruby}/lib:$DYLD_FALLBACK_LIBRARY_PATH";
     OPENSSL_NO_VENDOR = "1";
     OPENSSL_DIR = "${pkgs.openssl.dev}";
     OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
@@ -100,9 +100,8 @@ in
       upgrade = true;
       cleanup = "uninstall";
     };
-    brews =
-      [
-      ];
+    brews = [
+    ];
     casks = [
       "arc"
       "whatsapp"
