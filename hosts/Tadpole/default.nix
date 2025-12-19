@@ -51,7 +51,7 @@ in
 
   local.dock.enable = true;
   local.dock.entries = [
-    { path = "/System/Applications/Safari.app"; }
+    { path = "/Applications/Safari.app"; }
     { path = "/System/Applications/Mail.app"; }
     { path = "/System/Applications/Messages.app"; }
     { path = "/System/Applications/Calendar.app"; }
