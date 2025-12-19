@@ -53,9 +53,9 @@ in
   local.dock.entries = [
     { path = "/Applications/Safari.app"; }
     { path = "/System/Applications/Mail.app"; }
-    { path = "/System/Applications/Messages.app"; }
-    { path = "/System/Applications/Calendar.app"; }
-    { path = "/Applications/Spotify.app"; }
+    { path = "/${pkgs.slack}/Applications/Slack.app"; }
+    { path = "/Applications/Discord.app"; }
+    { path = "/${pkgs.zed}/Applications/Zed.app"; }
     { path = "/Applications/Obsidian.app"; }
   ];
 
