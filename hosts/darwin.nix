@@ -86,7 +86,6 @@
     brews = [
     ];
     casks = [
-      "arc"
       "whatsapp"
       "telegram"
       "spotify"

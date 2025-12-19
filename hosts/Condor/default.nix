@@ -31,9 +31,9 @@
   local.dock.enable = true;
   local.dock.entries = [
     { path = "/Applications/Arc.app"; }
-    { path = "/System/Applications/Calendar.app"; }
     { path = "/System/Applications/Mail.app"; }
     { path = "/System/Applications/Messages.app"; }
+    { path = "/System/Applications/Calendar.app"; }
     { path = "/Applications/Spotify.app"; }
     { path = "/Applications/Obsidian.app"; }
   ];
@@ -46,7 +46,7 @@
       "gemini-cli"
     ];
     casks = [
-      "whisky"
+      "arc"
       "curseforge"
     ];
   };
