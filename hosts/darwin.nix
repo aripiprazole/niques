@@ -3,7 +3,6 @@
   pkgs-unstable,
   lib,
   inputs,
-  aider-nix,
   ...
 }:
 {
@@ -35,8 +34,6 @@
     pkgs.delve
     pkgs.gh
     pkgs.jujutsu
-
-    aider-nix.packages.aarch64-darwin.aider-chat
   ];
 
   environment.shells = [

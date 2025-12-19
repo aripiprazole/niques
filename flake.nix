@@ -16,7 +16,6 @@
     homebrew-cask.url = "github:homebrew/homebrew-cask";
     homebrew-cask.flake = false;
     git-hooks.url = "github:cachix/git-hooks.nix";
-    aider-nix.url = "github:matko/aider-nix";
   };
 
   outputs =
@@ -29,7 +28,6 @@
       spicetify-nix,
       mac-app-util,
       git-hooks,
-      aider-nix,
       ...
     }:
     let
@@ -79,7 +77,6 @@
               inputs
               pkgs-unstable
               mac-app-util
-              aider-nix
               ;
           };
         };
@@ -101,7 +98,6 @@
               inputs
               pkgs-unstable
               mac-app-util
-              aider-nix
               ;
           };
         };
