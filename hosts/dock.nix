@@ -86,7 +86,7 @@ in
           echo >&2 "Resetting Dock."
           sudo -u ${config.system.primaryUser} ${dockutil}/bin/dockutil --no-restart --remove all
           ${createEntries}
-          defaults write com.apple.dock contents-immutable true
+          defaults write com.apple.dock contents-immutable yes
           killall Dock
         else
           echo >&2 "Dock setup complete."
