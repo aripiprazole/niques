@@ -9,7 +9,6 @@
     mac-app-util.url = "github:hraban/mac-app-util";
     nix-darwin.url = "github:nix-darwin/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    #nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-core.url = "github:homebrew/homebrew-core";
     homebrew-core.flake = false;

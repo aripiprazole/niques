@@ -24,6 +24,7 @@
     pkgs.dockutil
     pkgs.coreutils
     pkgs.fzf
+    pkgs.postgresql
     pkgs.codex
     pkgs-unstable.betterdisplay
 
@@ -58,7 +59,6 @@
     config.allowUnfree = true;
     config.allowBroken = true;
     overlays = [
-      #inputs.nix-vscode-extensions.overlays.default
     ];
   };
 
