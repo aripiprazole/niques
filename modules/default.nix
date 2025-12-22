@@ -59,11 +59,6 @@
     slack
   ];
 
-  home.file.".amethyst.yml" = {
-    enable = true;
-    source = ./amethyst/.amethyst.yml;
-  };
-
   home.file.".config/1Password/ssh/agent.toml" = {
     enable = true;
     source = ./1password/ssh/agent.toml;

@@ -55,6 +55,7 @@ in
     { path = "/System/Applications/Mail.app"; }
     { path = "/${pkgs.slack}/Applications/Slack.app"; }
     { path = "/Applications/Discord.app"; }
+    { path = "/Applications/Ghostty.app"; }
     { path = "/${pkgs.zed}/Applications/Zed.app"; }
     { path = "/Applications/Obsidian.app"; }
   ];
@@ -65,5 +66,9 @@ in
     caskArgs = {
       appdir = "/Applications";
     };
+  };
+
+  home.sessionVariables = {
+    PATH = "$PATH:/Users/gabrielleoliveira/go/bin";
   };
 }

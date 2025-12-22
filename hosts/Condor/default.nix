@@ -32,6 +32,8 @@
   local.dock.entries = [
     { path = "/Applications/Safari.app"; }
     { path = "/System/Applications/Mail.app"; }
+    { path = "/Applications/Ghostty.app"; }
+    { path = "/${pkgs.zed}/Applications/Zed.app"; }
     { path = "/Applications/Obsidian.app"; }
   ];
 
@@ -43,7 +45,6 @@
       "gemini-cli"
     ];
     casks = [
-      "arc"
       "curseforge"
     ];
   };
