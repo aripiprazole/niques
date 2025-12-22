@@ -59,11 +59,6 @@
     slack
   ];
 
-  home.file.".config/1Password/ssh/agent.toml" = {
-    enable = true;
-    source = ./1password/ssh/agent.toml;
-  };
-
   home.file."Library/Application Support/com.mitchellh.ghostty/config" = {
     enable = true;
     source = ./ghostty/config;
