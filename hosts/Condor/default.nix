@@ -1,4 +1,9 @@
-{ pkgs, mac-app-util, ... }:
+{
+  pkgs,
+  mac-app-util,
+  op-shell-plugins,
+  ...
+}:
 {
   system.primaryUser = "gabrielle";
   system.activationScripts.activateSettings.text = ''
@@ -24,6 +29,7 @@
       imports = [
         ./gabrielle.nix
         mac-app-util.homeManagerModules.default
+        op-shell-plugins.hmModules.default
       ];
     };
   };

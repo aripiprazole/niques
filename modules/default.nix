@@ -4,7 +4,6 @@
     ./zed.nix
     ./helix.nix
     ./git.nix
-    #./vscode.nix
     ./zsh.nix
   ];
 
@@ -20,6 +19,15 @@
     zoxide.enable = true;
     zoxide.enableZshIntegration = true;
     zoxide.options = [ "--cmd cd" ];
+  };
+
+  programs._1password-shell-plugins = {
+    enable = true;
+    plugins = with pkgs; [
+      gh
+      awscli2
+      cachix
+    ];
   };
 
   home.packages = with pkgs; [

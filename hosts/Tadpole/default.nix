@@ -1,4 +1,9 @@
-{ pkgs, mac-app-util, ... }:
+{
+  pkgs,
+  mac-app-util,
+  op-shell-plugins,
+  ...
+}:
 let
   gdk = pkgs.google-cloud-sdk.withExtraComponents (
     with pkgs.google-cloud-sdk.components;
@@ -44,6 +49,7 @@ in
     users.gabrielleoliveira = {
       imports = [
         ./gabrielleoliveira.nix
+        op-shell-plugins.hmModules.default
         mac-app-util.homeManagerModules.default
       ];
     };

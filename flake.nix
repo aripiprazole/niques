@@ -15,6 +15,7 @@
     homebrew-cask.url = "github:homebrew/homebrew-cask";
     homebrew-cask.flake = false;
     git-hooks.url = "github:cachix/git-hooks.nix";
+    op-shell-plugins.url = "github:1Password/shell-plugins";
   };
 
   outputs =
@@ -27,6 +28,7 @@
       spicetify-nix,
       mac-app-util,
       git-hooks,
+      op-shell-plugins,
       ...
     }:
     let
@@ -76,6 +78,7 @@
               inputs
               pkgs-unstable
               mac-app-util
+              op-shell-plugins
               ;
           };
         };
@@ -97,6 +100,7 @@
               inputs
               pkgs-unstable
               mac-app-util
+              op-shell-plugins
               ;
           };
         };
