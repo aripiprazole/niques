@@ -1,7 +1,8 @@
 {
-  description = "Gabi many systems configuration";
+  description = "aripiprazole lab setup";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
+    nixpkgs-nixos.url = "github:NixOS/nixpkgs/nixpkgs-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -23,6 +24,7 @@
       self,
       nix-darwin,
       nixpkgs,
+      nixpkgs-nixos,
       nix-homebrew,
       home-manager,
       spicetify-nix,
@@ -39,6 +41,7 @@
       };
       supportedSystems = [
         "x86_64-darwin"
+        "x86_64-linux"
         "aarch64-darwin"
       ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -59,6 +62,26 @@
           buildInputs = self.checks.${system}.pre-commit-check.enabledPackages;
         };
       });
+
+      nixosConfigurations = {
+        # Build nix os flake using:
+        # $ nixos build --flake .#Hercules
+        "Hercules" = nixpkgs-nixos.lib.darwinSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/Hercules/default.nix
+          ];
+          specialArgs = {
+            pkgs = import inputs.nixpkgs-nixos {
+              system = "x86_64-linux";
+            };
+            pkgs-unstable = import inputs.nixpkgs-unstable {
+              system = "x86_64-linux";
+              config.allowUnfree = true;
+            };
+          };
+        };
+      };
 
       darwinConfigurations = {
         # Build darwin flake using:
