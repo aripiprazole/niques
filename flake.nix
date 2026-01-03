@@ -61,27 +61,20 @@
         };
       });
 
-      nixosConfigurations =
-        let
-          pkgs-unstable = import inputs.nixpkgs-unstable {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
-        in
-        {
-          # Build nix os flake using:
-          # $ nixos-rebuild switch --flake .#Hercules
-          "Hercules" = inputs.nixpkgs-nixos.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [
-              determinate.nixosModules.default
-              ./hosts/Hercules/default.nix
-            ];
-            specialArgs = {
-              inherit inputs pkgs-unstable;
-            };
+      nixosConfigurations = {
+        # Build nix os flake using:
+        # $ nixos-rebuild switch --flake .#Hercules
+        "Hercules" = inputs.nixpkgs-nixos.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            determinate.nixosModules.default
+            ./hosts/Hercules/default.nix
+          ];
+          specialArgs = {
+            inherit inputs;
           };
         };
+      };
 
       darwinConfigurations =
         let
