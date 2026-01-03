@@ -72,7 +72,7 @@
     settings = {
       PermitRootLogin = "yes";
       PasswordAuthentication = "no";
-      KbdInteractiveAuthentication = "no";
+      KbdInteractiveAuthentication = false;
       ChallengeResponseAuthentication = "no";
       PubkeyAuthentication = "yes";
     };
