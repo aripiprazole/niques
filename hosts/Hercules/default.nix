@@ -30,7 +30,11 @@
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.root = {
+    openssh.authorizedKeys.keyFiles = [
+      ./authorized_keys
+    ];
+  };
   users.users.aripiprazole = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
@@ -67,7 +71,9 @@
     enable = true;
     settings = {
       PermitRootLogin = "yes";
-      # ChallengeResponseAuthentication = "no";
+      PasswordAuthentication = "no";
+      KbdInteractiveAuthentication = "no";
+      ChallengeResponseAuthentication = "no";
       PubkeyAuthentication = "yes";
     };
   };
