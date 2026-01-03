@@ -26,6 +26,7 @@
     pkgs.fzf
     pkgs.postgresql
     pkgs.codex
+    pkgs.nixos-rebuild
     pkgs-unstable.betterdisplay
 
     # Development utils
@@ -81,11 +82,13 @@
       cleanup = "uninstall";
     };
     brews = [
+      "tailscale"
     ];
     casks = [
       "whatsapp"
       "telegram"
       "spotify"
+      "tailscale"
 
       # System applications
       "soundsource"

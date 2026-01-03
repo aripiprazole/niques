@@ -3,3 +3,6 @@ result/
 .pre-commit-config.yaml
 .DS_Store
 .aider*
+tmpstore
+keys
+*.qcow2

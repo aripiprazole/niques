@@ -39,7 +39,7 @@
     { path = "/Applications/Safari.app"; }
     { path = "/System/Applications/Mail.app"; }
     { path = "/Applications/Ghostty.app"; }
-    { path = "/${pkgs.zed}/Applications/Zed.app"; }
+    { path = "/${pkgs.zed-editor}/Applications/Zed.app"; }
     { path = "/Applications/Obsidian.app"; }
   ];
 
@@ -49,6 +49,7 @@
       "llvm"
       "fftw"
       "gemini-cli"
+      "qemu"
     ];
     casks = [
       "curseforge"
