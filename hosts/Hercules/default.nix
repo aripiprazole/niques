@@ -71,7 +71,7 @@
     enable = true;
     settings = {
       PermitRootLogin = "yes";
-      PasswordAuthentication = "no";
+      PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
       ChallengeResponseAuthentication = "no";
       PubkeyAuthentication = "yes";
