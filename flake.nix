@@ -2,7 +2,8 @@
   description = "aripiprazole lab setup";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
-    nixpkgs-nixos.url = "github:NixOS/nixpkgs/nixos-25.11";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
+    nixpkgs-nixos.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -31,6 +32,7 @@
       mac-app-util,
       git-hooks,
       op-shell-plugins,
+      determinate,
       ...
     }:
     let
@@ -72,6 +74,7 @@
           "Hercules" = inputs.nixpkgs-nixos.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
+              determinate.nixosModules.default
               ./hosts/Hercules/default.nix
             ];
             specialArgs = {
