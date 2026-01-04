@@ -1,19 +1,43 @@
 name: deploy homelab
 
 on:
-  - push
+  push:
+    branches:
+      - main
+  check_suite:
+    types: [completed]
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    strategy:
+      matrix:
+        machine:
+          - hercules
+
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Tailscale
-        uses: tailscale/github-action@v4
+        uses: tailscale/github-action@main
         with:
-          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
-          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
-          tags: tag:ci
-      - name: Tailscale
-        uses: tailscale/github-action@v4
-        with:
-          ping: hercules.tail428a67.ts.net
+          authkey: ${{ secrets.TS_AUTHKEY }}
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Add agamemnon to known hosts
+        id: ssh-known-hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan ${{ matrix.machine }} >> ~/.ssh/known_hosts
+
+      - name: Build and deploy
+        run: |
+          set -euxo pipefail
+          nix flake check
+          nix run github:serokell/deploy-rs -- --hostname=${{ matrix.machine }}
