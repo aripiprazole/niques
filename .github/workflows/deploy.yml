@@ -30,7 +30,7 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
 
-      - name: Add agamemnon to known hosts
+      - name: Add hercules to known hosts
         id: ssh-known-hosts
         run: |
           mkdir -p ~/.ssh
@@ -40,4 +40,4 @@ jobs:
         run: |
           set -euxo pipefail
           nix flake check
-          nix run github:serokell/deploy-rs -- --hostname=${{ matrix.machine }}
+          nix run github:serokell/deploy-rs -- --hostname=${{ matrix.machine }} .#Hercules
