@@ -4,9 +4,9 @@
 
 {
   pkgs,
+  config,
   ...
 }:
-
 {
   imports = [
     # Include the results of the hardware scan.
@@ -28,7 +28,7 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "America/Sao_Paulo";
 
   users.users.root = {
     openssh.authorizedKeys.keyFiles = [
@@ -46,8 +46,6 @@
     ];
   };
 
-  # programs.firefox.enable = true;
-
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
@@ -56,15 +54,12 @@
     helix
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  nixpkgs.config.allowUnfree = true;
 
-  # List services that you want to enable:
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "server";
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh = {
@@ -77,11 +72,94 @@
       PubkeyAuthentication = "yes";
     };
   };
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  networking.firewall.enable = false;
+
+  networking.firewall = {
+    trustedInterfaces = [ "tailscale0" ];
+
+    # allow the Tailscale UDP port through the firewall
+    allowedUDPPorts = [ config.services.tailscale.port ];
+  };
+
+  services.plex = {
+    enable = true;
+  };
+
+  services.home-assistant = {
+    enable = true;
+    extraComponents = [
+      # Components required to complete the onboarding
+      "analytics"
+      "google_translate"
+      "met"
+      "radio_browser"
+      "shopping_list"
+      # Recommended for fast zlib compression
+      # https://www.home-assistant.io/integrations/isal
+      "isal"
+    ];
+    config = {
+      # Includes dependencies for a basic setup
+      # https://www.home-assistant.io/integrations/default_config/
+      default_config = { };
+    };
+  };
+
+  # security.acme = {
+  #   acceptTerms = true;
+  #   defaults.email = "acme@gabx.io";
+  # };
+
+  # services.nginx = {
+  #   enable = true;
+  #   recommendedProxySettings = true;
+  #   recommendedTlsSettings = true;
+  #   virtualHosts."${config.networking.hostName}.${tailnetName}.ts.net" =  {
+  #     sslCertificate = "/var/lib/tailscale/certs/hercules.tail428a67.ts.net.crt";
+  #     sslCertificateKey = "/var/lib/tailscale/certs/hercules.tail428a67.ts.net.key";
+  #     addSSL = true;
+  #     enableACME = true;
+  #     serverName = "${config.networking.hostName}.${tailnetName}.ts.net";
+  #     locations."/assistant" = {
+  #       proxyPass = "http://127.0.0.1:${config.services.home-assistant.config.http.server_port}";
+  #       proxyWebsockets = true;
+  #     };
+  #     locations."/stremio" = {
+  #       proxyPass = "http://127.0.0.1:11470";
+  #       proxyWebsockets = true;
+  #     };
+  #     locations."/plex" = {
+  #       proxyPass = "http://127.0.0.1:32400";
+  #       proxyWebsockets = true;
+  #     };
+  #   };
+  # };
+
+  virtualisation.oci-containers = {
+    backend = "podman";
+    containers = {
+      stremio = {
+        image = "stremio/server:v4.20.14";
+        ports = [
+          "127.0.0.1:11470:11470"
+        ];
+        volumes = [
+          "stremio-data:/storage/stremio"
+        ];
+      };
+      homeassistant = {
+        volumes = [ "home-assistant:/config" ];
+        environment.TZ = "America/Sao_Paulo";
+        # Note: The image will not be updated on rebuilds, unless the version label changes
+        image = "ghcr.io/home-assistant/home-assistant:stable";
+        extraOptions = [
+          # Use the host network namespace for all sockets
+          "--network=host"
+          # Pass devices into the container, so Home Assistant can discover and make use of them
+          "--device=/dev/ttyACM0:/dev/ttyACM0"
+        ];
+      };
+    };
+  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

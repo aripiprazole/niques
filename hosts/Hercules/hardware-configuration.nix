@@ -4,6 +4,7 @@
 {
   config,
   lib,
+  pkgs,
   modulesPath,
   ...
 }:
@@ -18,7 +19,6 @@
     "ahci"
     "nvme"
     "usbhid"
-    "usb_storage"
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
@@ -41,6 +41,14 @@
       "dmask=0022"
     ];
   };
+
+  fileSystems."/storage" = {
+    device = "/dev/mapper/storage";
+    fsType = "ext4";
+  };
+
+  boot.initrd.luks.devices."storage".device =
+    "/dev/disk/by-uuid/940c58fd-1a65-41be-9114-1b1deacfe311";
 
   swapDevices = [
     { device = "/dev/disk/by-uuid/0d8b0e6e-52f6-40c7-b428-74049781a2ec"; }
