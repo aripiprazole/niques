@@ -18,6 +18,7 @@
     homebrew-cask.flake = false;
     git-hooks.url = "github:cachix/git-hooks.nix";
     op-shell-plugins.url = "github:1Password/shell-plugins";
+    deploy-rs.url = "github:serokell/deploy-rs";
   };
 
   outputs =
@@ -33,6 +34,7 @@
       git-hooks,
       op-shell-plugins,
       determinate,
+      deploy-rs,
       ...
     }:
     let
@@ -60,6 +62,34 @@
           buildInputs = self.checks.${system}.pre-commit-check.enabledPackages;
         };
       });
+
+      deploy.nodes = {
+        "Hercules" = {
+          hostname = "Hercules";
+          profiles.system = {
+            user = "root";
+            ssh_user = "root";
+            path =
+              let
+                system = "x86_64-linux";
+                pkgs = import nixpkgs-nixos { inherit system; };
+                deployPkgs = import nixpkgs-nixos {
+                  inherit system;
+                  overlays = [
+                    deploy-rs.overlay
+                    (self: super: {
+                      deploy-rs = {
+                        inherit (pkgs) deploy-rs;
+                        lib = super.deploy-rs.lib;
+                      };
+                    })
+                  ];
+                };
+              in
+              deployPkgs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.Hercules;
+          };
+        };
+      };
 
       nixosConfigurations = {
         # Build nix os flake using:
