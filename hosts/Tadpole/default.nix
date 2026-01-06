@@ -57,7 +57,7 @@ in
 
   local.dock.enable = true;
   local.dock.entries = [
-    { path = "/Applications/Safari.app"; }
+    { path = "/Applications/Arc.app"; }
     { path = "/System/Applications/Mail.app"; }
     { path = "/${pkgs.slack}/Applications/Slack.app"; }
     { path = "/Applications/Discord.app"; }

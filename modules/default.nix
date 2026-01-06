@@ -55,8 +55,8 @@
     # Language tools
     elan
     rustup
-    nixfmt-rfc-style
     nil
+    nixfmt-rfc-style
 
     # Text editors
     zed-editor

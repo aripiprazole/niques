@@ -36,7 +36,7 @@
 
   local.dock.enable = true;
   local.dock.entries = [
-    { path = "/Applications/Safari.app"; }
+    { path = "/Applications/Arc.app"; }
     { path = "/System/Applications/Mail.app"; }
     { path = "/Applications/Ghostty.app"; }
     { path = "/${pkgs.zed-editor}/Applications/Zed.app"; }

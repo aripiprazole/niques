@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-unstable,
   lib,
   inputs,
   ...
@@ -27,7 +26,6 @@
     pkgs.postgresql
     pkgs.codex
     pkgs.nixos-rebuild
-    pkgs-unstable.betterdisplay
 
     # Development utils
     pkgs.zstd.dev
@@ -88,7 +86,8 @@
       "whatsapp"
       "telegram"
       "spotify"
-      "tailscale"
+      "arc"
+      "tailscale-app"
 
       # System applications
       "soundsource"

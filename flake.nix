@@ -1,16 +1,13 @@
 {
   description = "aripiprazole lab setup";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
-    nixpkgs-nixos.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     mac-app-util.url = "github:hraban/mac-app-util";
-    nix-darwin.url = "github:nix-darwin/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    nix-darwin.url = "https://flakehub.com/f/nix-darwin/nix-darwin/0";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-core.url = "github:homebrew/homebrew-core";
     homebrew-core.flake = false;
@@ -26,7 +23,6 @@
       self,
       nix-darwin,
       nixpkgs,
-      nixpkgs-nixos,
       nix-homebrew,
       home-manager,
       spicetify-nix,
@@ -39,6 +35,27 @@
     }:
     let
       inherit (nixpkgs.lib) attrValues;
+      darwinSystem =
+        path:
+        nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = attrValues self.darwinModules ++ [
+            path
+            ./hosts/darwin.nix
+            determinate.darwinModules.default
+            mac-app-util.darwinModules.default
+            spicetify-nix.darwinModules.spicetify
+            nix-homebrew.darwinModules.nix-homebrew
+            home-manager.darwinModules.home-manager
+          ];
+          specialArgs = {
+            inherit
+              inputs
+              mac-app-util
+              op-shell-plugins
+              ;
+          };
+        };
       forAllSystems = nixpkgs.lib.genAttrs [
         "x86_64-darwin"
         "x86_64-linux"
@@ -72,8 +89,8 @@
             path =
               let
                 system = "x86_64-linux";
-                pkgs = import nixpkgs-nixos { inherit system; };
-                deployPkgs = import nixpkgs-nixos {
+                pkgs = import nixpkgs { inherit system; };
+                deployPkgs = import nixpkgs {
                   inherit system;
                   overlays = [
                     deploy-rs.overlay
@@ -94,7 +111,7 @@
       nixosConfigurations = {
         # Build nix os flake using:
         # $ nixos-rebuild switch --flake .#Hercules
-        "Hercules" = inputs.nixpkgs-nixos.lib.nixosSystem {
+        "Hercules" = inputs.nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             determinate.nixosModules.default
@@ -106,55 +123,15 @@
         };
       };
 
-      darwinConfigurations =
-        let
-          pkgs-unstable = import inputs.nixpkgs-unstable {
-            system = "aarch64-darwin";
-            config.allowUnfree = true;
-          };
-          default-modules = attrValues self.darwinModules ++ [
-            ./hosts/darwin.nix
-            mac-app-util.darwinModules.default
-            spicetify-nix.darwinModules.spicetify
-            nix-homebrew.darwinModules.nix-homebrew
-            home-manager.darwinModules.home-manager
-          ];
-        in
-        {
-          # Build darwin flake using:
-          # $ darwin-rebuild build --flake .#Tadpole
-          "Tadpole" = nix-darwin.lib.darwinSystem {
-            system = "aarch64-darwin";
-            modules = default-modules ++ [
-              ./hosts/Tadpole/default.nix
-            ];
-            specialArgs = {
-              inherit
-                inputs
-                pkgs-unstable
-                mac-app-util
-                op-shell-plugins
-                ;
-            };
-          };
+      darwinConfigurations = {
+        # Build darwin flake using:
+        # $ darwin-rebuild build --flake .#Tadpole
+        "Tadpole" = darwinSystem ./hosts/Tadpole/default.nix;
 
-          # Build darwin flake using:
-          # $ darwin-rebuild build --flake .#Condor
-          "Condor" = nix-darwin.lib.darwinSystem {
-            system = "aarch64-darwin";
-            modules = default-modules ++ [
-              ./hosts/Condor/default.nix
-            ];
-            specialArgs = {
-              inherit
-                inputs
-                pkgs-unstable
-                mac-app-util
-                op-shell-plugins
-                ;
-            };
-          };
-        };
+        # Build darwin flake using:
+        # $ darwin-rebuild build --flake .#Condor
+        "Condor" = darwinSystem ./hosts/Condor/default.nix;
+      };
 
       # My `nix-darwin` modules that are pending upstream, or patched versions waiting on upstream
       # fixes.
