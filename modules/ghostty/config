@@ -7,3 +7,4 @@ keybind = cmd+opt>t=toggle_quick_terminal
 quick-terminal-position = center
 macos-titlebar-proxy-icon = visible
 macos-titlebar-style = tabs
+keybind = shift+enter=text:\n

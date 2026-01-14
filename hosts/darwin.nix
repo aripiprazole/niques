@@ -41,6 +41,7 @@
     pkgs.zsh
   ];
   environment.shellAliases.zed = "zeditor";
+  environment.shellAliases.psql = "op plugin run psql";
   environment.variables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig:${pkgs.ruby}/lib/pkgconfig";
     LIBRARY_PATH = "${pkgs.ruby}/lib:$LIBRARY_PATH";
@@ -88,6 +89,7 @@
       "spotify"
       "arc"
       "tailscale-app"
+      "claude-code"
 
       # System applications
       "soundsource"

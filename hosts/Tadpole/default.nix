@@ -39,6 +39,7 @@ in
     gdk
     python3
   ];
+  environment.shellAliases.claude = "ANTHROPIC_API_KEY=$(op item get r7vxiqnworn3waslypkzdstlhy --reveal --fields credential) claude .";
 
   home-manager = {
     useGlobalPkgs = true;

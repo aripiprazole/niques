@@ -60,7 +60,6 @@
 
     # Text editors
     zed-editor
-    vscode
     helix
 
     # Messaging
