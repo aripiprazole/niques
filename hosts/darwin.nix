@@ -41,7 +41,8 @@
     pkgs.zsh
   ];
   environment.shellAliases.zed = "zeditor";
-  environment.shellAliases.psql = "op plugin run psql";
+  environment.shellAliases.psql = "op plugin run psql --";
+  environment.shellAliases.pgcli = "op plugin run pgcli --";
   environment.variables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig:${pkgs.ruby}/lib/pkgconfig";
     LIBRARY_PATH = "${pkgs.ruby}/lib:$LIBRARY_PATH";
@@ -51,6 +52,7 @@
     OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
     OPENSSL_INCLUDE_DIR = "${pkgs.openssl.dev}/include";
     RUST_BACKTRACE = "1";
+    EDTIOR = "hx";
   };
 
   # The platform the configuration will be used on.

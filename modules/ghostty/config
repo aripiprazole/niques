@@ -8,3 +8,8 @@ quick-terminal-position = center
 macos-titlebar-proxy-icon = visible
 macos-titlebar-style = tabs
 keybind = shift+enter=text:\n
+macos-window-buttons = hidden
+window-save-state = always
+macos-option-as-alt = right
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
+

@@ -43,6 +43,7 @@
     fzf
     gh
     mkalias
+    pgcli
 
     # Terminal
     starship
@@ -69,6 +70,10 @@
   home.file."Library/Application Support/com.mitchellh.ghostty/config" = {
     enable = true;
     source = ./ghostty/config;
+  };
+
+  home.sessionVariables = {
+    EDITOR = "${pkgs.helix}/bin/hx";
   };
 
   # Nicely reload system units when changing configs
