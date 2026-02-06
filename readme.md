@@ -1,7 +1,36 @@
-# Niques
+# niques
 
-My Nix-Darwin and NixOS (yet to be done) configurations, it uses justfile to manage the build process.
+Nix-Darwin and NixOS configurations for my machines, managed with [Nix flakes](https://wiki.nixos.org/wiki/Flakes) and [just](https://github.com/casey/just).
 
-## Setting up in a Mac (Sillicon) environment
-Using [determinate nix](https://docs.determinate.systems/determinate-nix/), just download the
-[Determinate.pkg](https://determinate-pkg20240826203520431200000001.s3.dualstack.us-east-2.amazonaws.com/v3.6.2/Determinate.pkg-Universal?distinct_id=01975113-c99b-709a-b159-fab96f1a2ee0).
+## Hosts
+
+| Host | Platform | Description |
+|------|----------|-------------|
+| **Tadpole** | aarch64-darwin | Enterprise machine (config in [private flake](https://github.com/aripiprazole/niques.tadpole)) |
+| **Condor** | aarch64-darwin | Development machine |
+| **Hercules** | x86_64-linux | Home server |
+
+## Structure
+
+```
+.
+├── flake.nix          # Flake entrypoint
+├── hosts/
+│   ├── darwin.nix     # Shared macOS base config
+│   ├── Condor/        # Condor host config
+│   └── Hercules/      # Hercules host config
+├── modules/           # Shared home-manager modules (git, zsh, helix, zed, ...)
+└── justfile           # Build commands
+```
+
+## Setup
+
+Requires [Determinate Nix](https://docs.determinate.systems/determinate-nix/).
+
+```sh
+# Rebuild the current host
+just rebuild
+
+# Garbage collect and optimise the store
+just gc
+```
