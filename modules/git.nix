@@ -2,24 +2,7 @@
 {
   programs.git = {
     enable = true;
-    includes = [
-      {
-        condition = "gitdir:~/Cloudwalk/**";
-        contents = {
-          user = {
-            name = "Gabrielle Oliveira";
-            email = "gabrielle.oliveira@cloudwalk.io";
-            signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA1w2UXALVRmKAucVOBGMo7rXkkqqfSFqNwx9ZZ+x14g";
-          };
-        };
-      }
-    ];
     settings = {
-      user = {
-        name = "Gabrielle Oliveira";
-        email = "you@gabx.io";
-        signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHeK9z5uJU6w1bNKYyUDGlh+wqfws1jJcec83zlolGxp";
-      };
       gpg.format = "ssh";
       gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
       filter.lfs = {

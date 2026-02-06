@@ -3,7 +3,11 @@
   home.homeDirectory = "/Users/gabrielle";
   home.stateVersion = "25.05";
 
-  imports = [ ../../modules ];
+  programs.git.settings.user = {
+    name = "Gabrielle Oliveira";
+    email = "you@gabx.io";
+    signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHeK9z5uJU6w1bNKYyUDGlh+wqfws1jJcec83zlolGxp";
+  };
 
   home.packages = with pkgs; [
     # Dev tools
