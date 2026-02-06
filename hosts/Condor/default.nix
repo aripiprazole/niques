@@ -2,6 +2,7 @@
   pkgs,
   mac-app-util,
   op-shell-plugins,
+  sharedModules ? [ ],
   ...
 }:
 {
@@ -22,7 +23,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    sharedModules = [ ../../modules ];
+    inherit sharedModules;
     backupFileExtension = "bkp";
 
     users.gabrielle = {

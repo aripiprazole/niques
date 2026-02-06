@@ -84,6 +84,9 @@
     };
     brews = [
       "tailscale"
+      "node"
+      "macmon"
+      "uv"
     ];
     casks = [
       "whatsapp"
@@ -94,7 +97,6 @@
       "claude-code"
 
       # System applications
-      "soundsource"
       "obsidian"
       "ghostty"
     ];
