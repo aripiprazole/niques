@@ -16,7 +16,7 @@
     git-hooks.url = "github:cachix/git-hooks.nix";
     op-shell-plugins.url = "github:1Password/shell-plugins";
     deploy-rs.url = "github:serokell/deploy-rs";
-    tadpole.url = "git+ssh://git@github.com/aripiprazole/niques.tadpole";
+    tadpole.url = "git+ssh://git@github.com/aripiprazole/niques.tadpole?ref=main";
     tadpole.inputs = { };
   };
 
@@ -58,6 +58,7 @@
               op-shell-plugins
               ;
             sharedModules = [ ./modules ];
+            homeManagerModule = ./modules;
           };
         };
       forAllSystems = nixpkgs.lib.genAttrs [
