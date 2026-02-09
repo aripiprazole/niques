@@ -5,7 +5,6 @@
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     mac-app-util.url = "github:hraban/mac-app-util";
     nix-darwin.url = "https://flakehub.com/f/nix-darwin/nix-darwin/0";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
@@ -27,7 +26,6 @@
       nixpkgs,
       nix-homebrew,
       home-manager,
-      spicetify-nix,
       mac-app-util,
       git-hooks,
       op-shell-plugins,
@@ -47,7 +45,6 @@
             ./hosts/darwin.nix
             determinate.darwinModules.default
             mac-app-util.darwinModules.default
-            spicetify-nix.darwinModules.spicetify
             nix-homebrew.darwinModules.nix-homebrew
             home-manager.darwinModules.home-manager
           ];

@@ -329,11 +329,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1770646266,
-        "narHash": "sha256-DnbjUKzilKun8BlcV9p6ptNawc9BnwG9qpGJt9mpyxo=",
+        "lastModified": 1770658564,
+        "narHash": "sha256-r99rymCRjRMVJhFTEKJHS2QkC9Kpl4gUEQwCFQEF8r4=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "c533d1bed9b059c0309dc6ebff9c44a66809cd46",
+        "rev": "3526f9741a0de098f99f1ceb83667afba13b0f29",
         "type": "github"
       },
       "original": {
@@ -345,11 +345,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1770652709,
-        "narHash": "sha256-UGN28zEpsYr19yBttNfh8a4Usnqi1DLsTE5gutdXl3w=",
+        "lastModified": 1770658054,
+        "narHash": "sha256-jbfzEdUXXKX+WU0OzrHeXYb3laS2K+OK4W7rYy1JYaw=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "1c0b27574733977c2bc7b3c372f3026e6284b995",
+        "rev": "f80b3bc841cb62df04108744853e4d37d0cb322b",
         "type": "github"
       },
       "original": {
@@ -530,22 +530,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_12": {
-      "locked": {
-        "lastModified": 1770197578,
-        "narHash": "sha256-AYqlWrX09+HvGs8zM6ebZ1pwUqjkfpnv8mewYwAo+iM=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "00c21e4c93d963c50d4c0c89bfa84ed6e0694df2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1761597516,
@@ -702,27 +686,7 @@
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_10",
         "op-shell-plugins": "op-shell-plugins",
-        "spicetify-nix": "spicetify-nix",
         "tadpole": "tadpole"
-      }
-    },
-    "spicetify-nix": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_12",
-        "systems": "systems_5"
-      },
-      "locked": {
-        "lastModified": 1770528352,
-        "narHash": "sha256-KO51BALxgLUlhg1CqQgA3Rj8vgAcDvoLxzNLTxD65cc=",
-        "owner": "Gerg-L",
-        "repo": "spicetify-nix",
-        "rev": "9f4ab243968118026f4ff82f7ce41d30319e2bf0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Gerg-L",
-        "repo": "spicetify-nix",
-        "type": "github"
       }
     },
     "systems": {
@@ -785,28 +749,13 @@
         "type": "github"
       }
     },
-    "systems_5": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
     "tadpole": {
       "locked": {
-        "lastModified": 1770655187,
-        "narHash": "sha256-22J8a4iEF3AcNSJGiveN2zorGUBFWugFEwUL1pCTAKQ=",
+        "lastModified": 1770658953,
+        "narHash": "sha256-WsX1E5D/tZspVxDdgjryMgMerWYXhhRdF2URmhn7d94=",
         "ref": "main",
-        "rev": "a50cc45533fee232c955ce300718b35e292a7985",
-        "revCount": 10,
+        "rev": "93f30ffae53a5ac43148d6b12fd8401ed11b408b",
+        "revCount": 12,
         "type": "git",
         "url": "ssh://git@github.com/aripiprazole/niques.tadpole"
       },
