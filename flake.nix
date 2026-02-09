@@ -42,7 +42,7 @@
           system = "aarch64-darwin";
           modules = attrValues self.darwinModules ++ [
             path
-            ./hosts/darwin.nix
+            ./darwin.nix
             determinate.darwinModules.default
             mac-app-util.darwinModules.default
             nix-homebrew.darwinModules.nix-homebrew
@@ -54,8 +54,7 @@
               mac-app-util
               op-shell-plugins
               ;
-            sharedModules = [ ./modules ];
-            homeManagerModule = ./modules;
+            homeManagerModule = ./home.nix;
           };
         };
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -82,34 +81,6 @@
         };
       });
 
-      deploy.nodes = {
-        "Hercules" = {
-          hostname = "Hercules";
-          profiles.system = {
-            user = "root";
-            ssh_user = "root";
-            path =
-              let
-                system = "x86_64-linux";
-                pkgs = import nixpkgs { inherit system; };
-                deployPkgs = import nixpkgs {
-                  inherit system;
-                  overlays = [
-                    deploy-rs.overlay
-                    (self: super: {
-                      deploy-rs = {
-                        inherit (pkgs) deploy-rs;
-                        lib = super.deploy-rs.lib;
-                      };
-                    })
-                  ];
-                };
-              in
-              deployPkgs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.Hercules;
-          };
-        };
-      };
-
       nixosConfigurations = {
         # Build nix os flake using:
         # $ nixos-rebuild switch --flake .#Hercules
@@ -117,7 +88,7 @@
           system = "x86_64-linux";
           modules = [
             determinate.nixosModules.default
-            ./hosts/Hercules/default.nix
+            ./hercules.nix
           ];
           specialArgs = {
             inherit inputs;
@@ -132,7 +103,7 @@
 
         # Build darwin flake using:
         # $ darwin-rebuild build --flake .#Condor
-        "Condor" = darwinSystem ./hosts/Condor/default.nix;
+        "Condor" = darwinSystem ./condor.nix;
       };
 
       # My `nix-darwin` modules that are pending upstream, or patched versions waiting on upstream
@@ -165,6 +136,34 @@
               '';
             };
           };
+      };
+
+      deploy.nodes = {
+        "Hercules" = {
+          hostname = "Hercules";
+          profiles.system = {
+            user = "root";
+            ssh_user = "root";
+            path =
+              let
+                system = "x86_64-linux";
+                pkgs = import nixpkgs { inherit system; };
+                deployPkgs = import nixpkgs {
+                  inherit system;
+                  overlays = [
+                    deploy-rs.overlay
+                    (self: super: {
+                      deploy-rs = {
+                        inherit (pkgs) deploy-rs;
+                        lib = super.deploy-rs.lib;
+                      };
+                    })
+                  ];
+                };
+              in
+              deployPkgs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.Hercules;
+          };
+        };
       };
     };
 }
