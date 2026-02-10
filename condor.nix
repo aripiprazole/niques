@@ -29,12 +29,10 @@
     { path = "/Applications/Obsidian.app"; }
   ];
 
-  # Homebrew for packages not on Nix
   homebrew = {
     brews = [
       "llvm"
       "fftw"
-      "gemini-cli"
       "qemu"
     ];
     casks = [

@@ -4,11 +4,11 @@ Nix-Darwin and NixOS configurations for my machines, managed with [Nix flakes](h
 
 ## Hosts
 
-| Host | Platform | Description |
-|------|----------|-------------|
-| **Tadpole** | aarch64-darwin | Enterprise machine (config in [private flake](https://github.com/aripiprazole/niques.tadpole)) |
-| **Condor** | aarch64-darwin | Development machine |
-| **Hercules** | x86_64-linux | Home server |
+| Host         | Platform       | Description                                                                                    |
+| ------------ | -------------- | ---------------------------------------------------------------------------------------------- |
+| **Tadpole**  | aarch64-darwin | Enterprise machine (config in [private flake](https://github.com/aripiprazole/niques.tadpole)) |
+| **Condor**   | aarch64-darwin | Development machine                                                                            |
+| **Hercules** | x86_64-linux   | Home server                                                                                    |
 
 ## Structure
 
