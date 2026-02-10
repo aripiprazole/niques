@@ -8,11 +8,13 @@
 {
   nix-homebrew.user = "gabrielle";
 
-  system.primaryUser = "gabrielle";
-  system.activationScripts.activateSettings.text = ''
-    # Following line should allow us to avoid a logout/login cycle
-    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-  '';
+  system = {
+    primaryUser = "gabrielle";
+    activationScripts.activateSettings.text = ''
+      # Following line should allow us to avoid a logout/login cycle
+      /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+    '';
+  };
 
   users.users.gabrielle = {
     home = "/Users/gabrielle";
@@ -52,9 +54,6 @@
         homeManagerModule
       ];
 
-      home.homeDirectory = "/Users/gabrielle";
-      home.stateVersion = "25.05";
-
       programs.git = {
         settings = {
           user = {
@@ -62,27 +61,28 @@
             email = "you@gabx.io";
             signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHeK9z5uJU6w1bNKYyUDGlh+wqfws1jJcec83zlolGxp";
           };
-          core.sshCommand = "ssh -i ~/.ssh/aripiprazole_pub -o IdentitiesOnly=yes";
+          core.sshCommand = "ssh -i ${./condor/ssh/aripiprazole_pub} -o IdentitiesOnly=yes";
         };
       };
 
-      home.packages = with pkgs; [
-        livekit
-        foreman
-      ];
+      home = {
+        homeDirectory = "/Users/gabrielle";
+        stateVersion = "25.05";
 
-      home.sessionVariables = {
-        PATH = "$PATH:/Users/gabrielle/.radicle/bin/:/Users/gabrielle/.local/bin/";
-      };
+        packages = with pkgs; [
+          livekit
+          foreman
+        ];
 
-      home.file = {
-        ".ssh/aripiprazole_pub" = {
-          enable = true;
-          source = ./condor/ssh/aripiprazole_pub;
+        sessionVariables = {
+          PATH = "$PATH:/Users/gabrielle/.radicle/bin/:/Users/gabrielle/.local/bin/";
         };
-        ".config/1Password/ssh/agent.toml" = {
-          enable = true;
-          source = ./condor/1password/ssh/agent.toml;
+
+        file = {
+          ".config/1Password/ssh/agent.toml" = {
+            enable = true;
+            source = ./condor/1password/ssh/agent.toml;
+          };
         };
       };
     };

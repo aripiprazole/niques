@@ -49,12 +49,12 @@
             home-manager.darwinModules.home-manager
           ];
           specialArgs = {
+            homeManagerModule = ./home.nix;
             inherit
               inputs
               mac-app-util
               op-shell-plugins
               ;
-            homeManagerModule = ./home.nix;
           };
         };
       forAllSystems = nixpkgs.lib.genAttrs [

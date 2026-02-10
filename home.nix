@@ -1,54 +1,37 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    # DX
-    wakatime-cli
-    ngrok
-    just
-    jq
-    fd
-    ripgrep
-    ffmpeg
-    cmake
-    tig
-    fzf
-    gh
-    mkalias
-    pgcli
+  home = {
+    packages = with pkgs; [
+      wakatime-cli
+      ngrok
+      just
+      jq
+      fd
+      ripgrep
+      ffmpeg
+      cmake
+      tig
+      fzf
+      gh
+      mkalias
+      elan
+      rustup
+      nil
+      nixfmt-rfc-style
+      any-nix-shell
+      pgcli
+      slack
+    ];
 
-    # Terminal
-    starship
-    zsh
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    any-nix-shell
-    direnv
+    file."Library/Application Support/com.mitchellh.ghostty/config" = {
+      enable = true;
+      source = ./ghostty/config;
+    };
 
-    # Language tools
-    elan
-    rustup
-    nil
-    nixfmt-rfc-style
-
-    # Text editors
-    zed-editor
-    helix
-
-    # Messaging
-    slack
-  ];
-
-  home.file."Library/Application Support/com.mitchellh.ghostty/config" = {
-    enable = true;
-    source = ./ghostty/config;
+    sessionVariables = {
+      EDITOR = "${pkgs.helix}/bin/hx";
+    };
   };
-
-  home.sessionVariables = {
-    EDITOR = "${pkgs.helix}/bin/hx";
-  };
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
 
   programs = {
     home-manager.enable = true;
@@ -195,10 +178,8 @@
       enable = true;
       initContent = ''
         PROMPT="$\{PROMPT\}"$'\n'
-        ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
-      '';
-      profileExtra = ''
         eval "$(/opt/homebrew/bin/brew shellenv)"
+        ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
       '';
       enableCompletion = true;
       autosuggestion.enable = true;
@@ -241,4 +222,6 @@
     #   };
     # };
   };
+
+  systemd.user.startServices = "sd-switch"; # Nicely reload system units when changing configs
 }
