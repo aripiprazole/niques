@@ -17,7 +17,7 @@
       elan
       rustup
       nil
-      nixfmt-rfc-style
+      nixfmt
       any-nix-shell
       pgcli
       slack

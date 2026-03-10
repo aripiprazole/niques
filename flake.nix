@@ -69,7 +69,7 @@
         pre-commit-check = git-hooks.lib.${system}.run {
           src = self;
           hooks = {
-            nixfmt-rfc-style.enable = true;
+            nixfmt.enable = true;
           };
         };
       });

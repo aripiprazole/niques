@@ -46,6 +46,7 @@
       pkgs.fzf
       pkgs.postgresql
       pkgs.codex
+      pkgs.flyctl
       pkgs.nixos-rebuild
 
       # Development utils

@@ -151,7 +151,7 @@ pkgs: {
   lsp = {
     nil.initialization_options = {
       formatting = {
-        command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
+        command = [ "${pkgs.nixfmt}/bin/nixfmt" ];
       };
     };
     gopls = {
