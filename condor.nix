@@ -26,9 +26,8 @@
   local.dock.entries = [
     { path = "/Applications/Arc.app"; }
     { path = "/System/Applications/Mail.app"; }
+    { path = "/System/Applications/Messages.app"; }
     { path = "/Applications/Ghostty.app"; }
-    { path = "/${pkgs.zed-editor}/Applications/Zed.app"; }
-    { path = "/Applications/Obsidian.app"; }
   ];
 
   homebrew = {

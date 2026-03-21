@@ -149,9 +149,11 @@
 
     zellij = {
       enable = true;
+      enableZshIntegration = true;
+      attachExistingSession = true;
       settings = {
         simplified_ui = true;
-        theme = "gruvbox-light";
+        theme = "ansi";
         default_layout = "compact";
         show_startup_tips = false;
         pane_frames = false;
@@ -180,6 +182,16 @@
         PROMPT="$\{PROMPT\}"$'\n'
         eval "$(/opt/homebrew/bin/brew shellenv)"
         ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
+
+        # Auto-rename zellij tab to current directory
+        function _zellij_rename_tab() {
+          if [[ -n "$ZELLIJ" ]]; then
+            local tab_name="''${PWD##*/}"
+            nohup zellij action rename-tab "$tab_name" >/dev/null 2>&1
+          fi
+        }
+        chpwd_functions+=(_zellij_rename_tab)
+        _zellij_rename_tab
       '';
       enableCompletion = true;
       autosuggestion.enable = true;

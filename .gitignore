@@ -6,3 +6,4 @@ result/
 tmpstore
 keys
 *.qcow2
+.claude
