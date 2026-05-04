@@ -85,6 +85,10 @@
       upgrade = true;
       cleanup = "uninstall";
     };
+    taps = [
+      "homebrew/core"
+      "homebrew/cask"
+    ];
     brews = [
       "tailscale"
       "node"
@@ -97,7 +101,6 @@
       "spotify"
       "arc"
       "tailscale-app"
-      "claude-code"
 
       # System applications
       "obsidian"

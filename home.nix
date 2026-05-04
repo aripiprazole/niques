@@ -149,8 +149,6 @@
 
     zellij = {
       enable = true;
-      enableZshIntegration = true;
-      attachExistingSession = true;
       settings = {
         simplified_ui = true;
         theme = "ansi";

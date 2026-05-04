@@ -2,6 +2,7 @@
   description = "aripiprazole lab setup";
   inputs = {
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -36,6 +37,7 @@
     }:
     let
       inherit (nixpkgs.lib) attrValues;
+      pkgs-unstable = import inputs.nixpkgs-unstable { system = "aarch64-darwin"; };
       darwinSystem =
         path:
         nix-darwin.lib.darwinSystem {
@@ -47,6 +49,11 @@
             mac-app-util.darwinModules.default
             nix-homebrew.darwinModules.nix-homebrew
             home-manager.darwinModules.home-manager
+            {
+              nixpkgs.overlays = [
+                (_: _: { ruby_4_0 = pkgs-unstable.ruby_4_0; })
+              ];
+            }
           ];
           specialArgs = {
             homeManagerModule = ./home.nix;
