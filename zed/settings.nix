@@ -31,7 +31,7 @@ pkgs: {
   bottom_dock_layout = "contained";
   inlay_hints.enabled = false;
   inlay_hints.toggle_on_modifiers_press.function = true;
-  semantic_tokens.enabled = true;
+  semantic_tokens = "combined";
   telemetry = {
     diagnostics = false;
     metrics = false;
