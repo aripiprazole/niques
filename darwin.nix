@@ -61,7 +61,6 @@
       pkgs.bashInteractive
       pkgs.zsh
     ];
-    shellAliases.zed = "zeditor";
     shellAliases.psql = "op plugin run psql --";
     shellAliases.pgcli = "op plugin run pgcli --";
     variables = {
