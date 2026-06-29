@@ -16,8 +16,6 @@
     git-hooks.url = "github:cachix/git-hooks.nix";
     op-shell-plugins.url = "github:1Password/shell-plugins";
     deploy-rs.url = "github:serokell/deploy-rs";
-    tadpole.url = "git+ssh://git@github.com/aripiprazole/niques.tadpole?ref=main";
-    tadpole.inputs = { };
   };
 
   outputs =
@@ -32,7 +30,6 @@
       op-shell-plugins,
       determinate,
       deploy-rs,
-      tadpole,
       ...
     }:
     let
@@ -104,10 +101,6 @@
       };
 
       darwinConfigurations = {
-        # Build darwin flake using:
-        # $ darwin-rebuild build --flake .#Tadpole
-        "Tadpole" = darwinSystem tadpole.darwinModules.default;
-
         # Build darwin flake using:
         # $ darwin-rebuild build --flake .#Condor
         "Condor" = darwinSystem ./condor.nix;
