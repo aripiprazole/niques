@@ -20,7 +20,6 @@
       nixfmt
       any-nix-shell
       pgcli
-      slack
     ];
 
     file."Library/Application Support/com.mitchellh.ghostty/config" = {

@@ -39,7 +39,7 @@
       pkgs.mkalias
       pkgs.rsync
       pkgs.pinentry_mac
-      pkgs.neofetch
+      pkgs.fastfetch
       pkgs.xz
       pkgs.dockutil
       pkgs.coreutils
