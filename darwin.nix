@@ -89,9 +89,6 @@
     ];
     brews = [
       "tailscale"
-      "node"
-      "macmon"
-      "uv"
     ];
     casks = [
       "whatsapp"
