@@ -8,6 +8,8 @@
       jq
       fd
       ripgrep
+      lima
+      bun
       ffmpeg
       cmake
       tig
@@ -179,6 +181,12 @@
         PROMPT="$\{PROMPT\}"$'\n'
         eval "$(/opt/homebrew/bin/brew shellenv)"
         ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
+
+        function lodex() {
+          local codex_home="$HOME/.lodex"
+          mkdir -p "$codex_home"
+          CODEX_HOME="$codex_home" command codex "$@"
+        }
 
         # Auto-rename zellij tab to current directory
         function _zellij_rename_tab() {

@@ -1,0 +1,91 @@
+/*
+ * Corne translation of keyboard.vil.
+ *
+ * The source layout has four inner-column keys that the 42-key Corne does not.
+ * Tab shares Left Control (tap/hold), Raise shares Enter (tap/hold), and Lower
+ * remains on the right middle thumb. Holding Lower and Raise activates Adjust.
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+
+#define BASE 0
+#define LOWER 1
+#define RAISE 2
+#define ADJUST 3
+
+/ {
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        lower_raise_adjust {
+            if-layers = <LOWER RAISE>;
+            then-layer = <ADJUST>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        base_layer {
+            display-name = "Base";
+// -------------------------------------------------------------------------------------------------
+// | ESC  |  Q   |  W   |  E   |  R   |  T   |   |  Y   |  U   |  I   |  O   |  P   | BSPC |
+// | CTL/T|  A   |  S   |  D   |  F   |  G   |   |  H   |  J   |  K   |  L   |  ;   |  '   |
+// | SHFT |  Z   |  X   |  C   |  V   |  B   |   |  N   |  M   |  ,   |  .   |  /   | DEL  |
+//                    | ALT | GUI | SPACE |   | ENT/RSE | LWR | ALT |
+            bindings = <
+                &kp ESC        &kp Q &kp W &kp E &kp R &kp T    &kp Y &kp U &kp I &kp O &kp P &kp BSPC
+                &mt LCTRL TAB  &kp A &kp S &kp D &kp F &kp G    &kp H &kp J &kp K &kp L &kp SEMI &kp SQT
+                &kp LSHFT      &kp Z &kp X &kp C &kp V &kp B    &kp N &kp M &kp COMMA &kp DOT &kp FSLH &kp DEL
+                                  &kp LALT &kp LGUI &kp SPACE    &lt RAISE RET &mo LOWER &kp RALT
+            >;
+        };
+
+        lower_layer {
+            display-name = "Lower";
+// -------------------------------------------------------------------------------------------------
+// | GESC |  1   |  2   |  3   |  4   |  5   |   |  6   |  7   |  8   |  9   |  0   | BSPC |
+// | CTRL |      |      |      |      |      |   | LEFT | DOWN |  UP  | RGHT |  \\   |  `   |
+// | SHFT |      |      |      |      |      |   |  -   |  =   |  [   |  ]   |      |      |
+//                    | ALT | GUI | SPACE |   |  RSE  | LWR | ALT |
+            bindings = <
+                &gresc     &kp N1 &kp N2 &kp N3 &kp N4 &kp N5    &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp BSPC
+                &kp LCTRL  &none  &none  &none  &none  &none     &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp BSLH &kp GRAVE
+                &kp LSHFT  &none  &none  &none  &none  &none     &kp MINUS &kp EQUAL &kp LBKT &kp RBKT &none &none
+                              &kp LALT &kp LGUI &kp SPACE         &trans &trans &kp RALT
+            >;
+        };
+
+        raise_layer {
+            display-name = "Raise";
+// -------------------------------------------------------------------------------------------------
+// | GESC |  !   |  @   |  #   |  $   |  %   |   |  ^   |  &   |  *   |  (   |  )   | BSPC |
+// | CTRL |      |      |      |      |      |   |  -   |  =   |  [   |  ]   |  \\   |  `   |
+// | SHFT |      |      |      |      |      |   |  _   |  +   |  {   |  }   |  |   |  ~   |
+//                    | ALT | GUI | SPACE |   |  RSE  | LWR | ALT |
+            bindings = <
+                &gresc     &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT    &kp CARET &kp AMPS &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
+                &kp LCTRL  &none    &none  &none    &none    &none        &kp MINUS &kp EQUAL &kp LBKT &kp RBKT &kp BSLH &kp GRAVE
+                &kp LSHFT  &none    &none  &none    &none    &none        &kp UNDER &kp PLUS &kp LBRC &kp RBRC &kp PIPE &kp TILDE
+                                      &kp LALT &kp LGUI &kp SPACE         &trans &trans &kp RALT
+            >;
+        };
+
+        adjust_layer {
+            display-name = "Adjust";
+// -------------------------------------------------------------------------------------------------
+// | BOOT |      |      |      |      |      |   |      |      |      |      |      |      |
+// | BTCLR| BT 0 | BT 1 | BT 2 | BT 3 | BT 4 |   |      |      |      |      |      |      |
+// |      |      |      |      |      |      |   |      |      |      |      |      |      |
+//                    | GUI |     | SPACE |   | ENT |     | GUI |
+            bindings = <
+                &bootloader  &none        &none        &none        &none        &none           &none &none &none &none &none &none
+                &bt BT_CLR   &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &none &none &none &none &none &none
+                &none        &none        &none        &none        &none        &none           &none &none &none &none &none &none
+                                           &kp LGUI &trans &kp SPACE              &trans &trans &kp RGUI
+            >;
+        };
+    };
+};

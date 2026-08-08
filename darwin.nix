@@ -88,6 +88,7 @@
       "homebrew/cask"
     ];
     brews = [
+      "herdr"
       "tailscale"
     ];
     casks = [

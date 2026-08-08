@@ -1,0 +1,6 @@
+---
+include:
+  - board: boardsource_blok
+    shield: corne_left
+  - board: boardsource_blok
+    shield: corne_right
