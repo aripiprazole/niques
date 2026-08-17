@@ -1,0 +1,32 @@
+name: Lint Nix
+
+on:
+  push:
+    paths:
+      - "**/*.nix"
+      - "flake.lock"
+      - ".github/workflows/lint.yml"
+  pull_request:
+    paths:
+      - "**/*.nix"
+      - "flake.lock"
+      - ".github/workflows/lint.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.1
+
+      - name: Install Nix
+        uses: DeterminateSystems/determinate-nix-action@v3.21.9
+
+      - name: Check Nix formatting
+        run: nix build .#checks.x86_64-linux.pre-commit-check --no-link --print-build-logs
