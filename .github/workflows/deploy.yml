@@ -4,8 +4,12 @@ on:
   push:
     branches:
       - main
-  check_suite:
-    types: [completed]
+    paths:
+      - ".github/workflows/deploy.yml"
+      - "flake.nix"
+      - "flake.lock"
+      - "hercules.nix"
+      - "hercules/**"
   workflow_dispatch:
 
 jobs:
