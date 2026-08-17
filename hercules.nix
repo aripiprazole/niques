@@ -9,7 +9,7 @@
 }:
 {
   imports = [
-    ./hardware-configuration.nix
+    ./hercules/hardware-configuration.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -24,23 +24,26 @@
 
   time.timeZone = "America/Sao_Paulo";
 
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "acme@gabx.io";
+  };
+
   users.users = {
     root = {
       openssh.authorizedKeys.keyFiles = [
-        ./authorized_keys
+        ./hercules/authorized_keys
       ];
     };
     aripiprazole = {
       isNormalUser = true;
       extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
       openssh.authorizedKeys.keyFiles = [
-        ./authorized_keys
+        ./hercules/authorized_keys
       ];
     };
   };
 
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     wget
     git
@@ -48,6 +51,33 @@
   ];
 
   services = {
+    adguardhome = {
+      enable = true;
+      openFirewall = true;
+      mutableSettings = false;
+      host = "0.0.0.0";
+      port = 3003;
+      settings = {
+        dns = {
+          bind_hosts = [ "192.168.1.128" ];
+          upstream_dns = [
+            "1.1.1.1"
+            "8.8.8.8"
+          ];
+          bootstrap_dns = [
+            "1.1.1.1"
+            "8.8.8.8"
+          ];
+        };
+
+        filtering = {
+          protection_enabled = true;
+          filtering_enabled = true;
+          parental_enabled = false;
+        };
+      };
+    };
+
     openssh = {
       enable = true;
       settings = {
@@ -59,14 +89,9 @@
       };
     };
 
-    security.acme = {
-      acceptTerms = true;
-      defaults.email = "acme@gabx.io";
-    };
-
     ollama = {
       enable = true;
-      acceleration = "cuda";
+      package = pkgs.ollama-cuda;
     };
 
     plex = {

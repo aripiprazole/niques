@@ -92,6 +92,7 @@
       "tailscale"
     ];
     casks = [
+      "adguard"
       "whatsapp"
       "telegram"
       "spotify"
