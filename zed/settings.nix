@@ -11,8 +11,8 @@ pkgs: {
   use_autoclose = true;
   use_auto_surround = true;
   use_smartcase_search = true;
-  buffer_font_size = 16;
-  ui_font_size = 16;
+  buffer_font_size = 22;
+  ui_font_size = 22;
   ui_font_family = ".SystemUIFont";
   buffer_font_family = "JetBrains Mono NL";
   format_on_save = "on";
