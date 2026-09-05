@@ -1,4 +1,22 @@
 pkgs: {
+  cli_default_open_behavior = "existing_window";
+  collaboration_panel.dock = "left";
+  agent_servers = {
+    codex-acp.type = "registry";
+    opencode.type = "registry";
+    claude-acp = {
+      type = "registry";
+      default_config_options.mode = "acceptEdits";
+    };
+  };
+  helix_mode = false;
+  git_panel = {
+    tree_view = true;
+    dock = "left";
+    sort_by_path = true;
+  };
+  project_panel.dock = "right";
+  outline_panel.dock = "right";
   vim_mode = true;
   tab_size = 2;
   vertical_scroll_margin = 3;
@@ -12,7 +30,7 @@ pkgs: {
   use_auto_surround = true;
   use_smartcase_search = true;
   buffer_font_size = 22;
-  ui_font_size = 22;
+  ui_font_size = 16;
   ui_font_family = ".SystemUIFont";
   buffer_font_family = "JetBrains Mono NL";
   format_on_save = "on";
@@ -38,6 +56,7 @@ pkgs: {
   };
   languages = {
     Rust = {
+      autosave = "off";
       tab_size = 4;
       show_edit_predictions = false;
     };
@@ -51,6 +70,7 @@ pkgs: {
       format_on_save = "off";
     };
     Nix = {
+      autosave = "off";
       language_servers = [
         "!nixd"
         "nil"
@@ -62,27 +82,12 @@ pkgs: {
     cargo_workspace.enabled = true;
   };
   agent = {
+    dock = "left";
     stream_edits = true;
     preferred_completion_mode = "burn";
     play_sound_when_agent_done = true;
     notify_when_agent_waiting = "all_screens";
     enable_feedback = false;
-    default_model = {
-      provider = "openrouter";
-      model = "GPT-5";
-    };
-    thread_summary_model = {
-      provider = "openrouter";
-      model = "GPT-5 Nano";
-    };
-    commit_message_model = {
-      provider = "openrouter";
-      model = "GPT-5 Nano";
-    };
-    inline_assistant_model = {
-      provider = "openrouter";
-      model = "GPT-5 Mini";
-    };
   };
   session = {
     restore_unsaved_buffers = true;
@@ -149,13 +154,16 @@ pkgs: {
     ];
   };
   lsp = {
+    nix.binary.path_lookup = true;
     nil.initialization_options = {
       formatting = {
         command = [ "${pkgs.nixfmt}/bin/nixfmt" ];
       };
     };
     gopls = {
+      binary.env.GOFLAGS = "-tags=integration";
       initialization_options = {
+        standaloneTags = [ "integration" ];
         buildFlags = [
           "-tags=integration"
           "-gcflags=all=-N -l"

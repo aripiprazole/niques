@@ -22,6 +22,7 @@
       nixfmt
       any-nix-shell
       pgcli
+      sshfs
     ];
 
     file."Library/Application Support/com.mitchellh.ghostty/config" = {
