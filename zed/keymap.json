@@ -13,7 +13,16 @@
     }
   },
   {
-    "context": "Editor && (showing_context_menu || showing_completions)",
+    "context": "menu || Picker || (Picker > Editor)",
+    "use_key_equivalents": true,
+    "bindings": {
+      "ctrl-tab": "menu::SelectNext",
+      "ctrl-shift-tab": "menu::SelectPrevious"
+    }
+  },
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "use_key_equivalents": true,
     "bindings": {
       "ctrl-tab": "editor::ContextMenuNext",
       "ctrl-shift-tab": "editor::ContextMenuPrevious"
